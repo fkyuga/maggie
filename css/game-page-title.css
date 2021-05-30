@@ -12,6 +12,13 @@
     left: -142px;
     top: -53px;
     z-index: 1;
+    opacity: .6;
+    animation: rotate-light-rays 40s linear infinite;
+}
+
+@keyframes rotate-light-rays {
+    0% { transform: rotate(0deg) }
+    100% { transform: rotate(360deg) }
 }
 
 .btn-orb-start {
