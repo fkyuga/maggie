@@ -33,10 +33,15 @@
     position: absolute;
     width: 128%;
     left: -142px;
-    top: -53px;
+    top: 180px;
     z-index: 1;
     opacity: .6;
     animation: rotate-light-rays 40s linear infinite;
+    transition: 1s ease-in-out;
+}
+
+.lightrays.with-btn {
+    top: -53px;
 }
 
 @keyframes rotate-light-rays {
@@ -51,44 +56,62 @@
     width: 160px;
     height: 160px;
 
-    bottom: 84px;
+    bottom: -172px;
 
     /* centers on x axis */
     left: 0;
     right: 0;
     margin: 0 auto;
+
+    transition: 1s ease-in-out;
 }
 
-.title-logo-full {
+.btn-orb-start.visible {
+    bottom: 84px;
+}
+
+.title-logo {
     position: absolute;
-    opacity: .1;
-    top: 110px;
+    animation: logo-animation 1.9s ease-in-out;
+    top: 236px;
     left: -79.46px; /* tidbit: technically 0 would be dead center, but i'm centering
                        based on the word "MAGGIE" to make sure it appears
                        optically centered. */
     right: 0;
     margin: 0 auto;
-
     width: 750px;
-    animation: logo-animation 1.9s ease-in-out;
     z-index: 100;
     transform-origin: 50% 100%;
+    transition: 1s ease-in-out;
+}
+
+.title-logo.with-btn {
+    top: 110px;
+}
+
+.title-logo-full {
+    position: absolute;
+    top: 0;
+    width: 750px;
 }
 
 .character-maggie {
     height: 293px;
     width: 134px;
-    top: 77px; left: 60px;
+    top: -43px;
+    left: 7px;
     position: relative; /* children using position:absolute will be anchored
                            to Maggie */
-    /*transform: scale(0.25); /* use a single transform style instead of 
+    transform: scale(0.2); /* use a single transform style instead of 
                                 painstakingly setting the size of every child */
-
-    transition: 0.2s linear;
+    z-index: -1;
+    transition: 1s ease-in-out;
 }
 
 .character-maggie.peeking {
     transform: scale(0.25) rotate(-20deg);
+    left: -38px;
+    top: -34px;
 }
 
 .character-maggie div {
@@ -177,7 +200,7 @@
     }
 
     60% {
-        top: 110px;
+        top: 236px;
     }
 
     60% {

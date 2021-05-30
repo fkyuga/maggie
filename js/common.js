@@ -67,7 +67,7 @@ var game = {
 
 $(document).ready(function(){
     /* load SFX */
-    let sfxs = ['drop', 'falling']
+    let sfxs = ['drop', 'falling', 'peek']
     sfxs.forEach(sfx => {
         let audioElement = $(`
             <audio id="sound-effect-${sfx}">
