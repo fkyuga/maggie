@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
 
     <!-- Stylesheets - separated by concern just to keep things clean.
         (i guess if we were deploying to production we would use something like
@@ -9,6 +10,7 @@
     -->
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/game-page-title.css">
+    
 
     <!-- Include dependencies -->
     <script src="js/jquery-3.6.0.min.js"></script>
@@ -23,12 +25,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Adventures of Maggie &amp; The Magnets</title>
 </head>
-<body>
+<body ontouchstart>
     <div class="gameplay-stage-container">
         <div class="gameplay-stage">
 
             <!-- Title Screen -->
             <div class="game-page game-page-title">
+                <img class="title-logo-full" src="img/logo.png">
                 <div onclick="game.loadPage('story')" class="btn-orb btn-orb-start"></div>
                 <img class="lightrays" src="img/lightrays.png" />
             </div>

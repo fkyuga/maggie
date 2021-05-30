@@ -35,3 +35,18 @@
     right: 0;
     margin: 0 auto;
 }
+
+.title-logo-full {
+    position: absolute;
+
+    top: 110px;
+    left: -63.568px; /* tidbit: technically 0 would be dead center, but i'm centering
+                       based on the word "MAGGIE" to make sure it appears
+                       optically centered. */
+    right: 0;
+    margin: 0 auto;
+
+    width: 600px;
+
+    z-index: 100;
+}

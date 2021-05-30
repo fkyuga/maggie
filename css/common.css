@@ -7,6 +7,8 @@ html, body {
     overflow: hidden;
     white-space: nowrap;
     user-select: none; /* disable text selection */
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
 }
 
 .gameplay-stage-container {
