@@ -14,7 +14,6 @@
 
     <!-- Include dependencies -->
     <script src="js/jquery-3.6.0.min.js"></script>
-    <script src="js/howler.min.js"></script> <!-- for sound effects -->
     <script src="js/common.js"></script>
     
     <!-- JS files for each page -->
@@ -28,6 +27,18 @@
 <body ontouchstart>
     <div class="gameplay-stage-container">
         <div class="gameplay-stage">
+
+            <!-- Start screen -->
+            <!-- chrome won't let us play audio until the user has interacted with the page.
+                 so this is just a very simple start screen to force that interaction.
+                 it's not a part of the game. -->
+            <div class='game-page game-page-start'>
+                <div class="game-page-start-content">
+                    <h1>▶</h1>
+                    <p>Click to start</p>
+                </div>
+                
+            </div>
 
             <!-- Title Screen -->
             <div class="game-page game-page-title">
@@ -46,5 +57,6 @@
 
         </div>
     </div>
+    <div class="sound-effects-container"></div>
 </body>
 </html>

@@ -11,6 +11,11 @@ html, body {
     -webkit-user-drag: none;
 }
 
+.sound-effects-container {
+    /* hide audio elements - we only need to trigger them via JS */
+    display: none;
+}
+
 .gameplay-stage-container {
     min-height: 100%;
 	display: flex;

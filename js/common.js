@@ -45,10 +45,37 @@ var game = {
         this.currentPage = pageName;
     },
 
-    pages: {}
+    pages: {},
+
+    sfx: {
+        play: function(name, callback=()=>{}){
+            /* Play given SFX. example: game.sfx.play('falling');
+               Optionally, can provide a callback to run some code after
+               SFX finished playing */
+        
+            console.log(`playing SFX: ${name}`)
+            $(`#sound-effect-${name}`).one('ended', function(){
+                console.log(`finished SFX: ${name}`)
+                if(callback) callback();
+            })
+            $(`#sound-effect-${name}`)[0].play();
+            
+        }
+    }
 
 }
 
 $(document).ready(function(){
-    game.loadPage('title')
+    /* load SFX */
+    let sfxs = ['drop', 'falling']
+    sfxs.forEach(sfx => {
+        let audioElement = $(`
+            <audio id="sound-effect-${sfx}">
+                <source src="sfx/${sfx}.mp3" type="audio/mpeg">
+            </audio>
+        `)
+        $('.sound-effects-container').append(audioElement);
+    })
+
+    game.loadPage('start')
 })
