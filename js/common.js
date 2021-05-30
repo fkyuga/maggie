@@ -38,7 +38,7 @@ var game = {
         }
 
         /* Run initialisation code for new screen */
-        if(this.pages.onload) this.pages.onload();
+        if(this.pages[pageName].onload) this.pages[pageName].onload();
 
         /* Remember what page we're on so we can clean it up before we exit
         it */

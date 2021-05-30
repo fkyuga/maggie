@@ -1,5 +1,5 @@
 game.pages.title = {
     onload: function(){
-        alert('hello!');
+        console.log('loaded title page')
     }
 }
