@@ -61,7 +61,7 @@
 
 .title-logo-full {
     position: absolute;
-
+    opacity: .1;
     top: 110px;
     left: -79.46px; /* tidbit: technically 0 would be dead center, but i'm centering
                        based on the word "MAGGIE" to make sure it appears
@@ -75,11 +75,103 @@
     transform-origin: 50% 100%;
 }
 
+.character-maggie {
+    height: 293px;
+    width: 134px;
+    top: 77px; left: 60px;
+    position: relative; /* children using position:absolute will be anchored
+                           to Maggie */
+    /*transform: scale(0.25); /* use a single transform style instead of 
+                                painstakingly setting the size of every child */
+
+    transition: 0.2s linear;
+}
+
+.character-maggie.peeking {
+    transform: scale(0.25) rotate(-20deg);
+}
+
+.character-maggie div {
+    position: absolute;
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    
+}
+
+.character-maggie-hair {
+    position: absolute;
+    width: 284px;
+    height: 209px;
+    background-image: url(../img/maggie/hair.png);
+    z-index: 1;
+}
+
+.character-maggie-body {
+    position: absolute;
+    top: 102px; left: 73px;
+    width: 152px;
+    height: 487px;
+    background-image: url(../img/maggie/body.png);
+    z-index: 2;
+}
+
+.character-maggie-face {
+    top: 160px; left: 101px;
+    z-index: 3;
+}
+
+.character-maggie-face .character-maggie-face-eye-l {
+    background-image: url(../img/maggie/eye.png);
+    height: 28px; width: 28px;
+    top: 20px; left: 62px;
+}
+
+.character-maggie-face .character-maggie-face-eye-r {
+    background-image: url(../img/maggie/eye.png);
+    height: 28px; width: 28px;
+    top: 20px; left: 12px;
+}
+
+.character-maggie-face .character-maggie-face-brow-l {
+    background-image: url(../img/maggie/brow-l.png);
+    height: 24px; width: 20px;
+} 
+
+.character-maggie-face .character-maggie-face-brow-r {
+    background-image: url(../img/maggie/brow-r.png);
+    height: 25px; width: 19px;
+    left: 80px;
+}
+
+.character-maggie-face-mouth.character-maggie-face-mouth-frown {
+    background-image: url(../img/maggie/mouth-frown.png);
+    height: 13px; width: 29px;
+    left: 33px; top: 80px;
+}
+
+.character-maggie-leg-l {
+    width: 40px;
+    height: 55px;
+    background-image: url(../img/maggie/leg-l.png);
+    top: 572px; left: 92px;
+    z-index: 1;
+}
+
+.character-maggie-leg-r {
+    width: 40px;
+    height: 55px;
+    background-image: url(../img/maggie/leg-r.png);
+    top: 574px; left: 156px;
+    z-index: 1;
+}
+
+
 @keyframes logo-animation {
     0% {
         top: -300px;
     }
-    
+
     50% {
         top: -300px;
     }
