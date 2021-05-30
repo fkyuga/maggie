@@ -2,9 +2,16 @@
     background: linear-gradient(135deg, rgba(153, 42, 255, 1) 0%, rgba(95, 61, 146, 1) 100%);
 }
 
+.btn-orb-start {
+    z-index: 2;
+}
+
 .lightrays {
     position: absolute;
-    width: 150%;
+    width: 128%;
+    left: -142px;
+    top: -53px;
+    z-index: 1;
 }
 
 .btn-orb-start {
