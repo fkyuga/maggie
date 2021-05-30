@@ -1,0 +1,27 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.gameplay-stage-container {
+    min-height: 100%;
+	display: flex;
+	vertical-align: middle;
+	justify-content: center;
+	align-items: center;
+	min-width: 100%;
+}
+
+.gameplay-stage {
+	max-height: 768px;
+    min-height: 768px;
+    max-width: 1024px;
+    min-width: 1024px;
+    overflow: hidden;
+    background: green;
+}
