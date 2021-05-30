@@ -3,9 +3,21 @@
 <head>
     <meta charset="UTF-8">
 
-    <!-- Stylesheets - separated by page. -->
+    <!-- Stylesheets - separated by concern just to keep things clean.
+        (i guess if we were deploying to production we would use something like
+        webpack to compile this all down to one minified file)
+    -->
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/game-page-title.css">
+
+    <!-- Include dependencies -->
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/howler.min.js"></script> <!-- for sound effects -->
+    <script src="js/common.js"></script>
+    
+    <!-- JS files for each page -->
+    <script src="js/game-page-title.js"></script>
+    <script src="js/game-page-story.js"></script>
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,13 +27,20 @@
     <div class="gameplay-stage-container">
         <div class="gameplay-stage">
 
-            <div class="game-page game-page-title visible">
+            <!-- Title Screen -->
+            <div class="game-page game-page-title">
                 <h1>This is the title screen</h1>
+                <button onclick="game.loadPage('story')">Click to see story page</button>
             </div>
+            <!-- End Title Screen -->
 
+
+            <!-- Story Screen -->
             <div class="game-page game-page-story">
                 <h1>This is the story screen</h1>
             </div>
+            <!-- End Story Screen -->
+
         </div>
     </div>
 </body>

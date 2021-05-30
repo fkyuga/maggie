@@ -18,6 +18,7 @@ html, body {
 }
 
 .gameplay-stage {
+    /* Enforce 1024 x 768 dimension, and disable inadvertent scrolling */
 	max-height: 768px;
     min-height: 768px;
     max-width: 1024px;
@@ -28,6 +29,8 @@ html, body {
 }
 
 .game-page {
+    /* Common styles for game pages. Doesn't appear until you apply .visible
+    class */
     display: none;
     background: white;
     height: 100%;
@@ -36,4 +39,11 @@ html, body {
 
 .game-page.visible {
     display: block;
+}
+
+
+/********* Keyframes (for page animations) **********/
+@keyframes fade-in {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
 }
