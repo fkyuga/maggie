@@ -22,6 +22,18 @@ html, body {
     min-height: 768px;
     max-width: 1024px;
     min-width: 1024px;
+    width: 1024px;
+    height: 1024px;
     overflow: hidden;
-    background: green;
+}
+
+.game-page {
+    display: none;
+    background: white;
+    height: 100%;
+    width: 100%;
+}
+
+.game-page.visible {
+    display: block;
 }
