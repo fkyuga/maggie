@@ -6,6 +6,7 @@ html, body {
     background-color: black;
     overflow: hidden;
     white-space: nowrap;
+    user-select: none; /* disable text selection */
 }
 
 .gameplay-stage-container {
@@ -35,12 +36,36 @@ html, body {
     background: white;
     height: 100%;
     width: 100%;
+    overflow: hidden;
+    position: relative;
 }
 
 .game-page.visible {
     display: block;
 }
 
+img {
+    /* Disable image dragging */
+    pointer-events: none
+}
+
+/********* UI elements **********/
+.btn-orb {
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: 0.1s ease-in-out;
+}
+
+.btn-orb:hover {
+    filter: brightness(1.1);
+    transform: scale(1.05);
+}
+
+.btn-orb:active {
+    filter: brightness(0.9);
+    transform: scale(0.95);
+}
 
 /********* Keyframes (for page animations) **********/
 @keyframes fade-in {
