@@ -52,13 +52,30 @@ var game = {
             /* Play given SFX. example: game.sfx.play('falling');
                Optionally, can provide a callback to run some code after
                SFX finished playing */
+
+            /* This function will:
+                * create an audio element on the fly,
+                * play it,
+                * destroy the element.
+            
+               This allows us to play multiple instances of the sound effect at the same time! */
         
+
+            /* Generate a random ID for the sound effect instance */
+            let id = Math.round(Math.random() * 1E10)
+
             console.log(`playing SFX: ${name}`)
-            $(`#sound-effect-${name}`).one('ended', function(){
+            $('.sound-effects-container').append(`
+                <audio id="sound-effect-${id}">
+                    <source src="sfx/${name}.mp3" type="audio/mpeg">
+                </audio>
+            `)
+            $(`#sound-effect-${id}`).one('ended', function(){
                 console.log(`finished SFX: ${name}`)
+                $(`#sound-effect-${id}`).remove()
                 if(callback) callback();
             })
-            $(`#sound-effect-${name}`)[0].play();
+            $(`#sound-effect-${id}`)[0].play();
             
         }
     }
@@ -66,29 +83,6 @@ var game = {
 }
 
 $(document).ready(function(){
-    /* load SFX.
-       this automatically creates all of the <audio> tags in an invisible div
-       so i don't need to mess around dealing with them all individually */
-
-    let sfxs = [
-        'drop',
-        'falling',
-        'peek',
-        'xylo',
-        'whoosh',
-        'button_depress',
-        'button_release'
-    ];
-    
-    sfxs.forEach(sfx => {
-        let audioElement = $(`
-            <audio id="sound-effect-${sfx}">
-                <source src="sfx/${sfx}.mp3" type="audio/mpeg">
-            </audio>
-        `)
-        $('.sound-effects-container').append(audioElement);
-    })
-
     /* add sound effects for all buttons */
     $('.btn-orb')
         .on('touchstart mousedown', function(){
