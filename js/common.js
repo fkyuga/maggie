@@ -66,8 +66,20 @@ var game = {
 }
 
 $(document).ready(function(){
-    /* load SFX */
-    let sfxs = ['drop', 'falling', 'peek']
+    /* load SFX.
+       this automatically creates all of the <audio> tags in an invisible div
+       so i don't need to mess around dealing with them all individually */
+
+    let sfxs = [
+        'drop',
+        'falling',
+        'peek',
+        'xylo',
+        'whoosh',
+        'button_depress',
+        'button_release'
+    ];
+    
     sfxs.forEach(sfx => {
         let audioElement = $(`
             <audio id="sound-effect-${sfx}">
@@ -77,5 +89,15 @@ $(document).ready(function(){
         $('.sound-effects-container').append(audioElement);
     })
 
+    /* add sound effects for all buttons */
+    $('.btn-orb')
+        .on('touchstart mousedown', function(){
+            game.sfx.play('button_depress');
+        })
+        .on('touchend mouseup', function(){
+            game.sfx.play('button_release');
+        });
+
+    /* load the start page */
     game.loadPage('start')
 })
