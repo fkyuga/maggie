@@ -31,5 +31,36 @@ game.pages.title = {
             });
         })
         console.log('loaded title page')
+
+        /* Register handlers */
+        $('.btn-orb-start').on('touchend mouseup', game.pages.title.onClickStartButton);
+    },
+
+    onClickStartButton: function(){
+        /* CLICK START BUTTON
+           Fade the start button to 0 opacity, hide it, and animate in menu options one-by-one. */
+        
+        $('.btn-orb-start')
+            .one('animationend', (e)=>{
+                console.log(e);
+                $(e.currentTarget).removeClass('a-fadeout-300ms').hide();
+
+                /* callbacks are messy :( */
+                game.sfx.play('whoosh');
+                $('.menu-options .menu-option:nth-of-type(1)')
+                    .addClass('animating')
+                    .one('transitionend', e => {
+                        game.sfx.play('whoosh');
+                        $('.menu-options .menu-option:nth-of-type(2)')
+                            .addClass('animating')
+                            .one('transitionend', e => {
+                                game.sfx.play('whoosh');
+                                $('.menu-options .menu-option:nth-of-type(3)')
+                                .addClass('animating')
+                            });
+                    });
+            })
+            .addClass('a-fade-out-300ms');
     }
+
 }
