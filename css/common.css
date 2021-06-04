@@ -86,6 +86,24 @@ img {
     100% { opacity: 0;}
 }
 
+@keyframes circle-out {
+    0%   { clip-path: circle(100%); }
+    60% { clip-path: circle(0%); }
+    100% { clip-path: circle(0%); }
+}
+
+.fade.out {
+    animation: fade-out 300ms;
+}
+
+.fade.in {
+    animation: fade-in 300ms;
+}
+
+.circle.out {
+    animation: circle-out 1s linear;
+}
+
 /******** Common Animation Classes ******************/
 .a-fade-out-300ms {
     animation: fade-out 300ms;

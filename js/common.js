@@ -20,11 +20,28 @@ var game = {
         let fromPage = `.game-page-${this.currentPage}`;
         let toPage = `.game-page-${pageName}`
         $(toPage).addClass('visible')
-        if(opts.transition){
+        if(opts.transition && !opts.twoStep){
             if(this.currentPage){
                 $(fromPage).addClass(opts.transition + ' out')
             }
-            $(toPage).addClass(opts.transition + ' in')
+
+            $(toPage).one('msAnimationEnd animationEnd oAnimationEnd', function(){
+                /* once animation has finished, hide fromPage and clean up animation
+                classes */
+                $(fromPage).removeClass('visible out')
+                $(toPage).removeClass('in');
+                $(`${fromPage}, ${toPage}`).removeClass(opts.transition);
+            })
+        } else if(opts.transition && opts.twoStep) {
+            if(this.currentPage){
+                $(fromPage).addClass(opts.transition + ' out')
+            }
+
+            $(fromPage).one('msAnimationEnd animationend oAnimatioNEnd', function(){
+                console.log('toPage start...')
+                $(fromPage).removeClass('visible out');
+                $(toPage).addClass(opts.transition + ' in')
+            })
 
             $(toPage).one('msAnimationEnd animationEnd oAnimationEnd', function(){
                 /* once animation has finished, hide fromPage and clean up animation

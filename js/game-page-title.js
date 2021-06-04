@@ -34,6 +34,7 @@ game.pages.title = {
 
         /* Register handlers */
         $('.btn-orb-start').on('touchend mouseup', game.pages.title.onClickStartButton);
+        $('.menu-option').on('touchend mouseup', game.pages.title.onClickActivity)
     },
 
     onClickStartButton: function(){
@@ -61,6 +62,21 @@ game.pages.title = {
                     });
             })
             .addClass('a-fade-out-300ms');
+    },
+
+    onClickActivity: function(e){
+        /* CLICK ACTIVITY
+           Takes the user to the activity page they clicked on.
+           The menu option elements have a custom attribute "data-activity" that tells this function
+           what page to go to. */
+
+        let pageName = e.currentTarget.getAttribute('data-activity');
+        
+        game.sfx.play('xylo');
+        game.loadPage(pageName, {
+            transition: 'circle',
+            twoStep: true
+        });
     }
 
 }
