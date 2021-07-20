@@ -67,8 +67,17 @@ onload: ()=>{
             $(itemNode).attr('id', item.id);
             $(itemNode).attr('data-item-name', item.name);
 
-
         $('.item-bar__items').append(itemNode);
+
+        /* Enable Draggable */
+        Draggable.create(`#${item.id} .item`, {
+            onDragStart: function(){
+                $(`#${item.id} .item`).addClass('item--dragging');
+            },
+            onDragEnd: function(){
+                $(`#${item.id} .item`).removeClass('item--dragging');
+            }
+        });
     }
 }
 
