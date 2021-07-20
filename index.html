@@ -7,6 +7,7 @@
     <!-- Stylesheets - separated by concern just to keep things clean. -->
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/game-page-title.css">
+    <link rel="stylesheet" href="css/game-page-lab.css">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -19,6 +20,7 @@
     <!-- JS files for each page -->
     <script src="js/game-page-title.js"></script>
     <script src="js/game-page-story.js"></script>
+    <script src="js/game-page-lab.js"></script>
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -87,6 +89,28 @@
                 <h1>This is the story screen</h1>
             </div>
             <!-- End Story Screen -->
+
+
+            <!-- Lab Screen -->
+            <div class="game-page game-page-lab">
+                
+                <!-- Item bar -->
+                <div class="item-bar">
+
+                    <!-- Item bar item (template) -->
+                    <template id="item-bar__item--template">
+                        <li class="item-bar__item">
+                            <div class="item">
+                                <img src />
+                            </div>
+                        </li>
+                    </template>
+                    
+                    <ul class="item-bar__items">
+                        <!-- this DIV is filled out dynamically using js, so we can shuffle it -->
+                    </ul>
+                </div>
+            </div>
 
         </div>
     </div>
