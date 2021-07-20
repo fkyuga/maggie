@@ -1,3 +1,10 @@
+/* Background */
+.game-page-lab {
+    background: url('../img/lab/backdrop.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 /* Item bar */
 .item-bar {
     position: absolute;
