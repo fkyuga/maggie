@@ -63,9 +63,9 @@ onload: ()=>{
            attributes, and add it to the item bar ul. */
 
         let itemNode = $($('#item-bar__item-template').html());
-            itemNode = $(itemNode).find('img').attr('src', item.src);
-            itemNode = $(itemNode).attr('id', item.id);
-            itemNode = $(itemNode).attr('data-item-name', item.name);
+            $(itemNode).find('img').attr('src', item.src);
+            $(itemNode).attr('id', item.id);
+            $(itemNode).attr('data-item-name', item.name);
 
 
         $('.item-bar__items').append(itemNode);

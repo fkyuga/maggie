@@ -1,0 +1,54 @@
+/* Item bar */
+.item-bar {
+    position: absolute;
+    width: 1089px;
+    left: -39px;
+    bottom: -31px;
+}
+
+.item-bar__items {
+    display: flex;
+    justify-content: space-evenly;
+    position: absolute;
+    bottom: 46px;
+    left: 33px;
+    width: 964px;
+    list-style-type: none;
+    margin: 0;
+    display: inline-flex;
+}
+
+.item-bar__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #656565;
+    border-radius: 4px;
+    padding: 0 16px;
+    width: 64px;
+    height: 105px;
+}
+
+.item-bar__item img {
+    width: 56px;
+    height: 56px;
+}
+
+/* Item sizes
+   I scale(0.5) it so i can just copy+paste dimensions from Illustrator,
+   sue me.
+*/
+.item-bar__item#cola      img { width: 56px; height: 87.71075px }
+.item-bar__item#glass     img { width: 33.8811px; height: 81.14985px }
+.item-bar__item#boot      img { width: 49.69825px; height: 63.35485px }
+.item-bar__item#paperclip img { width: 43.915px; height: 71.65465px }
+.item-bar__item#clock     img { width: 68.181px; height: 67.898px }
+.item-bar__item#coin_2p   img { width: 71.42145px; height: 71.7492px }
+.item-bar__item#coin_10p  img { width: 65.5312px; height: 65.8319px }
+.item-bar__item#key       img { width: 36.2727px; height: 74.7284px }
+.item-bar__item#scissors  img { width: 56.9632px; height: 75.5254px }
+
+
+img#item-bar__backdrop {
+    width: 1089px;
+}
