@@ -72,10 +72,41 @@ onload: ()=>{
         /* Enable Draggable */
         Draggable.create(`#${item.id} .item`, {
             onDragStart: function(){
+                /* Stash the element's initial position in
+                   case we need to return it there later. */
+                if(!this.initialX){
+                    this.initialX = this.x;
+                    this.initialY = this.y;
+                }
+                console.log(this);
                 $(`#${item.id} .item`).addClass('item--dragging');
             },
-            onDragEnd: function(){
+            onDragEnd: function(e){
                 $(`#${item.id} .item`).removeClass('item--dragging');
+
+                /* The item will now behave differently based on the
+                   "drop zone" it landed on:
+
+                     -> If it landed near Maggie, evaluate whether or not
+                        the item is magnetic and perform a different
+                        animation based on that.
+
+                     -> If it landed near either box, evaluate whether or not
+                        the answer was correct.
+                    
+                     -> Otherwise, return it to the initial position. */
+
+                let dropzone = false;
+                switch(dropzone){
+                    default:
+                        /* Return to initial position with an anim. */
+                        TweenLite.to(this.target, .34, {
+                            x: this.initialX,
+                            y: this.initialY
+                        });
+                        break;
+                }
+
             }
         });
     }
