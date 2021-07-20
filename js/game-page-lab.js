@@ -71,14 +71,15 @@ onload: ()=>{
 
         /* Enable Draggable */
         Draggable.create(`#${item.id} .item`, {
-            onDragStart: function(){
+            onPress: function(){
                 /* Stash the element's initial position in
                    case we need to return it there later. */
-                if(!this.initialX){
+                   if(!this.initialX){
                     this.initialX = this.x;
                     this.initialY = this.y;
                 }
-                console.log(this);
+            },
+            onDragStart: function(){
                 $(`#${item.id} .item`).addClass('item--dragging');
             },
             onDragEnd: function(e){
