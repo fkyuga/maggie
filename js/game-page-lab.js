@@ -59,6 +59,16 @@ onload: ()=>{
 
     /* Populate the items bar */
     for ( let item of game.pages.lab.items ) {
+        /* For each item -- clone the template, add img and other
+           attributes, and add it to the item bar ul. */
+
+        let itemNode = $($('#item-bar__item-template').html());
+            itemNode = $(itemNode).find('img').attr('src', item.src);
+            itemNode = $(itemNode).attr('id', item.id);
+            itemNode = $(itemNode).attr('data-item-name', item.name);
+
+
+        $('.item-bar__items').append(itemNode);
     }
 }
 
