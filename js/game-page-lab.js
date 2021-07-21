@@ -156,8 +156,29 @@ onload: ()=>{
                     
                      -> Otherwise, return it to the initial position. */
 
-                let dropzone = false;
-                switch(dropzone){
+                let dropZone = game.pages.lab.helpers.detectDropZone(e.target);
+                switch(dropZone){
+                    case "BOX_MAGNETIC":
+                    case "BOX_NOT_MAGNETIC":
+                        /* Boxes logic
+                           Check if the item being dragged belongs in the box
+                           the player dragged it over.
+
+                           If it does, play success sequence.
+                           If it doesn't, return it to the stashed position and
+                           ask the player to guess again.
+                        */
+
+                        let isBoxMagnetic = dropZone == "BOX_MAGNETIC"
+                        let itemName = e.target.parentElement.id;
+                        let item = game.pages.lab.items.filter(candidate => candidate.id == itemName)[0];
+
+                        if(item.magnetic == isBoxMagnetic){
+                            alert('Correct!')
+                        } else {
+                            alert('Incorrect, try again...');
+                        }
+
                     default:
                         /* Return to initial position with an anim. */
                         TweenLite.to(this.target, .34, {
