@@ -5,52 +5,88 @@ items: [
     {
         id: 'boot',
         name: 'Boot',
-        src: 'img/items/boot@2x.png'
+        src: 'img/items/boot@2x.png',
+        magnetic: false
     },
     {
         id: 'clock',
         name: 'Alarm Clock',
-        src: 'img/items/clock@2x.png'
+        src: 'img/items/clock@2x.png',
+        magnetic: true
     },
     {
         id: 'coin_2p',
         name: 'Two Pence Coin',
-        src: 'img/items/coin_2p@2x.png'
+        src: 'img/items/coin_2p@2x.png',
+        magnetic: false
     },
     {
         id: 'coin_10p',
         name: 'Ten Pence Coin',
-        src: 'img/items/coin_10p@2x.png'
+        src: 'img/items/coin_10p@2x.png',
+        magnetic: true
     },
     {
         id: 'cola',
         name: 'Cola Can',
-        src: 'img/items/cola@2x.png'
+        src: 'img/items/cola@2x.png',
+        magnetic: false
     },
     {
         id: 'glass',
         name: 'Glass of Water',
-        src: 'img/items/glass@2x.png'
+        src: 'img/items/glass@2x.png',
+        magnetic: false
     },
     {
         id: 'key',
         name: 'House Key',
-        src: 'img/items/key@2x.png'
+        src: 'img/items/key@2x.png',
+        magnetic: true
     },
     {
         id: 'paperclip',
         name: 'Paperclip',
-        src: 'img/items/paperclip@2x.png'
+        src: 'img/items/paperclip@2x.png',
+        magnetic: true
     },
     {
         id: 'scissors',
         name: 'Scissors',
-        src: 'img/items/scissors@2x.png'
+        src: 'img/items/scissors@2x.png',
+        magnetic: true
     }
 ],
 
 /* This obj will contain references to frequently accessed elements. */
 refs: {},
+
+helpers: {
+
+    resetDropZones: function(){
+        /* Returns all drop zones to initial state. */
+        game.pages.lab.refs.BOX_MAGNETIC.classList.remove('hint')
+        game.pages.lab.refs.BOX_NOT_MAGNETIC.classList.remove('hint')
+    },
+    
+    detectDropZone: function(draggableEl){
+        /* Detects what element in [refs] object that [draggableEl] was dropped on.
+           This is used in onDrag and onDragEnd. */
+
+        /* Get the current position of the draggable element. */
+        let { x, y } = draggableEl.getBoundingClientRect();
+
+        /* Get elements underneath the draggable element. */
+        let els = document.elementsFromPoint(x, y);
+
+        /* Now, filter refs and return only the element that draggableEl
+           obscures */
+        return Object.keys( game.pages.lab.refs ).filter( k => {
+            return els.includes( game.pages.lab.refs[k] );
+        } )[0]
+    }
+
+},
 
 onload: ()=>{
     /* Shuffle the items array to randomise their order. */
@@ -93,33 +129,20 @@ onload: ()=>{
                    We use this to create a hint when the object is dragged
                    over an area of interest -- Maggie, or the boxes. */
 
-                /* Position of draggable element */
-                let { x, y } = e.target.getBoundingClientRect();
+                let dropZone = game.pages.lab.helpers.detectDropZone(e.target);
 
-                /* Get elements underneath these co-ordinates */
-                let els = document.elementsFromPoint(x, y);
-
-                /* Now, apply transformations! */
-
-                /*** BOXES ***/
-                if(els.includes(game.pages.lab.refs.BOX_MAGNETIC)){
-                    game.pages.lab.refs.BOX_MAGNETIC.classList.add('hint')
+                if(dropZone == "BOX_MAGNETIC" || dropZone == "BOX_NOT_MAGNETIC"){
+                    game.pages.lab.refs[dropZone].classList.add('hint');
                 } else {
-                    game.pages.lab.refs.BOX_MAGNETIC.classList.remove('hint')
-                }
-
-                if(els.includes(game.pages.lab.refs.BOX_NOT_MAGNETIC)){
-                    game.pages.lab.refs.BOX_NOT_MAGNETIC.classList.add('hint')
-                } else {
-                    game.pages.lab.refs.BOX_NOT_MAGNETIC.classList.remove('hint')
+                    game.pages.lab.refs['BOX_MAGNETIC'].classList.remove('hint');
+                    game.pages.lab.refs['BOX_NOT_MAGNETIC'].classList.remove('hint');
                 }
             },
             onDragEnd: function(e){
                 $(`#${item.id} .item`).removeClass('item--dragging');
 
                 /* Restore states of drop zones. */
-                game.pages.lab.refs.BOX_MAGNETIC.classList.remove('hint')
-                game.pages.lab.refs.BOX_NOT_MAGNETIC.classList.remove('hint')
+                game.pages.lab.helpers.resetDropZones();
 
                 /* The item will now behave differently based on the
                    "drop zone" it landed on:
