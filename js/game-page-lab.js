@@ -84,11 +84,30 @@ helpers: {
         return Object.keys( game.pages.lab.refs ).filter( k => {
             return els.includes( game.pages.lab.refs[k] );
         } )[0]
+    },
+
+    checkGameCompletion: function(){
+        /* If all items have been moved to the correct box, play the end-game sequence.
+           We can determine if the game is complete by checking of all item images are hidden. */
+           if($('.item img:hidden').length == game.pages.lab.items.length){
+               /* Game is complete! Show congratulations message w/ # of moves, throw down the confetti, and play the sound effect. */
+               confetti({
+                    particleCount: 300,
+                    angle: 90,
+                    spread: 180,
+                    scalar: 2,
+                    resize: true
+                })
+               game.sfx.play('applause');
+           }
     }
 
 },
 
 onload: ()=>{
+    /* Reset/initialise moves counter. */
+    game.pages.lab.moves = 0;
+
     /* Shuffle the items array to randomise their order. */
     game.pages.lab.items = game.pages.lab.items
         .map(a => ({sort: Math.random(), value: a}))
@@ -169,15 +188,23 @@ onload: ()=>{
                            ask the player to guess again.
                         */
 
+                        /* Update moves counter. */
+                        game.pages.lab.moves += 1;
+                        console.log(`${game.pages.lab.moves} moves`)
                         let isBoxMagnetic = dropZone == "BOX_MAGNETIC"
                         let itemName = e.target.parentElement.id;
                         let item = game.pages.lab.items.filter(candidate => candidate.id == itemName)[0];
 
                         if(item.magnetic == isBoxMagnetic){
                             /* correct! hide the item */
-                            TweenLite.to(this.target, .34, {
+                            TweenLite.to(this.target, .2, {
                                 opacity: 0,
-                                onComplete: ()=>{$(this.target).hide();}
+                                onComplete: ()=>{
+                                    $(this.target).hide();
+
+                                    /* Check if game is completed */
+                                    game.pages.lab.helpers.checkGameCompletion();
+                                }
                             })
                             game.sfx.play('correct')
                         } else {
@@ -188,6 +215,8 @@ onload: ()=>{
                                 y: this.initialY
                             })
                         }
+
+                        
                         break;
 
                     default:
