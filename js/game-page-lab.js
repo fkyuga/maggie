@@ -49,13 +49,19 @@ items: [
     }
 ],
 
+/* This obj will contain references to frequently accessed elements. */
+refs: {},
+
 onload: ()=>{
     /* Shuffle the items array to randomise their order. */
-
     game.pages.lab.items = game.pages.lab.items
         .map(a => ({sort: Math.random(), value: a}))
         .sort((a, b) => a.sort - b.sort)
         .map(a => a.value)
+
+    /* Store references to elements of interest */
+    game.pages.lab.refs.BOX_MAGNETIC = document.querySelector('.box--magnetic')
+    game.pages.lab.refs.BOX_NOT_MAGNETIC = document.querySelector('.box--not-magnetic')
 
     /* Populate the items bar */
     for ( let item of game.pages.lab.items ) {
@@ -82,8 +88,38 @@ onload: ()=>{
             onDragStart: function(){
                 $(`#${item.id} .item`).addClass('item--dragging');
             },
+            onDrag: function(e){
+                /* This event fires any time the draggable object is moved.
+                   We use this to create a hint when the object is dragged
+                   over an area of interest -- Maggie, or the boxes. */
+
+                /* Position of draggable element */
+                let { x, y } = e.target.getBoundingClientRect();
+
+                /* Get elements underneath these co-ordinates */
+                let els = document.elementsFromPoint(x, y);
+
+                /* Now, apply transformations! */
+
+                /*** BOXES ***/
+                if(els.includes(game.pages.lab.refs.BOX_MAGNETIC)){
+                    game.pages.lab.refs.BOX_MAGNETIC.classList.add('hint')
+                } else {
+                    game.pages.lab.refs.BOX_MAGNETIC.classList.remove('hint')
+                }
+
+                if(els.includes(game.pages.lab.refs.BOX_NOT_MAGNETIC)){
+                    game.pages.lab.refs.BOX_NOT_MAGNETIC.classList.add('hint')
+                } else {
+                    game.pages.lab.refs.BOX_NOT_MAGNETIC.classList.remove('hint')
+                }
+            },
             onDragEnd: function(e){
                 $(`#${item.id} .item`).removeClass('item--dragging');
+
+                /* Restore states of drop zones. */
+                game.pages.lab.refs.BOX_MAGNETIC.classList.remove('hint')
+                game.pages.lab.refs.BOX_NOT_MAGNETIC.classList.remove('hint')
 
                 /* The item will now behave differently based on the
                    "drop zone" it landed on:

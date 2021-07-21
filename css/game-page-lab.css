@@ -68,3 +68,47 @@
 img#item-bar__backdrop {
     width: 1089px;
 }
+
+/* Scene items */
+#scene-items--cabinets {
+    width: 1024px;
+    position: absolute;
+    top: 11px;
+}
+
+#scene-items--desk {
+    width: 573.6552px;
+    height: 359.91px;
+    position: absolute;
+    bottom: 18px;
+    left: 234px;
+}
+
+/* BOXES */
+.game-page-lab .box {
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 168px;
+    height: 144.5px;
+    display: inline-block;
+    bottom: 199px;
+    position: absolute;
+    z-index: 999;
+    transition: 0.15s ease-in-out;
+}
+
+.game-page-lab .box.hint {
+    transform: scale(1.2);
+    filter: brightness(1.05);
+}
+
+.game-page-lab .box.box--magnetic {
+    background-image: url('../img/lab/box_magnetic@2x.png');
+    left: 30px;
+}
+
+.game-page-lab .box.box--not-magnetic {
+    background-image: url('../img/lab/box_not_magnetic@2x.png');
+    right: 30px;
+}
