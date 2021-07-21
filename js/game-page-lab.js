@@ -174,9 +174,19 @@ onload: ()=>{
                         let item = game.pages.lab.items.filter(candidate => candidate.id == itemName)[0];
 
                         if(item.magnetic == isBoxMagnetic){
+                            /* correct! hide the item */
+                            TweenLite.to(this.target, .34, {
+                                opacity: 0,
+                                onComplete: ()=>{$(this.target).hide();}
+                            })
                             game.sfx.play('correct')
                         } else {
-                            game.sfx.play('incorrect')
+                            /* incorrect - fling back to original position */
+                            game.sfx.play('incorrect');
+                            TweenLite.to(this.target, .34, {
+                                x: this.initialX,
+                                y: this.initialY
+                            })
                         }
                         break;
 
