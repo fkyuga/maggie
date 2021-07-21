@@ -174,10 +174,11 @@ onload: ()=>{
                         let item = game.pages.lab.items.filter(candidate => candidate.id == itemName)[0];
 
                         if(item.magnetic == isBoxMagnetic){
-                            alert('Correct!')
+                            game.sfx.play('correct')
                         } else {
-                            alert('Incorrect, try again...');
+                            game.sfx.play('incorrect')
                         }
+                        break;
 
                     default:
                         /* Return to initial position with an anim. */

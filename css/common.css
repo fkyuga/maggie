@@ -12,6 +12,46 @@ html, body {
     font-family: 'Patrick Hand', cursive;
 }
 
+.modal-container {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 1024px;
+    height: 768px;
+    z-index: 9999;
+    background-color: rgba(0,0,0,.25);
+}
+
+#modal-container__bg {
+    width: 900px;
+    position: absolute;
+    top: 115px;
+    left: 59px;
+}
+
+#modal-container__title-img {
+    position: absolute;
+    height: 263px;
+    left: 132px;
+}
+
+.modal-title {
+    position: absolute;
+    top: 93px;
+    color: black;
+    text-align: center;
+    width: 100%;
+    font-size: 64px;
+}
+
+.modal-content {
+    width: 800px;
+    height: 428px;
+    position: absolute;
+    top: 264px;
+    left: 109px;
+}
+
 .sound-effects-container {
     /* hide audio elements - we only need to trigger them via JS */
     display: none;
