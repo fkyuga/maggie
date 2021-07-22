@@ -67,6 +67,7 @@ helpers: {
         /* Returns all drop zones to initial state. */
         game.pages.lab.refs.BOX_MAGNETIC.classList.remove('hint')
         game.pages.lab.refs.BOX_NOT_MAGNETIC.classList.remove('hint')
+        $('.game-page-lab .maggie-drop-zone').hide();
     },
     
     detectDropZone: function(draggableEl){
@@ -81,6 +82,7 @@ helpers: {
 
         /* Now, filter refs and return only the element that draggableEl
            obscures */
+           
         return Object.keys( game.pages.lab.refs ).filter( k => {
             return els.includes( game.pages.lab.refs[k] );
         } )[0]
@@ -147,14 +149,17 @@ onload: ()=>{
         .map(a => a.value)
 
     /* Store references to elements of interest */
-    game.pages.lab.refs.BOX_MAGNETIC = document.querySelector('.box--magnetic')
+    game.pages.lab.refs.BOX_MAGNETIC     = document.querySelector('.box--magnetic')
     game.pages.lab.refs.BOX_NOT_MAGNETIC = document.querySelector('.box--not-magnetic')
+    game.pages.lab.refs.MAGGIE           = document.querySelector('.maggie-drop-zone');
+
     game.pages.lab.refs.EYE_L = document.querySelector('.game-page-lab .character-maggie-face-eye-l')
     game.pages.lab.refs.EYE_R = document.querySelector('.game-page-lab .character-maggie-face-eye-r')
 
     /* Initialize handlers */
     game.pages.lab.handlers.maggieEyesFollowPointer();
-
+    game.pages.lab.helpers.resetDropZones();
+    
     /* Populate the items bar */
     for ( let item of game.pages.lab.items ) {
         /* For each item -- clone the template, add img and other
@@ -179,7 +184,17 @@ onload: ()=>{
             },
             onDragStart: function(){
                 $(`#${item.id} .item`).addClass('item--dragging');                
-
+                
+                /* Change Maggie's drop zone image to represent this item. */
+                $('.game-page-lab .maggie-drop-zone').show();
+                $('.game-page-lab .maggie-drop-zone img')
+                    .removeClass()
+                    .addClass(`item-${item.id}`)
+                    .attr('src', `img/items/${item.id}--hint@2x.png`)
+                    .css({
+                        top: 269 - $('.game-page-lab .maggie-drop-zone img').height()/2,
+                        right: 354 - $('.game-page-lab .maggie-drop-zone img').width()/2
+                    });
             },
             onDrag: function(e){
                 /* This event fires any time the draggable object is moved.
@@ -194,6 +209,13 @@ onload: ()=>{
                     game.pages.lab.refs['BOX_MAGNETIC'].classList.remove('hint');
                     game.pages.lab.refs['BOX_NOT_MAGNETIC'].classList.remove('hint');
                 }
+
+                if(dropZone == "MAGGIE"){
+                    game.pages.lab.refs['MAGGIE'].classList.add('hint');
+                } else {
+                    game.pages.lab.refs['MAGGIE'].classList.remove('hint');
+                }
+
             },
             onDragEnd: function(e){
                 $(`#${item.id} .item`).removeClass('item--dragging');
@@ -215,6 +237,9 @@ onload: ()=>{
                 */
 
                 let dropZone = game.pages.lab.helpers.detectDropZone(e.target);
+
+                console.log(dropZone);
+
                 switch(dropZone){
                     case "BOX_MAGNETIC":
                     case "BOX_NOT_MAGNETIC":
@@ -287,6 +312,11 @@ onload: ()=>{
                         }
 
                         
+                        break;
+
+                    case "MAGGIE":
+                        /* Dropped on Maggie! */
+                        console.log('dropped on magige');
                         break;
 
                     default:

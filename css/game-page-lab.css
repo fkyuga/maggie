@@ -56,15 +56,24 @@
    I scale(0.5) it so i can just copy+paste dimensions from Illustrator,
    sue me.
 */
-.item-bar__item#cola      img { width: 56px; height: 87.71075px }
-.item-bar__item#glass     img { width: 33.8811px; height: 81.14985px }
-.item-bar__item#boot      img { width: 49.69825px; height: 63.35485px }
-.item-bar__item#paperclip img { width: 43.915px; height: 71.65465px }
-.item-bar__item#clock     img { width: 68.181px; height: 67.898px }
-.item-bar__item#coin_2p   img { width: 71.42145px; height: 71.7492px }
-.item-bar__item#coin_10p  img { width: 65.5312px; height: 65.8319px }
-.item-bar__item#key       img { width: 36.2727px; height: 74.7284px }
-.item-bar__item#scissors  img { width: 56.9632px; height: 75.5254px }
+.item-bar__item#cola      img,
+img.item-cola             { width: 56px; height: 87.71075px }
+.item-bar__item#glass     img,
+img.item-glass            { width: 33.8811px; height: 81.14985px }
+.item-bar__item#boot      img,
+img.item-boot             { width: 49.69825px; height: 63.35485px }
+.item-bar__item#paperclip img,
+img.item-paperclip        { width: 43.915px; height: 71.65465px }
+.item-bar__item#clock     img,
+img.item-clock            { width: 68.181px; height: 67.898px }
+.item-bar__item#coin_2p   img,
+img.item-coin_2p          { width: 71.42145px; height: 71.7492px }
+.item-bar__item#coin_10p  img,
+img.item-coin_10p         { width: 65.5312px; height: 65.8319px }
+.item-bar__item#key       img,
+img.item-key               { width: 36.2727px; height: 74.7284px }
+.item-bar__item#scissors  img,
+img.item-scissors         { width: 56.9632px; height: 75.5254px }
 
 
 img#item-bar__backdrop {
@@ -114,6 +123,20 @@ img#item-bar__backdrop {
 .game-page-lab .box.box--not-magnetic {
     background-image: url('../img/lab/box_not_magnetic@2x.png');
     right: 30px;
+}
+
+.game-page-lab .maggie-drop-zone {
+    position: absolute;
+    right: 354px;
+    opacity: .8;
+    top: 269px;
+    -webkit-filter: drop-shadow(2px 1px 6px rgba(0,0,0,0.5));
+    filter: drop-shadow(2px 1px 6px rgba(0,0,0,0.5));
+}
+
+.game-page-lab .maggie-drop-zone.hint {
+    opacity: 1;
+    transform: scale(1.5);
 }
 
 /* MAGGIE */
