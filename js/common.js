@@ -115,7 +115,7 @@ var game = {
     },
 
     modal: {
-        display: function(title, html, actions){
+        display: function(title, html, actions, addClass = false){
             /* Show modal with specified title + HTML content. */
 
             $('.modal-title').html(title);
@@ -138,9 +138,11 @@ var game = {
                 })
             }, 450)
 
-            /* Refresh button click sound */
-            game.helpers.startButtonSounds();
-    
+            /* if addClass is defined, add those classes to the modal */
+            $('.modal').removeClass().addClass('modal')
+            if(addClass){
+                $('.modal').addClass(addClass);
+            }
         },
 
         hide: function(){
@@ -150,6 +152,112 @@ var game = {
             $('.modal-container').css({
                 'pointer-events': 'none'
             });
+        },
+
+        slide: function(i){
+            gsap.to(`.slide--active`, .2, {
+                x: -80,
+                opacity: 0,
+                onComplete: function(){
+                    $(`.slide--active`).removeClass('slide--active');
+                    $(`.slide${i}`).addClass('slide--active');
+                }
+            });
+
+            gsap.to(`.slide${i}`, .2, {
+                x: 80,
+                opacity: 0,
+                onComplete: function(){
+                    gsap.to(`.slide${i}`, .2, {
+                        x: 0,
+                        opacity: 1
+                    })
+                }
+            });
+        }
+    },
+
+    modals: {
+        labTutorial: function(){
+            function toSlide2(){
+                alert('foo')
+            }
+
+            let content = `
+                <div class="slide slide1 slide--active">
+                    <div class="video-container">
+                        <video autoplay loop muted>
+                            <source src="video/lab-tutorial1.webm" type="video/webm">
+                        </video>
+                    </div>
+                    <div>
+                        <p>To see if an object is magnetic, move it over to Maggie the magnet!</p>
+                        <div class="modal-action">
+                            <button onclick="game.modal.slide(2)" class="btn-circle btn-yes"></button>
+                            <div class="modal-action-label">Next</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide slide2">
+                    <div class="video-container">
+                        <video autoplay loop muted>
+                            <source src="video/lab-tutorial2.webm" type="video/webm">
+                        </video>
+                    </div>
+                    <div>
+                        <p>If you think the object isn't magnetic, put it in the "Not Magnetic" box.</p>
+                        <div class="modal-action">
+                            <button onclick="game.modal.slide(3)" class="btn-circle btn-yes"></button>
+                            <div class="modal-action-label">Next</div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="slide slide3">
+                    <div class="video-container">
+                        <video autoplay loop muted>
+                            <source src="video/lab-tutorial3.webm" type="video/webm">
+                        </video>
+                    </div>
+                    <div>
+                        <p>And if you think it <em>is</em> magnetic, put it in the "Magnetic" box!</p>
+                        <div class="modal-action">
+                            <button onclick="game.modal.slide(4)" class="btn-circle btn-yes"></button>
+                            <div class="modal-action-label">Next</div>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <div class="slide slide4">
+                    <div class="slide4_content">
+                        <p>That's everything!</p>
+                        <h2>Are you ready?</h2>
+                        <div class="buttons">
+                            <div class="modal-action">
+                                <button onclick="game.sfx.play('xylo'); game.loadPage('lab', {transition: 'circle',twoStep: true});   game.modal.hide(); " class="btn-circle btn-96 btn-yes"></button>
+                                <div class="modal-action-label">Yes, Go Home</div>
+                            </div>
+                            <div class="modal-action">
+                                <button onclick="game.modal.hide()" class="btn-circle btn-96 btn-no"></button>
+                                <div class="modal-action-label">No, Take Me Back!</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            let actions = `
+            `
+
+            game.modal.display(
+                'How To Play',
+                content,
+                actions,
+                'lab-howto'
+            )
         }
     },
 

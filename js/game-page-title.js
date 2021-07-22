@@ -1,7 +1,7 @@
 game.pages.start = {
     onload: function(){
         $('.game-page-start-content').off().on('click', function(){
-            game.loadPage('lab');
+            game.loadPage('title');
         })
     }
 }
@@ -70,13 +70,20 @@ game.pages.title = {
            The menu option elements have a custom attribute "data-activity" that tells this function
            what page to go to. */
 
+           
         let pageName = e.currentTarget.getAttribute('data-activity');
         
-        game.sfx.play('xylo');
-        game.loadPage(pageName, {
-            transition: 'circle',
-            twoStep: true
-        });
+        switch(pageName){
+            case "lab":
+                game.modals.labTutorial()
+                break;
+            default:
+                game.sfx.play('xylo');
+                game.loadPage(pageName, {
+                    transition: 'circle',
+                    twoStep: true
+                });
+        }
     }
 
 }

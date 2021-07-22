@@ -173,3 +173,52 @@ img#item-bar__backdrop {
     background-color: #543982;
     border-radius: 12px;
 }
+
+.modal video {
+    height: 100%;
+    width: 100%;
+}
+
+.modal .video-container {
+    display: inline-flex;
+    height: 336px;
+    width: 448px;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.modal.lab-howto .slide1,
+.modal.lab-howto .slide2,
+.modal.lab-howto .slide3 {
+    height: 449px;
+    align-items: center;
+}
+
+.modal.lab-howto .slide1 p,
+.modal.lab-howto .slide2 p,
+.modal.lab-howto .slide3 p {
+    width: 275px;
+    padding: 0 40px;
+}
+
+.modal.lab-howto .slide {
+    height: 430px;
+}
+
+.modal.lab-howto .slide4 {
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.lab-howto .slide4 .buttons {
+    justify-content: center;
+    gap: 32px;
+}
+
+.slide {
+    display: none;
+}
+
+.slide--active {
+    display: flex;
+}
