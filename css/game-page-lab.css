@@ -121,3 +121,27 @@ img#item-bar__backdrop {
     transform: scale(.6);
     top: 113px; left: 406px;
 }
+
+/** Moves counter **/
+.moves-counter-container {
+    position: absolute;
+    z-index: 999;
+    top: 32px;
+    left: 32px;
+    background-color: #8E48ED;
+    color: rgba(255,255,255,.9);
+    border: 3px solid #543982;
+
+    display: flex;
+    gap: 16px;
+    padding: 8px 16px;
+    font-size: 32px;
+    border-radius: 16px;
+}
+
+.moves-counter {
+    width: 84px;
+    text-align: center;
+    background-color: #543982;
+    border-radius: 12px;
+}

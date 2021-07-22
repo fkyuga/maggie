@@ -176,7 +176,8 @@ onload: ()=>{
                 }
             },
             onDragStart: function(){
-                $(`#${item.id} .item`).addClass('item--dragging');
+                $(`#${item.id} .item`).addClass('item--dragging');                
+
             },
             onDrag: function(e){
                 /* This event fires any time the draggable object is moved.
@@ -208,7 +209,8 @@ onload: ()=>{
                      -> If it landed near either box, evaluate whether or not
                         the answer was correct.
                     
-                     -> Otherwise, return it to the initial position. */
+                     -> Otherwise, return it to the initial position. 
+                */
 
                 let dropZone = game.pages.lab.helpers.detectDropZone(e.target);
                 switch(dropZone){
@@ -224,8 +226,6 @@ onload: ()=>{
                         */
 
                         /* Update moves counter. */
-                        game.pages.lab.moves += 1;
-                        console.log(`${game.pages.lab.moves} moves`)
                         let isBoxMagnetic = dropZone == "BOX_MAGNETIC"
                         let itemName = e.target.parentElement.id;
                         let item = game.pages.lab.items.filter(candidate => candidate.id == itemName)[0];
@@ -295,6 +295,12 @@ onload: ()=>{
                         });
                         game.pages.lab.helpers.resetMaggieEyes();
                         break;
+                }
+                
+                if(['BOX_MAGNETIC', 'BOX_NOT_MAGNETIC', 'MAGGIE'].includes(dropZone)){
+                    /** Increment + update moves counter **/
+                    console.log('increment')
+                    $('.game-page-lab .moves-counter').text( game.pages.lab.moves+=1 );
                 }
 
             }
