@@ -104,6 +104,37 @@ helpers: {
 
 },
 
+handlers: {
+
+    maggieEyesFollowPointer: function(){
+        /* Makes Maggie's eyes follow the mouse pointer (or the touch pos)
+           Adapted from https://stackoverflow.com/questions/15653801/rotating-object-to-face-mouse-pointer-on-mousemove. */
+
+        let eye  =  $('.game-page-lab .character-maggie-face-eye-l')[0];
+        let eyeR =  $('.game-page-lab .character-maggie-face-eye-r')[0];
+
+        let eyeBoundingRect = eye.getBoundingClientRect();
+        let eyeCenter = {
+            x: eyeBoundingRect.left + eyeBoundingRect.width  / 2,
+            y: eyeBoundingRect.top  + eyeBoundingRect.height / 2
+        };
+
+        document.addEventListener('touchmove', e => {
+            let { clientX, clientY } = e.touches[0];
+            let rotate = Math.atan2(clientX - eyeCenter.x, - (clientY - eyeCenter.y) )*(180 / Math.PI) + 90;    
+            
+            TweenLite.to([eye, eyeR], .2, { rotate })
+        })
+        
+        document.addEventListener('touchend', e => {
+            TweenLite.to([eye, eyeR], 0.2, {
+                rotate: 0
+            })
+        })
+    }
+
+},
+
 onload: ()=>{
     /* Reset/initialise moves counter. */
     game.pages.lab.moves = 0;
@@ -117,6 +148,9 @@ onload: ()=>{
     /* Store references to elements of interest */
     game.pages.lab.refs.BOX_MAGNETIC = document.querySelector('.box--magnetic')
     game.pages.lab.refs.BOX_NOT_MAGNETIC = document.querySelector('.box--not-magnetic')
+
+    /* Initialize handlers */
+    game.pages.lab.handlers.maggieEyesFollowPointer();
 
     /* Populate the items bar */
     for ( let item of game.pages.lab.items ) {
