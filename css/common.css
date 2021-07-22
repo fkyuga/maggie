@@ -12,6 +12,10 @@ html, body {
     font-family: 'Patrick Hand', cursive;
 }
 
+.active {
+    display: block !important;
+}
+
 .modal-container {
     display: none;
     position: relative;
@@ -152,6 +156,12 @@ img {
 
 /********* Characters **************/
 
+.character-expression {
+    display: none;
+}
+
+/*********** MAGGIE *********/
+
 .character-maggie {
     height: 293px;
     width: 134px;
@@ -274,4 +284,12 @@ img {
     z-index: 2;
     top: 12px;
     left: -14px;
+}
+
+.character-maggie-expression-happy {
+    background-image: url(../img/maggie/expression-happy.png);
+    width: 100px;
+    height: 76px;
+    top: 29px;
+    left: -3px;
 }

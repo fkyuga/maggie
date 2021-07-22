@@ -100,6 +100,12 @@ helpers: {
                 })
                game.sfx.play('applause');
            }
+    },
+
+    resetMaggieEyes: function(){
+        TweenLite.to([eye, eyeR], 0.2, {
+            rotate: 0
+        });
     }
 
 },
@@ -110,10 +116,9 @@ handlers: {
         /* Makes Maggie's eyes follow the mouse pointer (or the touch pos)
            Adapted from https://stackoverflow.com/questions/15653801/rotating-object-to-face-mouse-pointer-on-mousemove. */
 
-        let eye  =  $('.game-page-lab .character-maggie-face-eye-l')[0];
-        let eyeR =  $('.game-page-lab .character-maggie-face-eye-r')[0];
-
-        let eyeBoundingRect = eye.getBoundingClientRect();
+        let { EYE_L, EYE_R } = game.pages.lab.refs;
+        
+        let eyeBoundingRect = EYE_L.getBoundingClientRect();
         let eyeCenter = {
             x: eyeBoundingRect.left + eyeBoundingRect.width  / 2,
             y: eyeBoundingRect.top  + eyeBoundingRect.height / 2
@@ -123,13 +128,7 @@ handlers: {
             let { clientX, clientY } = e.touches[0];
             let rotate = Math.atan2(clientX - eyeCenter.x, - (clientY - eyeCenter.y) )*(180 / Math.PI) + 90;    
             
-            TweenLite.to([eye, eyeR], .2, { rotate })
-        })
-        
-        document.addEventListener('touchend', e => {
-            TweenLite.to([eye, eyeR], 0.2, {
-                rotate: 0
-            })
+            TweenLite.to([EYE_L, EYE_R], .2, { rotate })
         })
     }
 
@@ -148,6 +147,8 @@ onload: ()=>{
     /* Store references to elements of interest */
     game.pages.lab.refs.BOX_MAGNETIC = document.querySelector('.box--magnetic')
     game.pages.lab.refs.BOX_NOT_MAGNETIC = document.querySelector('.box--not-magnetic')
+    game.pages.lab.refs.EYE_L = document.querySelector('.game-page-lab .character-maggie-face-eye-l')
+    game.pages.lab.refs.EYE_R = document.querySelector('.game-page-lab .character-maggie-face-eye-r')
 
     /* Initialize handlers */
     game.pages.lab.handlers.maggieEyesFollowPointer();
@@ -241,6 +242,20 @@ onload: ()=>{
                                 }
                             })
                             game.sfx.play('correct')
+
+                            /* maggie happy face and sound */
+                            $('.game-page-lab .character-maggie-expression-neutral')
+                                .removeClass('active');
+                            $('.game-page-lab .character-maggie-expression-happy')
+                                .addClass('active');
+
+                            setTimeout(function(){
+                                $('.game-page-lab .character-maggie-expression-neutral')
+                                .addClass('active');
+                            $('.game-page-lab .character-maggie-expression-happy')
+                                .removeClass('active');
+                            }, 1000);
+                            
                         } else {
                             /* incorrect - fling back to original position */
                             game.sfx.play('incorrect');
@@ -248,6 +263,25 @@ onload: ()=>{
                                 x: this.initialX,
                                 y: this.initialY
                             })
+
+                            /* maggie sad face and sound :( */
+                            $('.game-page-lab .character-maggie-face-mouth')
+                                .removeClass('character-maggie-face-mouth-smile')
+                                .addClass('character-maggie-face-mouth-frown');
+                            
+                            let { EYE_L, EYE_R } = game.pages.lab.refs;
+
+                            TweenLite.to([EYE_L, EYE_R], 0.3, {
+                                rotate: 270
+                            });
+                        
+                            setTimeout(function(){
+                                $('.game-page-lab .character-maggie-face-mouth')
+                                    .removeClass('character-maggie-face-mouth-frown')
+                                    .addClass('character-maggie-face-mouth-smile');
+                                game.pages.lab.helpers.resetMaggieEyes();
+                            }, 1000)
+                            
                         }
 
                         
@@ -259,6 +293,7 @@ onload: ()=>{
                             x: this.initialX,
                             y: this.initialY
                         });
+                        game.pages.lab.helpers.resetMaggieEyes();
                         break;
                 }
 
