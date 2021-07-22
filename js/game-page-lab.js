@@ -63,6 +63,18 @@ refs: {},
 
 helpers: {
 
+    getMatrix: (element) => {
+        /* from https://stackoverflow.com/questions/7982053/get-translate3d-values-of-a-div */
+        const values = element.style.transform.split(/\w+\(|\);?/);
+        const transform = values[1].split(/,\s?/g).map(e => parseInt(e.replace('px', '')))
+    
+        return {
+          x: transform[0],
+          y: transform[1],
+          z: transform[2]
+        };
+    },
+
     resetDropZones: function(){
         /* Returns all drop zones to initial state. */
         game.pages.lab.refs.BOX_MAGNETIC.classList.remove('hint')
@@ -110,6 +122,22 @@ helpers: {
         TweenLite.to([EYE_L, EYE_R], 0.2, {
             rotate: 0
         });
+    },
+
+    itemAbsoluteXY: function(el, dx, dy){
+        /* because of quirks of how position: absolute works with transform: translate, we can't just animate the item to its new pos by specifying the
+           destination x/y. we have to do some maths -- subtracting the offsets of other elements.
+
+           this function... does that */
+        
+        let { x, y } = game.pages.lab.helpers.getMatrix(el);
+        let { left, top } = $(el).position();
+
+        // transformX - position.left
+        let newX = x - left;
+        let newY = y - top - $('.item-bar').position().top - $('.item-bar ul').position().top;
+
+        return { x: newX + dx, y: newY + dy}
     }
 
 },
@@ -218,12 +246,7 @@ onload: ()=>{
 
             },
             onDragEnd: function(e){
-                $(`#${item.id} .item`).removeClass('item--dragging');
-
-                /* Restore states of drop zones. */
-                game.pages.lab.helpers.resetDropZones();
-
-                /* The item will now behave differently based on the
+                /* The item will now zehave differently based on the
                    "drop zone" it landed on:
 
                      -> If it landed near Maggie, evaluate whether or not
@@ -237,6 +260,10 @@ onload: ()=>{
                 */
 
                 let dropZone = game.pages.lab.helpers.detectDropZone(e.target);
+
+                let itemName = e.target.parentElement.id;
+                let item = game.pages.lab.items.filter(candidate => candidate.id == itemName)[0];
+                $(`#${item.id} .item`).removeClass('item--dragging');
 
                 console.log(dropZone);
 
@@ -254,9 +281,6 @@ onload: ()=>{
 
                         /* Update moves counter. */
                         let isBoxMagnetic = dropZone == "BOX_MAGNETIC"
-                        let itemName = e.target.parentElement.id;
-                        let item = game.pages.lab.items.filter(candidate => candidate.id == itemName)[0];
-
                         if(item.magnetic == isBoxMagnetic){
                             /* correct! hide the item */
                             TweenLite.to(this.target, .2, {
@@ -315,8 +339,23 @@ onload: ()=>{
                         break;
 
                     case "MAGGIE":
-                        /* Dropped on Maggie! */
-                        console.log('dropped on magige');
+                        /* Dropped on Maggie!
+
+                            If the item is magnetic, move its x-position to directly
+                            next to Maggie, play a sound, and change Maggie's expression.
+
+                            If the item isn't magnetic, move it's y-position to onto the desk,
+                            play a sound, and move Maggie's eyes to follow it. */
+                    
+
+                        if(item.magnetic){
+                            /* Click onto Maggie */
+                            TweenLite.to(this.target, .3, {
+                                ...game.pages.lab.helpers.itemAbsoluteXY(this.target, 560, 260),
+                                rotate: 359
+                            })
+                        }
+
                         break;
 
                     default:
@@ -328,7 +367,10 @@ onload: ()=>{
                         game.pages.lab.helpers.resetMaggieEyes();
                         break;
                 }
-                
+
+                /* Restore states of drop zones. */
+                game.pages.lab.helpers.resetDropZones();
+
                 if(['BOX_MAGNETIC', 'BOX_NOT_MAGNETIC', 'MAGGIE'].includes(dropZone)){
                     /** Increment + update moves counter **/
                     console.log('increment')
