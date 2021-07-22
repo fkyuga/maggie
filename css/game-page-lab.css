@@ -130,10 +130,11 @@ img#item-bar__backdrop {
 }
 
 .game-page-lab .maggie-drop-zone {
+    padding: 24px;
     position: absolute;
-    right: 354px;
+    right: 330px;
     opacity: .8;
-    top: 269px;
+    top: 221px;
     -webkit-filter: drop-shadow(2px 1px 6px rgba(0,0,0,0.5));
     filter: drop-shadow(2px 1px 6px rgba(0,0,0,0.5));
 }

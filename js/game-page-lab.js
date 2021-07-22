@@ -61,6 +61,106 @@ items: [
 /* This obj will contain references to frequently accessed elements. */
 refs: {},
 
+modals: {
+    gameCompleteWithMaggiesHelp: () => {
+        let content = `
+            <p>With Maggie's help, you were able to sort the objects in <strong>${game.pages.lab.moves} moves</strong>!</p>
+            <p>(Do you think you could do it in less moves?)</p>
+        `;
+
+        let actions = `
+            <div class="modal-action">
+                <button onclick="game.helpers.goHome()" class="btn-circle btn-96 btn-yes"></button>
+                <div class="modal-action-label">Play Again</div>
+            </div>
+            <div class="modal-action">
+                <button onclick="game.helpers.goHome()" class="btn-circle btn-96 btn-no"></button>
+                <div class="modal-action-label">Go Home</div>
+            </div>
+        `
+
+        game.modal.display(
+            'Congratulations!',
+            content,
+            actions
+        )
+    },
+
+    gameCompleteWithMaggiesHelpPerfect: () => {
+        let content = `
+            <p>With Maggie's help, you were able to sort all of the objects <strong>perfectly</strong>!</p>
+            <p>(Do you think you could do it without her help?)</p>
+        `;
+
+        let actions = `
+            <div class="modal-action">
+                <button onclick="game.helpers.goHome()" class="btn-circle btn-96 btn-yes"></button>
+                <div class="modal-action-label">Play Again</div>
+            </div>
+            <div class="modal-action">
+                <button onclick="game.helpers.goHome()" class="btn-circle btn-96 btn-no"></button>
+                <div class="modal-action-label">Go Home</div>
+            </div>
+        `
+
+        game.modal.display(
+            'Amazing!',
+            content,
+            actions
+        )
+    },
+
+    gameCompleteWithoutMaggiesHelp: () => {
+        let content = `
+            <p>You were able to sort the objects in <strong>${game.pages.lab.moves} moves</strong>, without Maggie's help! That's amazing!</p>
+            <p>(Do you think you could do it in less moves?)</p>
+        `;
+
+        let actions = `
+            <div class="modal-action">
+                <button onclick="game.helpers.goHome()" class="btn-circle btn-96 btn-yes"></button>
+                <div class="modal-action-label">Play Again</div>
+            </div>
+            <div class="modal-action">
+                <button onclick="game.helpers.goHome()" class="btn-circle btn-96 btn-no"></button>
+                <div class="modal-action-label">Go Home</div>
+            </div>
+        `
+
+        game.modal.display(
+            'Incredible!',
+            content,
+            actions
+        )
+    },
+
+    gameCompleteWithoutMaggiesHelpPerfect: () => {
+        let content = `
+            <p>Wow!</p>
+            <p>You managed to sort all the magnets <strong>the first time around</strong>! And you didn't even ask Maggie for help!</p>
+            <p>I think it's safe to call you a <strong>magnet expert</strong> now!</p>
+        `;
+
+        let actions = `
+            <div class="modal-action">
+                <button onclick="game.helpers.goHome()" class="btn-circle btn-96 btn-yes"></button>
+                <div class="modal-action-label">Play Again</div>
+            </div>
+            <div class="modal-action">
+                <button onclick="game.helpers.goHome()" class="btn-circle btn-96 btn-no"></button>
+                <div class="modal-action-label">Go Home</div>
+            </div>
+        `
+
+        game.modal.display(
+            'You\'re Amazing!',
+            content,
+            actions
+        )
+    }
+
+},
+
 helpers: {
 
     getMatrix: (element) => {
@@ -113,6 +213,16 @@ helpers: {
                     resize: true
                 })
                game.sfx.play('applause');
+
+               if(game.pages.lab.usedMaggie && game.pages.lab.madeMistake){
+                   game.pages.lab.modals.gameCompleteWithMaggiesHelp();
+               } else if(game.pages.lab.usedMaggie && !game.pages.lab.madeMistake){
+                   game.pages.lab.modals.gameCompleteWithMaggiesHelpPerfect();
+               } else if(game.pages.lab.madeMistake){
+                   game.pages.lab.modals.gameCompleteWithoutMaggiesHelp();
+               } else {
+                   game.pages.lab.modals.gameCompleteWithoutMaggiesHelpPerfect();
+               }
            }
     },
 
@@ -138,6 +248,16 @@ helpers: {
         let newY = y - top - $('.item-bar').position().top - $('.item-bar ul').position().top;
 
         return { x: newX + dx, y: newY + dy}
+    },
+
+    itemAbsoluteY: function(el, dy){
+        /* as above but for y only. if i were less lazy i'd have one function do all this. alas... */
+        
+        let { y } = game.pages.lab.helpers.getMatrix(el);
+        let { top } = $(el).position();
+        let newY = y - top - $('.item-bar').position().top - $('.item-bar ul').position().top;
+
+        return { y: newY + dy}
     },
 
     enableItems: () => {
@@ -205,6 +325,8 @@ onload: ()=>{
     /* Reset/initialise moves counter. */
     game.pages.lab.moves = 0;
     game.pages.lab.maggieHasMagnet = false;
+    game.pages.lab.usedMaggie = false;
+    game.pages.lab.madeMistake = false;
 
     /* Shuffle the items array to randomise their order. */
     game.pages.lab.items = game.pages.lab.items
@@ -359,6 +481,7 @@ onload: ()=>{
                                 x: this.initialX,
                                 y: this.initialY
                             })
+                            game.pages.lab.madeMistake = true;
 
                             /* maggie sad face and sound :( */
                             $('.game-page-lab .character-maggie-face-mouth')
@@ -392,8 +515,9 @@ onload: ()=>{
                             If the item isn't magnetic, move it's y-position to onto the desk,
                             play a sound, and move Maggie's eyes to follow it. */
                     
-
+                        game.pages.lab.usedMaggie = true;
                         if(item.magnetic){
+
                             /* Click onto Maggie */
                             TweenLite.to(this.target, .3, {
                                 ...game.pages.lab.helpers.itemAbsoluteXY(this.target, 560, 260),
@@ -412,6 +536,20 @@ onload: ()=>{
                             game.pages.lab.maggieHasMagnet = true;
 
                             /* Disable all other items */
+                            game.pages.lab.helpers.disableItems(itemName)
+
+                        } else {
+
+                            /** ITEM IS NOT MAGNETIC **/
+                            /* Drop the item onto the table. */
+                            
+                            game.sfx.play('drop');
+                            TweenLite.to(this.target, .2, {
+                                ...game.pages.lab.helpers.itemAbsoluteY(this.target, 370)
+                            });
+
+                            /* Disable all other items */
+                            game.pages.lab.maggieHasMagnet = true;
                             game.pages.lab.helpers.disableItems(itemName)
                         }
 
