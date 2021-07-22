@@ -138,6 +138,34 @@ helpers: {
         let newY = y - top - $('.item-bar').position().top - $('.item-bar ul').position().top;
 
         return { x: newX + dx, y: newY + dy}
+    },
+
+    enableItems: () => {
+        $('.item-bar__item').removeClass('disabled');
+        for ( let item of game.pages.lab.items ) {
+            if(item._draggableInstance){
+                item._draggableInstance.map(i => i.enable());
+            }
+        }
+    },
+
+    disableItems: (except) => {
+        /* This function is used during gameplay.
+           Once the user has dragged an item to Maggie to see if it's magnetic, we want to disable dragging of all other items except that one to avoid
+           confusion.
+
+           This function, then:
+                -> adds class 'disabled' to all item elements (except those that have an ID == [except])
+                -> disables all Draggable instances (except those for items that have ID == [except])
+        */
+
+        // first let's re-enable everything TODO
+
+        for ( let item of game.pages.lab.items ) {
+            if(item.id == except) continue; /* do nothing */
+            $(`.item-bar__item#${item.id}`).addClass('disabled');
+            item._draggableInstance.map(i => i.disable());
+        }
     }
 
 },
@@ -176,6 +204,7 @@ handlers: {
 onload: ()=>{
     /* Reset/initialise moves counter. */
     game.pages.lab.moves = 0;
+    game.pages.lab.maggieHasMagnet = false;
 
     /* Shuffle the items array to randomise their order. */
     game.pages.lab.items = game.pages.lab.items
@@ -208,7 +237,8 @@ onload: ()=>{
         $('.item-bar__items').append(itemNode);
 
         /* Enable Draggable */
-        Draggable.create(`#${item.id} .item`, {
+        /* Assign the instance to the items object */
+        item._draggableInstance = Draggable.create(`#${item.id} .item`, {
             onPress: function(){
                 /* Stash the element's initial position in
                    case we need to return it there later. */
@@ -221,15 +251,19 @@ onload: ()=>{
                 $(`#${item.id} .item`).addClass('item--dragging');                
                 
                 /* Change Maggie's drop zone image to represent this item. */
-                $('.game-page-lab .maggie-drop-zone').show();
-                $('.game-page-lab .maggie-drop-zone img')
-                    .removeClass()
-                    .addClass(`item-${item.id}`)
-                    .attr('src', `img/items/${item.id}--hint@2x.png`)
-                    .css({
-                        top: 269 - $('.game-page-lab .maggie-drop-zone img').height()/2,
-                        right: 354 - $('.game-page-lab .maggie-drop-zone img').width()/2
-                    });
+                /** (not if Maggie already has something attached to her, though) */
+                if(!game.pages.lab.maggieHasMagnet){
+                    $('.game-page-lab .maggie-drop-zone').show();
+                    $('.game-page-lab .maggie-drop-zone img')
+                        .removeClass()
+                        .addClass(`item-${item.id}`)
+                        .attr('src', `img/items/${item.id}--hint@2x.png`)
+                        .css({
+                            top: 269 - $('.game-page-lab .maggie-drop-zone img').height()/2,
+                            right: 354 - $('.game-page-lab .maggie-drop-zone img').width()/2
+                        });
+                }
+                
             },
             onDrag: function(e){
                 /* This event fires any time the draggable object is moved.
@@ -301,6 +335,10 @@ onload: ()=>{
                             })
                             game.sfx.play('correct')
 
+                            /* re-enable movement */
+                            game.pages.lab.helpers.enableItems()
+                            game.pages.lab.maggieHasMagnet = false;
+
                             /* maggie happy face and sound */
                             $('.game-page-lab .character-expression')
                                 .removeClass('active');
@@ -369,6 +407,12 @@ onload: ()=>{
                                 .removeClass('active');
                             $('.game-page-lab .character-maggie-expression-surprised')
                                 .addClass('active');
+
+                            /* Store in var */
+                            game.pages.lab.maggieHasMagnet = true;
+
+                            /* Disable all other items */
+                            game.pages.lab.helpers.disableItems(itemName)
                         }
 
                         break;
@@ -388,7 +432,6 @@ onload: ()=>{
 
                 if(['BOX_MAGNETIC', 'BOX_NOT_MAGNETIC', 'MAGGIE'].includes(dropZone)){
                     /** Increment + update moves counter **/
-                    console.log('increment')
                     $('.game-page-lab .moves-counter').text( game.pages.lab.moves+=1 );
                 }
 

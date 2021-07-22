@@ -37,6 +37,10 @@
     height: 105px;
 }
 
+.item-bar__item.disabled img {
+    opacity: .3;
+}
+
 .item-bar__item img {
     width: 56px;
     height: 56px;
