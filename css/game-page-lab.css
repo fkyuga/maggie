@@ -130,13 +130,13 @@ img#item-bar__backdrop {
     left: 32px;
     background-color: #8E48ED;
     color: rgba(255,255,255,.9);
-    border: 3px solid #543982;
-
+    border: 6px solid #543982;
     display: flex;
     gap: 16px;
-    padding: 8px 16px;
+    padding: 16px 30px;
     font-size: 32px;
-    border-radius: 16px;
+    box-shadow: 0px 0px 10px rgb(0 0 0 / 50%);
+    border-radius: 64px;
 }
 
 .moves-counter {

@@ -64,6 +64,95 @@ var game = {
 
     pages: {},
 
+    helpers: {
+        goHome: function(){
+            game.sfx.play('xylo');
+            game.modal.hide();
+            game.loadPage('title', {
+                transition: 'circle',
+                twoStep: true
+            });  
+        },
+        homePrompt: function(){
+            /* Shows home prompt in a modal. */
+            let content = `
+                <p>Are you sure?</p>
+                <p>If you stop now, you'll have to start from the beginning!</p>
+            `;
+ 
+            let actions = `
+                <div class="modal-action">
+                    <button onclick="game.helpers.goHome()" class="btn-circle btn-96 btn-yes"></button>
+                    <div class="modal-action-label">Yes, Go Home</div>
+                </div>
+                <div class="modal-action">
+                    <button onclick="game.modal.hide()" class="btn-circle btn-96 btn-no"></button>
+                    <div class="modal-action-label">No, Take Me Back!</div>
+                </div>
+            `
+
+            game.modal.display(
+                'Stop Playing?',
+                content,
+                actions
+            )
+        },
+
+        startButtonSounds: function(){
+            /* Makes a click sound when any button is pressed.
+              WE might need to call this again if buttons are
+              dynamically inserted (e.g. for modals) */
+            
+            /* TODO do this properly */
+              $('button')
+              .on('touchstart mousedown', function(){
+                  game.sfx.play('button_depress');
+              })
+              .on('touchend mouseup', function(){
+                  game.sfx.play('button_release');
+              });
+        }
+    },
+
+    modal: {
+        display: function(title, html, actions){
+            /* Show modal with specified title + HTML content. */
+
+            $('.modal-title').html(title);
+            $('.modal-content').html(html);
+            $('.modal-actions').html(actions)
+
+            /* Create animation timeline. */
+            let tl = gsap.timeline();
+            /* set initial states */
+            tl.to('.modal-container', { opacity: 0, duration: 0.001})
+            tl.to('.modal', { y: 1024, duration: 0.001 })
+            /* then animate! */
+            game.sfx.play('whoosh');
+            tl.to('.modal-container', { opacity: 1, duration: .45 })
+            tl.to('.modal', { y: 0, duration: .45 }, '-=.45')
+            
+            setTimeout(function(){
+                $('.modal-container').css({
+                    'pointer-events': 'all'
+                })
+            }, 450)
+
+            /* Refresh button click sound */
+            game.helpers.startButtonSounds();
+    
+        },
+
+        hide: function(){
+            /* hides the modal */
+            gsap.to('.modal-container', { opacity: 0, duration: .45 });
+            gsap.to('.modal', { y: 1024, duration: .45 })
+            $('.modal-container').css({
+                'pointer-events': 'none'
+            });
+        }
+    },
+
     sfx: {
         play: function(name, callback=()=>{}){
             /* Play given SFX. example: game.sfx.play('falling');
@@ -101,13 +190,12 @@ var game = {
 
 $(document).ready(function(){
     /* add sound effects for all buttons */
-    $('.btn-orb')
-        .on('touchstart mousedown', function(){
-            game.sfx.play('button_depress');
-        })
-        .on('touchend mouseup', function(){
-            game.sfx.play('button_release');
-        });
+    game.helpers.startButtonSounds();
+
+    /* Init home button */
+    $('.btn-home').off().on('click', function(){
+        game.helpers.homePrompt();
+    })
 
     /* load the start page */
     game.loadPage('start')

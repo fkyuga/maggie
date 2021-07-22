@@ -103,7 +103,9 @@ helpers: {
     },
 
     resetMaggieEyes: function(){
-        TweenLite.to([eye, eyeR], 0.2, {
+        let { EYE_L, EYE_R } = game.pages.lab.refs;
+
+        TweenLite.to([EYE_L, EYE_R], 0.2, {
             rotate: 0
         });
     }

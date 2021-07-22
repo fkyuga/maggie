@@ -17,14 +17,16 @@ html, body {
 }
 
 .modal-container {
-    display: none;
-    position: relative;
+    display: flex;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
     top: 0;
     left: 0;
     width: 1024px;
     height: 768px;
     z-index: 9999;
-    background-color: rgba(0,0,0,.25);
+    background-color: rgba(0,0,0,.4);
 }
 
 #modal-container__bg {
@@ -45,7 +47,7 @@ html, body {
     top: 93px;
     color: black;
     text-align: center;
-    width: 100%;
+    width: 1024px;
     font-size: 64px;
 }
 
@@ -55,6 +57,34 @@ html, body {
     position: absolute;
     top: 264px;
     left: 109px;
+    font-size: 32px;
+    color: white;
+    text-align: center;
+}
+
+.modal-actions-container {
+    position: absolute;
+    top: 548px;
+    width: 1024px;
+    display: flex;
+    justify-content: center;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 36px;
+}
+
+.modal-action {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.modal-action-label {
+    font-size: 24px;
+    color: white;
 }
 
 .sound-effects-container {
@@ -73,6 +103,7 @@ html, body {
 
 .gameplay-stage {
     /* Enforce 1024 x 768 dimension, and disable inadvertent scrolling */
+    position: relative;
 	max-height: 768px;
     min-height: 768px;
     max-width: 1024px;
@@ -118,6 +149,54 @@ img {
 .btn-orb:active {
     filter: brightness(0.9);
     transform: scale(0.95);
+}
+
+.btn-circle {
+    width: 67.25px;
+    height: 70px;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    background-image: url(../img/btn-circle.png);
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: 0.1s ease-in-out;
+}
+
+.btn-circle.btn-96 {
+    width:  96px;
+    height: 96px;
+}
+
+.btn-circle:active {
+    filter: brightness(0.9);
+    transform: scale(0.95);
+}
+
+/** BUTTONS **/
+.btn-circle.btn-home { background-image: url(../img/btn-home.png) }
+.btn-circle.btn-help { background-image: url(../img/btn-help.png) }
+.btn-circle.btn-sound { background-image: url(../img/btn-sound.png) }
+.btn-circle.btn-yes { background-image: url(../img/yes@2x.png) }
+.btn-circle.btn-no { background-image: url(../img/no@2x.png) }
+
+.global-controls {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    top: 24px;
+    right: 24px;
+    background: red;
+    border: 6px solid #636267;
+    border-radius: 100px;
+    background : linear-gradient(103.98deg, rgba(59, 29, 0, 1) 0%, rgba(24, 0, 0, 1) 100%);
+    z-index: 999;
+    box-shadow: 0px 0px 10px rgba(0,0,0,.5);
 }
 
 /********* Keyframes (for page animations) **********/
