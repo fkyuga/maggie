@@ -372,3 +372,11 @@ img {
     top: 29px;
     left: -3px;
 }
+
+.character-maggie-expression-surprised {
+    background-image: url(../img/maggie/expression-surprised.png);
+    width: 100px;
+    height: 96px;
+    top: 16px;
+    left: -3px; 
+}

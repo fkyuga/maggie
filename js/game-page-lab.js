@@ -162,6 +162,13 @@ handlers: {
             
             TweenLite.to([EYE_L, EYE_R], .2, { rotate })
         })
+
+        document.addEventListener('mousemove', e => {
+            let { clientX, clientY } = e;
+            let rotate = Math.atan2(clientX - eyeCenter.x, - (clientY - eyeCenter.y) )*(180 / Math.PI) + 90;    
+            
+            TweenLite.to([EYE_L, EYE_R], .2, { rotate })
+        })
     }
 
 },
@@ -295,16 +302,16 @@ onload: ()=>{
                             game.sfx.play('correct')
 
                             /* maggie happy face and sound */
-                            $('.game-page-lab .character-maggie-expression-neutral')
+                            $('.game-page-lab .character-expression')
                                 .removeClass('active');
                             $('.game-page-lab .character-maggie-expression-happy')
                                 .addClass('active');
 
                             setTimeout(function(){
+                                $('.game-page-lab .character-expression')
+                                .removeClass('active');
                                 $('.game-page-lab .character-maggie-expression-neutral')
                                 .addClass('active');
-                            $('.game-page-lab .character-maggie-expression-happy')
-                                .removeClass('active');
                             }, 1000);
                             
                         } else {
@@ -354,6 +361,14 @@ onload: ()=>{
                                 ...game.pages.lab.helpers.itemAbsoluteXY(this.target, 560, 260),
                                 rotate: 359
                             })
+
+                            game.sfx.play('magnet');
+
+                            /* Change maggie's expression to surprised */
+                            $('.game-page-lab .character-expression')
+                                .removeClass('active');
+                            $('.game-page-lab .character-maggie-expression-surprised')
+                                .addClass('active');
                         }
 
                         break;
