@@ -9,6 +9,13 @@
 
 .scene--active { display: block; }
 
+.scene .item {
+    position: absolute;
+    top: 0; left: 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
 /*** First scene (city) ***/
 .scene0 {
     background-image: url(../img/story/sky--sunny.png);
@@ -158,4 +165,75 @@
     0% { transform: translateY(0) }
     50% { transform: translateY(-5px) }
     100% { transform: translateY(0) }
+}
+
+
+
+/**** Scene 2: Maggie close up in bed ****/
+.scene2 {
+    background-color: #361820;
+}
+
+.scene2 .bed-closeup {
+    width: 814px; height: 826px;
+    background-image: url(../img/story/bed-closeup.png);
+    top: 145.6px; left: 100.8px;
+}
+
+.scene2 .blanket-closeup {
+    width: 709.5px; height: 657.5px;
+    background-image: url(../img/story/blanket-closeup.png);
+    top: 493.6px; left: 165.6px;
+    z-index: 1;
+}
+
+.scene2 .maggie-pajamas {
+    width: 365.5px; height: 791px;
+    background-image: url(../img/story/maggie-pajamas.png);
+    top: 186.4px; left: 320.8px;
+    animation: 3s infinite sleeping;
+}
+
+.scene2 .expression-sleeping {
+    position: relative;
+    top: 0; left: 0;
+    width: 127.5px; height: 127.5px;
+    background-image: url(../img/story/expression-sleeping.png);
+    top: 177px; left: 111px;
+}
+
+.scene2 .sleepbubbles {
+    top: 470.2px;
+    left: 508.2px;
+    animation: 3s infinite sleeping;
+}
+
+.scene2 .sleepbubbles .sleepbubble0 {
+    width: 25.5px; height: 22.5px;
+    background-image: url(../img/story/sleepbubble0.png);
+    position: relative;
+}
+
+.scene2 .sleepbubbles .sleepbubble1 {
+    width: 38.5px; height: 39px;
+    background-image: url(../img/story/sleepbubble1.png);
+    position: relative;
+    top: -64px;
+    left: 31px;
+}
+
+.scene2 .sleepbubbles .sleepbubble2 {
+    width: 55.5px; height: 55.5px;
+    background-image: url(../img/story/sleepbubble2.png);
+    position: relative;
+    top: -163px;
+    left: 75px;
+}
+
+.scene2 .sleepbubbles .sleepbubble3 {
+    width: 98px; height: 98px;
+    background-image: url(../img/story/sleepbubble3.png);
+    position: relative;
+    top: -320px;
+    left: 123px;
 }

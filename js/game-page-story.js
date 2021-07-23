@@ -1,6 +1,6 @@
 game.pages.story = {
     onload: function(){
-        game.pages.story.scenes[0].animate();
+        game.pages.story.scenes[2].animate();
     },
 
     scenes: [
@@ -33,11 +33,34 @@ game.pages.story = {
                 /* Wait for speech to complete. */
                 setTimeout(function(){
                     /* Switch to scene 2. */
-
-                    $('.scene').removeClass('scene--active');
-                    $('.scene2').addClass('scene--active');
-
+                    game.pages.story.scenes[2].animate();
                 }, 5000);
+            }
+        },
+
+        {
+            /* Scene 2 -- Maggie in bed closeup. */
+            animate: () => {
+                $('.scene').removeClass('scene--active');
+                $('.scene2').addClass('scene--active');
+
+                /* Sleep bubbles */
+                let sleepBubblesTl = gsap.timeline({ repeat: 3 });
+                    sleepBubblesTl.to('.sleepbubbles *', .00001, { opacity: 0 })
+                    sleepBubblesTl.to('.sleepbubble0', .00001, { opacity: 1 })
+                    sleepBubblesTl.to('.sleepbubble0', .5, { opacity: 1 })
+
+                    sleepBubblesTl.to('.sleepbubbles *', .00001, { opacity: 0 })
+                    sleepBubblesTl.to('.sleepbubble1', .00001, { opacity: 1 })
+                    sleepBubblesTl.to('.sleepbubble1', .5, { opacity: 1 })
+
+                    sleepBubblesTl.to('.sleepbubbles *', .00001, { opacity: 0 })
+                    sleepBubblesTl.to('.sleepbubble2', .00001, { opacity: 1 })
+                    sleepBubblesTl.to('.sleepbubble2', .5, { opacity: 1 })
+
+                    sleepBubblesTl.to('.sleepbubbles *', .00001, { opacity: 0 })
+                    sleepBubblesTl.to('.sleepbubble3', .00001, { opacity: 1 })
+                    sleepBubblesTl.to('.sleepbubble3', .5, { opacity: 1 })
             }
         }
     ]
