@@ -194,11 +194,31 @@
     animation: 3s infinite sleeping;
 }
 
+.scene2 .maggie-pajamas.awake {
+    animation: unset;
+}
+
 .scene2 .expression-sleeping {
     position: relative;
     top: 0; left: 0;
     width: 127.5px; height: 127.5px;
     background-image: url(../img/story/expression-sleeping.png);
+    top: 177px; left: 111px;
+}
+
+.scene2 .expression-shocked {
+    position: relative;
+    top: 0; left: 0;
+    width: 127px; height: 124.5px;
+    background-image: url(../img/story/expression-shocked.png);
+    top: 177px; left: 111px;
+}
+
+.scene2 .expression-screaming {
+    position: relative;
+    top: 0; left: 0;
+    width: 127.5px; height: 134px;
+    background-image: url(../img/story/expression-screaming.png);
     top: 177px; left: 111px;
 }
 
@@ -236,4 +256,11 @@
     position: relative;
     top: -320px;
     left: 123px;
+}
+
+.scene2 .clock {
+    width: 217.5px; height: 216.75px;
+    background-image: url(../img/items/clock@2x.png);
+    top: 271px;
+    left: 1030px;
 }
