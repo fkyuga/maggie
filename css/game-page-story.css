@@ -1,13 +1,16 @@
 .scene {
-    width: 100%;
-    height: 100%;
+    width: 1024px;
+    height: 768px;
     overflow: hidden;
+    display: none;
+    position: absolute;
+    top: 0; left: 0;
 }
+
+.scene--active { display: block; }
 
 /*** First scene (city) ***/
 .scene0 {
-    position: absolute;
-    top: 0; left: 0;
     background-image: url(../img/story/sky--sunny.png);
     background-size: cover;
     background-repeat: no-repeat;
@@ -110,3 +113,49 @@
     z-index: 4;
 }
 
+/*** Maggie's Room ***/
+.scene1 {
+    background-image: url(../img/story/maggies-room.png);
+    background-size: cover;
+    transform-origin: 45% 41%;
+}
+
+.scene1 .bed {
+    position: absolute;
+    background-image: url(../img/story/bed.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 364.5px;
+    height: 276px;
+    z-index: 1;
+    top: 478.4px; left: 635.2px;
+}
+
+.scene1 .maggie-sleep {
+    position: absolute;
+    background-image: url(../img/story/maggie-sleep.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 86px;
+    height: 101.5px;
+    z-index: 1;
+    top: 461px; left: 791.2px;
+    animation: 3s infinite sleeping;
+}
+
+.scene1 .blanket {
+    position: absolute;
+    background-image: url(../img/story/blanket.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 339.5px;
+    height: 107.5px;
+    z-index: 2;
+    top: 523.2px; left: 629.6px
+}
+
+@keyframes sleeping {
+    0% { transform: translateY(0) }
+    50% { transform: translateY(-5px) }
+    100% { transform: translateY(0) }
+}
