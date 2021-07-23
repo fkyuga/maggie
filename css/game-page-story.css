@@ -1,0 +1,112 @@
+.scene {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/*** First scene (city) ***/
+.scene0 {
+    position: absolute;
+    top: 0; left: 0;
+    background-image: url(../img/story/sky--sunny.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden !important;
+}
+
+.scene0 .city {
+    transform: scale(.9) translate(100px, 0);
+}
+
+.scene0 .sun {
+    position: absolute;
+    background-image: url(../img/story/sun.png);
+    background-size: contain;
+    width: 105.49195px;
+    height: 122.4207px;
+    top: 32px; left: 32px;
+}
+
+.scene0 .buildings {
+    position: absolute;
+    background-image: url(../img/story/buildings.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 1168.25px;
+    height: 580.75px;
+    top: 33px; left: -163px;
+}
+
+.scene0 .magbux {
+    position: absolute;
+    background-image: url(../img/story/magbux.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 362px;
+    height: 405px;
+    top: 203.703px; left: 470.674px;
+    z-index: 2;
+}
+
+.scene0 .bank {
+    position: absolute;
+    background-image: url(../img/story/bank.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 187px;
+    height: 289px;
+    top: 321.457px; left: 94.6463px;
+    z-index: 2;
+}
+
+.scene0 .tree {
+    position: absolute;
+    background-image: url(../img/story/tree.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 147px;
+    height: 241.5px;
+    top: 0; left: 0;
+    z-index: 2;
+}
+
+.scene0 .tree0 {
+    top: 336.805px; left: 321.457px;
+}
+
+.scene0 .tree1 {
+    top: 340.215px; left: 850.964px;
+}
+
+.scene0 .pavement {
+    position: absolute;
+    background-image: url(../img/story/pavement.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 1227.25px;
+    height: 46.25px;
+    top: 547.414px; left: -208.904px;
+}
+
+.scene0 .road {
+    position: absolute;
+    background-image: url(../img/story/road.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 1313.25px;
+    height: 246.5px;
+    top: 590px; left: -207px;
+    z-index: 3;
+}
+
+.scene0 .car {
+    position: absolute;
+    background-image: url(../img/story/car.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 451.5px;
+    height: 262px;
+    top: 489px; left: -700px;
+    z-index: 4;
+}
+

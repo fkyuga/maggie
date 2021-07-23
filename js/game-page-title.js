@@ -1,7 +1,7 @@
 game.pages.start = {
     onload: function(){
         $('.game-page-start-content').off().on('click', function(){
-            game.loadPage('title');
+            game.loadPage('story');
         })
     }
 }
