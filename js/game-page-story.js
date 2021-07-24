@@ -1,9 +1,36 @@
 game.pages.story = {
     onload: function(){
-        game.pages.story.scenes[2].animate();
+        game.pages.story.scenes[0].animate();
     },
 
     scenes: [
+        {
+            /* Scene 0 - Magnets are in everything! */
+            animate: () => {
+                let tl = gsap.timeline({ onComplete: () => {
+                    /* After completion, move to the next scene. */
+                    game.pages.story.scenes[1].animate();
+                } })
+
+                /* Set initial state of elements */
+                tl.to('.scene0 .text', .0000001, { opacity: 0 })
+                tl.to('.scene0 .items *', .0000001, { opacity: 0, y: 64});
+                tl.to('.scene0 .items .compass-needle', .0000001, { opacity: 1, y: 0});
+            
+                /* Fade in the text */
+                tl.to('.scene0 .text', .5, { opacity: 1 });
+
+                /* Start displaying the items in time with the narration. */
+                tl.to('.scene0 .items .card', .5, { opacity: 1, y: 0 }, '+=1');
+                tl.to('.scene0 .items .compass', .5, { opacity: 1, y: 0 }, '+=1');
+                tl.to('.scene0 .items .phone', .5, { opacity: 1, y: 0 }, '+=1');
+
+                /* Animate the compass needle in time with the compass appearing on the display. */
+                tl.to('.scene0 .items .compass-needle', 1, {
+                    rotate: 359
+                }, '-=2')
+            }
+        },
         {
             /* Scene 0 */
             animate: () => {

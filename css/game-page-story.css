@@ -16,19 +16,63 @@
     background-repeat: no-repeat;
 }
 
-/*** First scene (city) ***/
+
+/*** magnetic items scene ***/
 .scene0 {
+    background-color: #543982
+}
+
+.scene0 .item.card {
+    background-image: url(../img/story/card.png);
+    width: 333px; height: 239px;
+    top: 211.555px; left: 39.1109px;
+}
+
+.scene0 .item.compass {
+    background-image: url(../img/story/compass-base.png);
+    width: 219px; height: 220px;
+    top: 215.111px; left: 441.778px;
+}
+
+.scene0 .item.compass-needle {
+    background-image: url(../img/story/compass-needle.png);
+    width: 129px; height: 113px;
+    position: relative; top: 59px; left: 45px;
+}
+
+.scene0 .item.phone {
+    background-image: url(../img/story/phone.png);
+    width: 184px; height: 317px;
+    top: 153.778px; left: 761.778px;
+}
+
+.scene0 .text {
+    color: white;
+    font-size: 36px;
+    position: absolute;
+    text-align: center;
+    width: 1024px;
+    top: 536.88px;
+}
+
+.scene0 .text p {
+    margin: 12px 0;
+}
+
+
+/*** First scene (city) ***/
+.scene3 {
     background-image: url(../img/story/sky--sunny.png);
     background-size: cover;
     background-repeat: no-repeat;
     overflow: hidden !important;
 }
 
-.scene0 .city {
+.scene3 .city {
     transform: scale(.9) translate(100px, 0);
 }
 
-.scene0 .sun {
+.scene3 .sun {
     position: absolute;
     background-image: url(../img/story/sun.png);
     background-size: contain;
@@ -37,7 +81,7 @@
     top: 32px; left: 32px;
 }
 
-.scene0 .buildings {
+.scene3 .buildings {
     position: absolute;
     background-image: url(../img/story/buildings.png);
     background-size: contain;
@@ -47,7 +91,7 @@
     top: 33px; left: -163px;
 }
 
-.scene0 .magbux {
+.scene3 .magbux {
     position: absolute;
     background-image: url(../img/story/magbux.png);
     background-size: contain;
@@ -58,7 +102,7 @@
     z-index: 2;
 }
 
-.scene0 .bank {
+.scene3 .bank {
     position: absolute;
     background-image: url(../img/story/bank.png);
     background-size: contain;
@@ -69,7 +113,7 @@
     z-index: 2;
 }
 
-.scene0 .tree {
+.scene3 .tree {
     position: absolute;
     background-image: url(../img/story/tree.png);
     background-size: contain;
@@ -80,15 +124,15 @@
     z-index: 2;
 }
 
-.scene0 .tree0 {
+.scene3 .tree0 {
     top: 336.805px; left: 321.457px;
 }
 
-.scene0 .tree1 {
+.scene3 .tree1 {
     top: 340.215px; left: 850.964px;
 }
 
-.scene0 .pavement {
+.scene3 .pavement {
     position: absolute;
     background-image: url(../img/story/pavement.png);
     background-size: contain;
@@ -98,7 +142,7 @@
     top: 547.414px; left: -208.904px;
 }
 
-.scene0 .road {
+.scene3 .road {
     position: absolute;
     background-image: url(../img/story/road.png);
     background-size: contain;
@@ -109,7 +153,7 @@
     z-index: 3;
 }
 
-.scene0 .car {
+.scene3 .car {
     position: absolute;
     background-image: url(../img/story/car.png);
     background-size: contain;
@@ -121,13 +165,13 @@
 }
 
 /*** Maggie's Room ***/
-.scene1 {
+.scene4 {
     background-image: url(../img/story/maggies-room.png);
     background-size: cover;
     transform-origin: 45% 41%;
 }
 
-.scene1 .bed {
+.scene4 .bed {
     position: absolute;
     background-image: url(../img/story/bed.png);
     background-size: contain;
@@ -138,7 +182,7 @@
     top: 478.4px; left: 635.2px;
 }
 
-.scene1 .maggie-sleep {
+.scene4 .maggie-sleep {
     position: absolute;
     background-image: url(../img/story/maggie-sleep.png);
     background-size: contain;
@@ -150,7 +194,7 @@
     animation: 3s infinite sleeping;
 }
 
-.scene1 .blanket {
+.scene4 .blanket {
     position: absolute;
     background-image: url(../img/story/blanket.png);
     background-size: contain;
@@ -170,35 +214,35 @@
 
 
 /**** Scene 2: Maggie close up in bed ****/
-.scene2 {
+.scene5 {
     background-color: #361820;
 }
 
-.scene2 .bed-closeup {
+.scene5 .bed-closeup {
     width: 814px; height: 826px;
     background-image: url(../img/story/bed-closeup.png);
     top: 145.6px; left: 100.8px;
 }
 
-.scene2 .blanket-closeup {
+.scene5 .blanket-closeup {
     width: 709.5px; height: 657.5px;
     background-image: url(../img/story/blanket-closeup.png);
     top: 493.6px; left: 165.6px;
     z-index: 1;
 }
 
-.scene2 .maggie-pajamas {
+.scene5 .maggie-pajamas {
     width: 365.5px; height: 791px;
     background-image: url(../img/story/maggie-pajamas.png);
     top: 186.4px; left: 320.8px;
     animation: 3s infinite sleeping;
 }
 
-.scene2 .maggie-pajamas.awake {
+.scene5 .maggie-pajamas.awake {
     animation: unset;
 }
 
-.scene2 .expression-sleeping {
+.scene5 .expression-sleeping {
     position: relative;
     top: 0; left: 0;
     width: 127.5px; height: 127.5px;
@@ -206,7 +250,7 @@
     top: 177px; left: 111px;
 }
 
-.scene2 .expression-shocked {
+.scene5 .expression-shocked {
     position: relative;
     top: 0; left: 0;
     width: 127px; height: 124.5px;
@@ -214,7 +258,7 @@
     top: 177px; left: 111px;
 }
 
-.scene2 .expression-screaming {
+.scene5 .expression-screaming {
     position: relative;
     top: 0; left: 0;
     width: 127.5px; height: 134px;
@@ -222,19 +266,19 @@
     top: 177px; left: 111px;
 }
 
-.scene2 .sleepbubbles {
+.scene5 .sleepbubbles {
     top: 470.2px;
     left: 508.2px;
     animation: 3s infinite sleeping;
 }
 
-.scene2 .sleepbubbles .sleepbubble0 {
+.scene5 .sleepbubbles .sleepbubble0 {
     width: 25.5px; height: 22.5px;
     background-image: url(../img/story/sleepbubble0.png);
     position: relative;
 }
 
-.scene2 .sleepbubbles .sleepbubble1 {
+.scene5 .sleepbubbles .sleepbubble1 {
     width: 38.5px; height: 39px;
     background-image: url(../img/story/sleepbubble1.png);
     position: relative;
@@ -242,7 +286,7 @@
     left: 31px;
 }
 
-.scene2 .sleepbubbles .sleepbubble2 {
+.scene5 .sleepbubbles .sleepbubble2 {
     width: 55.5px; height: 55.5px;
     background-image: url(../img/story/sleepbubble2.png);
     position: relative;
@@ -250,7 +294,7 @@
     left: 75px;
 }
 
-.scene2 .sleepbubbles .sleepbubble3 {
+.scene5 .sleepbubbles .sleepbubble3 {
     width: 98px; height: 98px;
     background-image: url(../img/story/sleepbubble3.png);
     position: relative;
@@ -258,7 +302,7 @@
     left: 123px;
 }
 
-.scene2 .clock {
+.scene5 .clock {
     width: 217.5px; height: 216.75px;
     background-image: url(../img/items/clock@2x.png);
     top: 271px;
