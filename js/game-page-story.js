@@ -1,6 +1,6 @@
 game.pages.story = {
     onload: function(){
-        game.pages.story.scenes[0].animate();
+        game.pages.story.scenes[1].animate();
     },
 
     scenes: [
@@ -9,6 +9,7 @@ game.pages.story = {
             animate: () => {
                 let tl = gsap.timeline({ onComplete: () => {
                     /* After completion, move to the next scene. */
+                    tl.to({}, 2, {}); /* 2 second delay */
                     game.pages.story.scenes[1].animate();
                 } })
 
@@ -31,6 +32,88 @@ game.pages.story = {
                 }, '-=2')
             }
         },
+
+        { 
+            /* Introducing magnet poles */
+            animate: () => {
+                const onComplete = () => {
+                    /* Part 2 of this scene - demonstrate magnetic attraction using drag and drop */
+                    let tl2 = gsap.timeline();
+                    const onComplete2 = () => {
+                        /* this code is a -disaster- */
+                        /* anyway, this code makes Haroon draggable so the player can drag him to Jessie.
+                           we lock him to the x-axis, and constrain his movement to the path we display on screen. */
+
+                           Draggable.create('.scene1 .character-haroon', {
+                               type: 'x',
+                               inertia: true,
+                               onDrag: function(e){
+                                   /* Calculate the percentage of the interaction that has been completed. */
+                                   // To do this we need the -relative- position of the draggable element to the game stage.
+                                   // *sigh* have i over engineered this?
+
+                                   let draggableRect = e.target.getBoundingClientRect();
+                                   let stageRect = document.querySelector('.game-page-story').getBoundingClientRect();
+
+                                   let x = draggableRect.left - stageRect.left;
+
+                                   let xMax   = 700;
+                                   let xMin   = 191;
+
+                                   let perc = (x + xMin / xMax - xMin) / (xMax - xMin); /* i don't know how this works, but it does */
+                                   /* invert percentage */
+                                       perc = Math.abs( 1 - perc );
+
+                                   let progress = perc * 550;
+
+                                   $('.drag-progress')[0].style.setProperty('--progress', `${progress}px`)
+                               }
+                           })
+                    }
+                    setTimeout(function(){
+                        /* oh god */
+
+                        $('.scene1 .text1').removeClass('inactive').addClass('active');
+                        $('.scene1 .text0').removeClass('active').addClass('inactive');
+                    }, 250)
+                    tl2.to('.scene1 .text0', .25, { y: -64, opacity: 0 });
+                    tl2.to('.scene1 .text1', .0000001, { opacity: 0, y: 64 });
+                    tl2.to('.scene1 .text1', .25, { y: 0, opacity: 1, onComplete2});
+                }
+
+                let tl = gsap.timeline();
+                tl.timeScale(10);
+                /* Set initial state */
+
+                $('.scene0').addClass('scene--active')
+                $('.scene1').addClass('scene--active')
+                tl.to('.scene0 .items, .scene0 .text', .000001, { y: 0, opacity: 1})
+                tl.to('.scene1', .000001, { y: 128, opacity: 0});
+                tl.to('.scene1 .character-jessie', .000001, { y: 64, opacity: 0})
+                tl.to('.scene1 .character-haroon', .000001, { y: 64, opacity: 0})
+
+                /* Hide scene0 and slide in scene1 */
+                tl.to('.scene0 .items, .scene0 .text', .5, { y: -128, opacity: 0 });
+                tl.to('.scene1', .5, { y: 0, opacity: 1 });
+
+                /* Slide in Jessie */
+                tl.to('.scene1 .character-jessie', .5, { y:0, opacity: 1 }, '+=1.5')
+                
+                /* Make her wave */
+                let jessieWave = gsap.timeline({yoyo: true})
+                jessieWave.to('.scene1 .character-jessie-arm-r', .25, { rotate: 55, yoyo: true, repeat: 10 }, '+=1.5')
+            
+                /* Slide in Haroon */
+                tl.to('.scene1 .character-haroon', .5, { y: 0, opacity: 1}, '+=1.5');
+
+                /* Make him wave */
+                let haroonWave = gsap.timeline({yoyo: true, onComplete})
+                haroonWave.timeScale(10);
+                haroonWave.to('.scene1 .character-haroon-arm-l', .5, { rotate: -16, yoyo: true, repeat: 5 }, '+=3')
+                haroonWave.to({}, 1, {});
+            }
+        },
+
         {
             /* Scene 0 */
             animate: () => {

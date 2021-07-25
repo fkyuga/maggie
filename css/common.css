@@ -16,6 +16,10 @@ html, body {
     display: block !important;
 }
 
+.inactive {
+    display: none !important;
+}
+
 .modal-container {
     display: flex;
     opacity: 0;

@@ -46,19 +46,152 @@
     top: 153.778px; left: 761.778px;
 }
 
-.scene0 .text {
+.game-page-story .text {
     color: white;
     font-size: 36px;
     position: absolute;
     text-align: center;
     width: 1024px;
+}
+
+.scene0 .text {
     top: 536.88px;
 }
 
-.scene0 .text p {
+.game-page-story .text p {
     margin: 12px 0;
 }
 
+/*** introducing poles page ***/
+.scene1 {
+    background-color: #543982
+}
+
+.scene .character-jessie {
+    top: 343px;
+    left: 216px;
+    z-index: 1;
+}
+
+.scene .character-jessie-arms {
+    z-index: 0 !important;
+    position: relative !important;
+    left: 17px !important;
+    z-index: 4;
+    top: 60px !important;
+}
+
+.scene .character-jessie-body {
+    background-image: url(../img/characters/jessie/jessie-body.png);
+    width: 91px; height: 273px;
+    z-index: 2;
+}
+
+.scene .character-jessie-expression-happy {
+    position: relative;
+    top: 30px !important;
+    left: 15px;
+    background-image: url(../img/characters/jessie/expression-jessie-happy.png);
+    width: 60px; height: 46px;
+    z-index: 3;
+    top: 0;
+}
+
+.scene .character-jessie-arm-l {
+    background-image: url(../img/maggie/arm-l.png);
+    z-index: 1;
+    left: -41px;
+    width: 36px;
+    height: 77px;
+}
+
+.scene .character-jessie-arm-r {
+    background-image: url(../img/maggie/arm-r.png);
+    z-index: 1;
+    left: 38px;
+    width: 36px;
+    top: -68px;
+    height: 77px;
+    transform: rotate(44deg);
+    transform-origin: bottom;
+}
+
+.scene .character-haroon {
+    top: 291px;
+    left: 687px;
+    z-index: 2;
+}
+
+.scene .character-haroon .character-haroon-body {
+    background-image: url(../img/characters/haroon/haroon-body.png);
+    width: 133px;
+    height: 330px;
+}
+
+.scene .character-haroon .character-haroon-expression-smile {
+    position: relative;
+    top: 74px !important;
+    left: 45px;
+    background-image: url(../img/characters/haroon/expression-haroon-smile.png);
+    width: 59px; height: 52px;
+    z-index: 3;
+    top: 0;
+}
+
+.scene .character-haroon-arm-l {
+    background-image: url(../img/characters/haroon/haroon-arm-l.png);
+    z-index: 1;
+    left: 6px;
+    width: 23px;
+    top: 121px;
+    height: 56px;
+    transform-origin: center 90%;
+}
+
+
+.scene .character-haroon-arm-r {
+    background-image: url(../img/characters/haroon/haroon-arm-r.png);
+    z-index: 1;
+    left: 110px;
+    width: 28px;
+    top: 166px;
+    height: 46px;
+    transform-origin: center 90%;
+}
+
+.scene1 .text {
+    top: 159px;
+}
+
+.scene1 .drag-progress {
+    width: 550px;
+    height: 32px;
+    border-radius: 900px;
+    background-color: rgba(255,255,255,.3);
+    top: 450px;
+    left: 239px;
+    position: absolute;
+
+    /* flip */
+    transform: scaleX(-1);
+
+    z-index: 0;
+}
+
+.scene1 .drag-progress:after {
+    /* We store width of the :after element (which is what displays the progress inside the bar)
+    as a CSS custom property - which we adjust in JS. We do this because we cannot easily
+    modify styles of pseudo-elements. */
+
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: var(--progress);
+    height: 32px;
+    border-radius: 900px;
+    background-color: rgba(255,255,255,.8);
+    z-index: 0;
+}
 
 /*** First scene (city) ***/
 .scene3 {
