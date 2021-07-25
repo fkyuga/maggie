@@ -43,14 +43,16 @@ game.pages.story = {
                         /* this code is a -disaster- */
                         /* anyway, this code makes Haroon draggable so the player can drag him to Jessie.
                            we lock him to the x-axis, and constrain his movement to the path we display on screen. */
+                        /* i would use inertia here, but it is a paid plugin :( */
 
-                           Draggable.create('.scene1 .character-haroon', {
+                           let instance = Draggable.create('.scene1 .character-haroon', {
                                type: 'x',
-                               inertia: true,
+                               bounds: '.drag-progress',
                                onDrag: function(e){
                                    /* Calculate the percentage of the interaction that has been completed. */
                                    // To do this we need the -relative- position of the draggable element to the game stage.
                                    // *sigh* have i over engineered this?
+
 
                                    let draggableRect = e.target.getBoundingClientRect();
                                    let stageRect = document.querySelector('.game-page-story').getBoundingClientRect();
@@ -63,10 +65,35 @@ game.pages.story = {
                                    let perc = (x + xMin / xMax - xMin) / (xMax - xMin); /* i don't know how this works, but it does */
                                    /* invert percentage */
                                        perc = Math.abs( 1 - perc );
+                                   this.perc = perc;
 
                                    let progress = perc * 550;
 
+                                   if(perc >= 0.65){
+                                       /* Complete the interaction if the user is at 65% (magnets would attract at that point) */
+                                       /* Destroy the Draggable */
+                                       let completeTl = gsap.timeline();
+                                       instance[0].kill();
+                                       game.sfx.play('magnet');
+                                       gsap.to('.scene1 .character-haroon', .15, { x: "-415px" })
+                                       gsap.to('.drag-progress', .15, { '--progress': "550px" })
+                                       gsap.to('.drag-progress', .25, { opacity: 0, y: -24 });
+                                   
+                                       gsap.to('.scene1 .text1', .25, { opacity: 0, y: -64})
+                                       
+                                       setTimeout(function(){
+                                            gsap.to('.scene1', { y: -128, opacity: 0});
+                                       }, 1250)
+                                    }
+
                                    $('.drag-progress')[0].style.setProperty('--progress', `${progress}px`)
+                               },
+                               onDragEnd: function(){
+                                   /* If percentage is less than 65% (complete), return to initial pos */
+                                   if(this.perc < 0.65){
+                                        gsap.to('.scene1 .character-haroon', .25, {x:0})
+                                        gsap.to('.drag-progress', .25, { '--progress': 0 })
+                                   }
                                }
                            })
                     }
