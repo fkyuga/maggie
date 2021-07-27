@@ -368,6 +368,81 @@ game.pages.story = {
                 setTimeout(function(){
                     game.sfx.play('snow');
                 }, 1000)
+
+                let maggieWalkingTimeline = gsap.timeline({yoyo: true, repeat: 10});
+                maggieWalkingTimeline.to('.character-maggie-leg-l', .35, { y: -10, ease: Linear.easeNone })
+                maggieWalkingTimeline.to('.character-maggie-leg-r', .35, { y: -10, ease: Linear.easeNone }, '-=.175')
+
+
+                let animationTimeline = gsap.timeline({ onComplete: () => {
+                    maggieWalkingTimeline.pause();
+
+                    /* Once Maggie has approached the school, get Tomas to throw the snowball. */
+                    let snowballTimeline = gsap.timeline();
+                    snowballTimeline.to({}, .5, {}) /* sleep 500ms to allow for dialogue */
+                    snowballTimeline.to('.scene7 .snowball', .5, { opacity: 1 });
+                    snowballTimeline.to('.scene7 .character-tomas-arm-l', .3, { rotate: 135})
+
+                    snowballTimeline.to('.scene7 .snowball', .4, {
+                        motionPath: {
+                            type: 'cubic',
+                            path:[{x:0, y:0}, {x:20, y:0}, {x:30, y:50}, {x:120, y:155}]
+                          },
+                        onComplete: ()=>{
+                            game.sfx.play('repel')
+                        }
+                    })
+
+                    snowballTimeline.to('.scene7 .snowball', .4, {
+                        motionPath: {
+                            type: 'cubic',
+                            path:[{x:120, y:155}, {x: 50 , y: 130}, {x: 70, y: 120}, {x: 0, y: 110}]
+                          },
+                        onComplete: () => {
+                            game.sfx.play('snowball_impact');
+                            $('.scene7 .character-jessie-expression-focussed')
+                                .removeClass('active')
+                                .addClass('inactive');
+
+                            $('.scene7 .character-jessie-expression-surprised')
+                                .addClass('active')
+                                .removeClass('inactive');
+
+                            $('.scene7 .character-jessie-arms').removeClass('animating');
+                        
+                            $('.scene7 .character-maggie-face-mouth-smile')
+                                .removeClass('active')
+                                .addClass('inactive');
+
+                            $('.scene7 .character-maggie-face-mouth-scream')
+                                .addClass('active')
+                                .removeClass('inactive');
+
+                            setTimeout(function(){
+                                let exitTimeline = gsap.timeline();
+                                exitTimeline.to('.scene7 .character-maggie-body', .0000001, {
+                                    scaleX: -1
+                                })
+                                exitTimeline.to('.scene7 .character-maggie', .0000001, {
+                                    scaleX: -.4,
+                                    x: 128
+                                });
+
+                                setTimeout(function(){
+                                    game.sfx.play('whee');
+                                }, 250)
+
+                                exitTimeline.to('.scene7 .character-maggie', .3, {
+                                    x: -800
+                                }, '+=.25');
+                            }, 1000);
+                        }
+                    })
+                }});
+                animationTimeline.to({}, .5, {}); /* sleep 500ms */
+                animationTimeline.to('.scene7 .character-maggie', 3, { x: 200, ease: Linear.easeNone })
+
+
             }
         }
     ]

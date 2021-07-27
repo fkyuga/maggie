@@ -107,6 +107,16 @@
     top: 0;
 }
 
+.scene .character-jessie-expression-surprised {
+    position: relative;
+    top: 30px !important;
+    left: 10px;
+    background-image: url(../img/characters/jessie/expression-jessie-surprised.png);
+    width: 67px; height: 52px;
+    z-index: 3;
+    top: 0;
+}
+
 .scene .character-jessie-arm-l {
     background-image: url(../img/maggie/arm-l.png);
     z-index: 1;
@@ -582,7 +592,7 @@
     top: 94px;
     height: 78px;
     transform: rotate(-5deg);
-    transform-origin: center 90%;
+    transform-origin: 73% 20%;
 }
 
 
@@ -595,4 +605,26 @@
     height: 78px;
     transform: rotate(5deg);
     transform-origin: center 90%;
+}
+
+.scene7 .snowball {
+    height: 24px;
+    width: 24px;
+    background-size: contain;
+    background-image: url(../img/story/snowball.png);
+    top: 43px;
+    left: -7px;
+    z-index: 3;
+    opacity: 0;
+}
+
+.scene7 .character-maggie {
+    transform: scale(.4) scaleX(-1);
+    top: 283px;
+    left: 182px;
+    transition: none;
+}
+
+.scene7 .character-maggie-body {
+    transform: scaleX(-1);
 }

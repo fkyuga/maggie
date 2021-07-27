@@ -22,6 +22,7 @@
     <!-- GSAP stuff -->
     <script src="js/gsap.min.js"></script>
     <script src="js/Draggable.min.js"></script>
+    <script src="js/MotionPathPlugin.min.js"></script>
 
     <!-- JS files for each page -->
     <script src="js/game-page-title.js"></script>
@@ -252,6 +253,29 @@
                 </div>
 
                 <div class="scene scene7">
+                    <!-- Maggie -->
+                    <div class="item character-maggie">
+                        <div class="character-maggie-frame"></div>
+                        <div class="character-maggie-hair"></div>
+                        <div class="character-maggie-face">
+                            <div class="character-maggie-face-brow-l"></div>
+                            <div class="character-maggie-face-brow-r"></div>
+                            <div class="character-expression character-maggie-expression-happy"></div>
+                            <div class="character-expression character-maggie-expression-surprised"></div>
+                            <div class="character-expression character-maggie-expression-neutral active">
+                                <div class="character-maggie-face-eye-l"></div>
+                                <div class="character-maggie-face-eye-r"></div>
+                                <div class="character-maggie-face-mouth character-maggie-face-mouth-smile active"></div>
+                                <div class="character-maggie-face-mouth character-maggie-face-mouth-scream inactive"></div>
+                            </div>
+                        </div>
+                        <div class="character-maggie-body"></div>
+                        <div class="character-maggie-arm-l"></div>
+                        <div class="character-maggie-arm-r"></div>
+                        <div class="character-maggie-leg-l"></div>
+                        <div class="character-maggie-leg-r"></div>
+                    </div>
+
                     <div class="item character-jessie">
                         <div class="item character-expression character-jessie-expression-focussed active"></div>
                         <div class="item character-expression character-jessie-expression-surprised inactive"></div>
@@ -264,7 +288,9 @@
 
                     <div class="item character-tomas">
                         <div class="item character-tomas-arms">
-                            <div class="item character-tomas-arm-l"></div>
+                            <div class="item character-tomas-arm-l">
+                                <div class="item snowball"></div>
+                            </div>
                             <div class="item character-tomas-arm-r"></div>
                         </div>
                         <div class="item character-tomas-body"></div>

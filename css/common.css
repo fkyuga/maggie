@@ -327,6 +327,16 @@ img {
     left: 33px; top: 80px;
 }
 
+.character-maggie-face-mouth.character-maggie-face-mouth-scream {
+    background-image: url(../img/maggie/mouth-scream.png);
+    background-size: contain;
+    background-position: center center;
+    height: 28px;
+    width: 33px;
+    left: 33px;
+    top: 74px;
+}
+
 .character-maggie-leg-l {
     width: 40px;
     height: 55px;
