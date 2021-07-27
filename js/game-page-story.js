@@ -1,6 +1,6 @@
 game.pages.story = {
     onload: function(){
-        game.pages.story.scenes[6].animate();
+        game.pages.story.scenes[7].animate();
     },
 
     scenes: [
@@ -346,9 +346,11 @@ game.pages.story = {
                 transitionTimeline.to('.scene6', 1, { opacity: 1 }, '-=1')
 
 
-                let animationTimeline = gsap.timeline({onComplete: function(){
+                let animationTimeline = gsap.timeline({onComplete: ()=>{
                     /* Once done, wait 2 seconds and move on to the flashback scene */
-                    setTimeout(game.pages.story.scenes[7].animate, 2000)
+                    setTimeout(()=>{
+                        game.pages.story.scenes[7].animate()
+                    }, 2000)
                 }});
                 animationTimeline.to('.magnetfield-academy-front', 5, { y: -100 })
                 animationTimeline.to('.maggie-back', 5, { y: 100 }, '-=5')
@@ -356,8 +358,17 @@ game.pages.story = {
         },
 
         {
-            /* Scene 7: Flashback */
-            
+            /* Scene 7: Flashback to snow day */
+            animate: () => {
+                let transitionTimeline = gsap.timeline();
+                transitionTimeline.to('.scene7', .00000001, { opacity: 0 });
+                $('.scene7').addClass('scene--active')
+                transitionTimeline.to('.scene6', 0.1, { opacity: 0 });
+                transitionTimeline.to('.scene7', 2, { opacity: 1 }, '+=.5')
+                setTimeout(function(){
+                    game.sfx.play('snow');
+                }, 1000)
+            }
         }
     ]
 }

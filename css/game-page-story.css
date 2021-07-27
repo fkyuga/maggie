@@ -74,7 +74,7 @@
 }
 
 .scene .character-jessie-arms {
-    z-index: 0 !important;
+    z-index: 0 !important /* I KNOW using !important is bad, but damn if it ain't a great quick fix :p */;
     position: relative !important;
     left: 17px !important;
     z-index: 4;
@@ -93,6 +93,16 @@
     left: 15px;
     background-image: url(../img/characters/jessie/expression-jessie-happy.png);
     width: 60px; height: 46px;
+    z-index: 3;
+    top: 0;
+}
+
+.scene .character-jessie-expression-focussed {
+    position: relative;
+    top: 30px !important;
+    left: 10px;
+    background-image: url(../img/characters/jessie/expression-jessie-focussed.png);
+    width: 66px; height: 48px;
     z-index: 3;
     top: 0;
 }
@@ -493,9 +503,8 @@
     background-image: url(../img/story/magnetfield-academy@0.5x.png);
     width: 890px;
     height: 801px;
-    position: absolute;
-    left: 72px;
-    top: 74px;
+    left: 72px !important;
+    top: 74px !important; 
 }
 
 .maggie-back {
@@ -503,7 +512,50 @@
     width: 520px;
     height: 901px;
     z-index: 2;
-    top: 209px;
-    left: 232px;
-    position: absolute;
+    top: 209px !important;
+    left: 232px !important;
+}
+
+/** Scene 7: Snow day goes wrong **/
+.scene7 { 
+    height: 100%; width: 100%;
+    background-image: url(../img/story/school-snow.png);
+    background-size: cover;
+}
+
+.scene7 .character-jessie {
+    transform: scale(.7);
+    left: 592px;
+    top: 369px;
+}
+
+.scene7 .character-jessie-arm-r {
+    background-image: url(../img/maggie/arm-r.png);
+    z-index: 1;
+    left: -79px;
+    width: 36px;
+    top: -36px;
+    height: 77px;
+    transform: rotate(53deg);
+    transform-origin: bottom;
+}
+
+.scene7 .character-jessie-arms.animating .character-jessie-arm-r {
+    animation: 1s infinite arm-r-ruffling;
+}
+
+.scene7 .character-jessie-arms.animating .character-jessie-arm-l {
+    animation: 1s infinite arm-l-ruffling;
+}
+
+@keyframes arm-l-ruffling {
+    0% { transform: rotate(0deg)}
+    50% { transform: rotate(10deg) translateX(-15px)}
+    100% { transform: rotate(0deg)}
+}
+
+@keyframes arm-r-ruffling {
+    0% { transform: rotate(53deg)}
+    50% { transform: rotate(63deg) translateX(10px)}
+    100% { transform: rotate(53deg)}
 }
