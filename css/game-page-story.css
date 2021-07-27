@@ -482,3 +482,28 @@
     top: 271px;
     left: 1030px;
 }
+
+/** Scene 6 : Maggie scared of school **/
+.scene6 {
+    height: 100%; width: 100%;
+    background-color: #29ABE2;
+}
+
+.magnetfield-academy-front {
+    background-image: url(../img/story/magnetfield-academy@0.5x.png);
+    width: 890px;
+    height: 801px;
+    position: absolute;
+    left: 72px;
+    top: 74px;
+}
+
+.maggie-back {
+    background-image: url(../img/story/maggie-back@0.5x.png);
+    width: 520px;
+    height: 901px;
+    z-index: 2;
+    top: 209px;
+    left: 232px;
+    position: absolute;
+}
