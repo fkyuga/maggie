@@ -174,7 +174,7 @@
     position: absolute;
 
     /* flip */
-    transform: scaleX(-1);
+    transform: scaleX(-1) !important;
 
     z-index: 0;
 }
@@ -224,6 +224,16 @@
     border-radius: 900px;
     background-color: rgba(255,255,255,.8);
     z-index: 0;
+}
+
+.scene2 .text p {
+    max-width: 60%;
+    white-space: normal;
+    margin: 12px auto;
+}
+
+.scene2 .text {
+    top: 124px
 }
 
 /*** First scene (city) ***/

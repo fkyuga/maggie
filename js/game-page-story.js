@@ -192,17 +192,25 @@ game.pages.story = {
                                     /* Destroy the Draggable */
                                     let completeTl = gsap.timeline();
                                     instance_scene2[0].kill();
-                                    game.sfx.play('magnet');
-                                    gsap.to('.scene2 .character-lil', .15, { x: "-415px" })
+                                    game.sfx.play('repel');
+                                    gsap.to('.scene2 .character-lil-full', .15, { x: "1000px" })
+                                    gsap.to('.scene2 .character-jessie', .15, { x: "-415px" })
                                     gsap.to('.scene2 .drag-progress', .15, { '--progress2': "550px" })
                                     gsap.to('.scene2 .drag-progress', .25, { opacity: 0, y: -24 });
-                                
-                                    gsap.to('.scene2 .text1', .25, { opacity: 0, y: -64})
-                                    
+                            
                                     setTimeout(function(){
-                                        gsap.to('.scene2', { y: -128, opacity: 0});
-                                        /* Move to Scene 3 */
-                                        //game.pages.story.scenes[2].animate();
+                                        /* Show well done! */
+                                        let tl = gsap.timeline();
+                                        tl.to('.scene2 .text1', .0000001, { opacity: 0, y: 64});
+                                        tl.to('.scene2 .text1', .0000001, { opacity: 0, y: 64});
+                                        tl.to('.scene2 .text0', .25, { opacity: 0, y: -64});
+                                        $('.scene2 .text1').removeClass('inactive').addClass('active');
+                                        tl.to('.scene2 .text1', .25, { opacity: 1, y: 0}, '+=.5')
+
+                                        /* Move to Scene 3 on button press*/
+                                        $('.scene2 button').off().on('click', function () {
+                                            game.pages.story.scenes[3].animate();
+                                        })
                                     }, 1250)
                                 }
 
@@ -223,20 +231,23 @@ game.pages.story = {
         },
 
         {
-            /* Scene 0 */
+            /* Scene 3 - Story time! */
             animate: () => {
+                $('.scene').removeClass('scene--active');
+                $('.scene3').addClass('scene--active');
+                
                 let tl = gsap.timeline({ onComplete: () => {
                     /* After completion, display Maggie's room */
                     let tl2 = gsap.timeline({ onComplete: () => {
                         /* After transitioning to Maggie's room, run scene 1's
                            animations. */
-                        game.pages.story.scenes[1].animate();
+                        game.pages.story.scenes[4].animate();
                     } });
 
-                    $('.scene1').addClass('scene--active');
-                    tl2.to('.scene1', .000001, { opacity: 0, scale: 6 })
-                    tl2.to('.scene0', 2, { scale: 0.5, opacity: .5 });
-                    tl2.to('.scene1', 2, { scale: 1, opacity: 1}, '-=2')
+                    $('.scene4').addClass('scene--active');
+                    tl2.to('.scene4', .000001, { opacity: 0, scale: 6 })
+                    tl2.to('.scene3', 2, { scale: 0.5, opacity: .5 });
+                    tl2.to('.scene4', 2, { scale: 1, opacity: 1}, '-=2')
                 } });
                 tl.to('.city', 7, { x: 37, ease:Linear.easeNone } );
                 tl.to('.car', 3, { x: 2000 }, '-=5')
@@ -244,21 +255,21 @@ game.pages.story = {
         },
 
         {
-            /* Scene 1 -- Maggie's room, Maggie asleep in bed. */
+            /* Scene 4 -- Maggie's room, Maggie asleep in bed. */
             animate: () => {
                 /* Wait for speech to complete. */
                 setTimeout(function(){
                     /* Switch to scene 2. */
-                    game.pages.story.scenes[2].animate();
+                    game.pages.story.scenes[5].animate();
                 }, 5000);
             }
         },
 
         {
-            /* Scene 2 -- Maggie in bed closeup. */
+            /* Scene 5 -- Maggie in bed closeup. */
             animate: () => {
                 $('.scene').removeClass('scene--active');
-                $('.scene2').addClass('scene--active');
+                $('.scene5').addClass('scene--active');
 
                 /* Sleep bubbles */
                 let sleepBubblesTl = gsap.timeline({ repeat: 3 });
@@ -283,24 +294,24 @@ game.pages.story = {
                     game.sfx.play('alarm');
                     setTimeout(function(){
                         /* Wake maggie up (stop her sleeping anim) */
-                        $('.scene2 .maggie-pajamas').addClass('awake');
-                        $('.scene2 .sleepbubbles').hide();
-                        $('.scene2 .maggie-pajamas .expression-sleeping').hide();
-                        $('.scene2 .maggie-pajamas .expression-shocked').show();
+                        $('.scene5 .maggie-pajamas').addClass('awake');
+                        $('.scene5 .sleepbubbles').hide();
+                        $('.scene5 .maggie-pajamas .expression-sleeping').hide();
+                        $('.scene5 .maggie-pajamas .expression-shocked').show();
 
                         game.sfx.play('magnet')
-                        gsap.to('.scene2 .clock', .2, {
+                        gsap.to('.scene5 .clock', .2, {
                             left: 562,
                             rotate: 359,
                             onComplete: function(){
                                 setTimeout(function(){
-                                    $('.scene2 .maggie-pajamas .expression-shocked').hide();
-                                    $('.scene2 .maggie-pajamas .expression-screaming').show();
+                                    $('.scene5 .maggie-pajamas .expression-shocked').hide();
+                                    $('.scene5 .maggie-pajamas .expression-screaming').show();
                                 }, 1000)
                                 setTimeout(function(){
-                                    $('.scene2 .maggie-pajamas .expression-sleeping').hide();
+                                    $('.scene5 .maggie-pajamas .expression-sleeping').hide();
 
-                                    gsap.to('.scene2 .maggie-pajamas, .scene2 .clock', .1, {
+                                    gsap.to('.scene5 .maggie-pajamas, .scene5 .clock', .1, {
                                         x: -800
                                     })
                                     game.sfx.play('whee');
