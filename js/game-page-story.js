@@ -1,6 +1,6 @@
 game.pages.story = {
     onload: function(){
-        game.pages.story.scenes[1].animate();
+        game.pages.story.scenes[6].animate();
     },
 
     scenes: [
@@ -113,7 +113,7 @@ game.pages.story = {
                 }
 
                 let tl = gsap.timeline();
-                tl.timeScale(10);
+                
                 /* Set initial state */
 
                 $('.scene0').addClass('scene--active')
@@ -139,7 +139,7 @@ game.pages.story = {
 
                 /* Make him wave */
                 let haroonWave = gsap.timeline({yoyo: true, onComplete})
-                haroonWave.timeScale(10);
+                
                 haroonWave.to('.scene1 .character-haroon-arm-l', .5, { rotate: -16, yoyo: true, repeat: 5 }, '+=3')
                 haroonWave.to({}, 1, {});
             }
@@ -315,6 +315,9 @@ game.pages.story = {
                                         x: -800
                                     })
                                     game.sfx.play('whee');
+                                    setTimeout(function(){
+                                        game.pages.story.scenes[6].animate();
+                                    }, 3000);
                                 }, 2000)
                             }
                         })
@@ -325,6 +328,36 @@ game.pages.story = {
                    her out of sleep and waking her up */
                 
             }
+        },
+
+        {
+            /* Scene 6: Foreboding image of school */
+            animate: () => {
+                let transitionTimeline = gsap.timeline();
+
+                setTimeout(function(){
+                    game.sfx.play('organ');
+                }, 500);
+                
+                transitionTimeline.to('.scene6', .000001, { opacity: 0 })
+                $('.scene6').addClass('scene--active');
+
+                transitionTimeline.to('.scene5', 1, { opacity: 0 });
+                transitionTimeline.to('.scene6', 1, { opacity: 1 }, '-=1')
+
+
+                let animationTimeline = gsap.timeline({onComplete: function(){
+                    /* Once done, wait 2 seconds and move on to the flashback scene */
+                    setTimeout(game.pages.story.scenes[7].animate, 2000)
+                }});
+                animationTimeline.to('.magnetfield-academy-front', 5, { y: -100 })
+                animationTimeline.to('.maggie-back', 5, { y: 100 }, '-=5')
+            }
+        },
+
+        {
+            /* Scene 7: Flashback */
+            
         }
     ]
 }
