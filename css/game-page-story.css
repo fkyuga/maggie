@@ -559,3 +559,40 @@
     50% { transform: rotate(63deg) translateX(10px)}
     100% { transform: rotate(53deg)}
 }
+
+.scene7 .character-tomas {
+    position: absolute;
+    left: 692px;
+    top: 485px;
+    z-index: 2;
+}
+
+.scene7 .character-tomas-body {
+    background-image: url(../img/characters/tomas/tomas-body.png);
+    width: 70px;
+    height: 248px;
+    z-index: 2;
+}
+
+.scene7 .character-tomas-arm-l {
+    background-image: url(../img/maggie/arm-l.png);
+    z-index: 1;
+    left: -21px;
+    width: 30px;
+    top: 94px;
+    height: 78px;
+    transform: rotate(-5deg);
+    transform-origin: center 90%;
+}
+
+
+.scene7 .character-tomas-arm-r {
+    background-image: url(../img/maggie/arm-r.png);
+    z-index: 1;
+    left: 59px;
+    width: 30px;
+    top: 94px;
+    height: 78px;
+    transform: rotate(5deg);
+    transform-origin: center 90%;
+}
