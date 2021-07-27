@@ -34,7 +34,7 @@ game.pages.story = {
         },
 
         { 
-            /* Introducing magnet poles */
+            /* Introducing magnet poles & attraction */
             animate: () => {
                 const onComplete = () => {
                     /* Part 2 of this scene - demonstrate magnetic attraction using drag and drop */
@@ -47,7 +47,7 @@ game.pages.story = {
 
                            let instance = Draggable.create('.scene1 .character-haroon', {
                                type: 'x',
-                               bounds: '.drag-progress',
+                               bounds: '.scene1 .drag-progress',
                                onDrag: function(e){
                                    /* Calculate the percentage of the interaction that has been completed. */
                                    // To do this we need the -relative- position of the draggable element to the game stage.
@@ -69,6 +69,8 @@ game.pages.story = {
 
                                    let progress = perc * 550;
 
+                                    console.log(progress);
+
                                    if(perc >= 0.65){
                                        /* Complete the interaction if the user is at 65% (magnets would attract at that point) */
                                        /* Destroy the Draggable */
@@ -83,10 +85,12 @@ game.pages.story = {
                                        
                                        setTimeout(function(){
                                             gsap.to('.scene1', { y: -128, opacity: 0});
+                                            /* Move to Scene 2 */
+                                            game.pages.story.scenes[2].animate();
                                        }, 1250)
                                     }
 
-                                   $('.drag-progress')[0].style.setProperty('--progress', `${progress}px`)
+                                   $('.scene1 .drag-progress')[0].style.setProperty('--progress', `${progress}px`)
                                },
                                onDragEnd: function(){
                                    /* If percentage is less than 65% (complete), return to initial pos */
@@ -138,6 +142,83 @@ game.pages.story = {
                 haroonWave.timeScale(10);
                 haroonWave.to('.scene1 .character-haroon-arm-l', .5, { rotate: -16, yoyo: true, repeat: 5 }, '+=3')
                 haroonWave.to({}, 1, {});
+            }
+        },
+
+        {
+            /* Scene 2: Introducing repulsion */
+            animate: () => { 
+                let tl = gsap.timeline();
+                //1tl.timeScale(10);
+                /* Set initial state */
+
+                $('.scene1').addClass('scene--active')
+                $('.scene2').addClass('scene--active')
+                tl.to('.scene1, .scene1 .character-jessie, .scene1 .character-haroon', .000001, { y: 0, opacity: 1})
+                tl.to('.scene2', .000001, { y: 128, opacity: 0});
+
+                /* Hide scene0 and slide in scene1 */
+                tl.to('.scene1, .scene1 .character-jessie, .scene1 .character-haroon', .5, { y: -128, opacity: 0 });
+                tl.to('.scene2, .scene2 .drag-progress', .5, { y: 0, opacity: 1, onComplete: () => {
+                
+                    /* this code makes lil draggable.
+                        basically the same as scene1. a less time-constrained me would abstract this away into a new function... but -yeah- */
+
+                        let instance_scene2 = Draggable.create('.scene2 .character-lil-full', {
+                            type: 'x',
+                            bounds: {minX: 0, maxX: -495},
+                            onDrag: function(e){
+                                /* Calculate the percentage of the interaction that has been completed. */
+                                // To do this we need the -relative- position of the draggable element to the game stage.
+                                // *sigh* have i over engineered this?
+
+                                let draggableRect = e.target.getBoundingClientRect();
+                                let stageRect = document.querySelector('.game-page-story').getBoundingClientRect();
+
+                                let x = draggableRect.left - stageRect.left;
+
+                                let xMax   = 700;
+                                let xMin   = 191;
+
+                                let perc = (x + xMin / xMax - xMin) / (xMax - xMin); /* i don't know how this works, but it does */
+                                /* invert percentage */
+                                    perc = Math.abs( 1 - perc );
+                                this.perc = perc;
+
+                                let progress = (perc * 550) / 0.65;
+
+                                if(perc >= 0.65){
+                                    /* Complete the interaction if the user is at 65% (magnets would attract at that point) */
+                                    /* Destroy the Draggable */
+                                    let completeTl = gsap.timeline();
+                                    instance_scene2[0].kill();
+                                    game.sfx.play('magnet');
+                                    gsap.to('.scene2 .character-lil', .15, { x: "-415px" })
+                                    gsap.to('.scene2 .drag-progress', .15, { '--progress2': "550px" })
+                                    gsap.to('.scene2 .drag-progress', .25, { opacity: 0, y: -24 });
+                                
+                                    gsap.to('.scene2 .text1', .25, { opacity: 0, y: -64})
+                                    
+                                    setTimeout(function(){
+                                        gsap.to('.scene2', { y: -128, opacity: 0});
+                                        /* Move to Scene 3 */
+                                        //game.pages.story.scenes[2].animate();
+                                    }, 1250)
+                                }
+
+                                $('.scene2 .drag-progress')[0].style.setProperty('--progress2', `${progress}px`)
+                            },
+                            onDragEnd: function(){
+                                /* If percentage is less than 65% (complete), return to initial pos */
+                                if(this.perc < 0.65){
+                                    gsap.to('.scene1 .character-haroon', .25, {x:0})
+                                    gsap.to('.drag-progress', .25, { '--progress': 0 })
+                                }
+                            }
+                        })
+                }
+                
+                });
             }
         },
 

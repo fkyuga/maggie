@@ -163,7 +163,8 @@
     top: 159px;
 }
 
-.scene1 .drag-progress {
+.scene1 .drag-progress,
+.scene2 .drag-progress {
     width: 550px;
     height: 32px;
     border-radius: 900px;
@@ -187,6 +188,38 @@
     position: absolute;
     top: 0; left: 0;
     width: var(--progress);
+    height: 32px;
+    border-radius: 900px;
+    background-color: rgba(255,255,255,.8);
+    z-index: 0;
+}
+
+/*** Magnetic Repulsion ***/
+.scene2 .character-lil-full {
+    top: 300px;
+    width: 144.5px;
+    height: 319.5px;
+    background-image: url(../img/characters/lil/character-lil-full.png);
+    left: 678px;
+    z-index: 1;
+}
+
+.scene2 .character-jessie-arm-r { 
+    background-image: url(../img/maggie/arm-r.png);
+    z-index: 1;
+    left: 64px;
+    width: 36px;
+    top: -82px;
+    height: 77px;
+    transform: rotate(183deg);
+    transform-origin: bottom;
+}
+
+.scene2 .drag-progress:after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: var(--progress2);
     height: 32px;
     border-radius: 900px;
     background-color: rgba(255,255,255,.8);
@@ -343,8 +376,6 @@
     50% { transform: translateY(-5px) }
     100% { transform: translateY(0) }
 }
-
-
 
 /**** Scene 2: Maggie close up in bed ****/
 .scene5 {
