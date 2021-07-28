@@ -4,18 +4,16 @@
 
 game.pages.story = {
     onload: function(){
-        game.pages.story.scenes[6].animate();
+        game.pages.story.scenes[0].animate();
     },
 
     scenes: [
         {
             /* Scene 0 - Magnets are in everything! */
             animate: () => {
-                let tl = gsap.timeline({ onComplete: () => {
-                    /* After completion, move to the next scene. */
-                    tl.to({}, 2, {}); /* 2 second delay */
-                    game.pages.story.scenes[1].animate();
-                } })
+                game.bgm.play('what-is-love');
+                $('.scene0').addClass('scene--active')
+                let tl = gsap.timeline()
 
                 /* Set initial state of elements */
                 tl.to('.scene0 .text', .0000001, { opacity: 0 })
@@ -29,6 +27,23 @@ game.pages.story = {
                 tl.to('.scene0 .items .card', .5, { opacity: 1, y: 0 }, '+=1');
                 tl.to('.scene0 .items .compass', .5, { opacity: 1, y: 0 }, '+=1');
                 tl.to('.scene0 .items .phone', .5, { opacity: 1, y: 0 }, '+=1');
+
+                setTimeout(()=>{
+                    game.sfx.play('whoosh')
+                }, 1500);
+
+                setTimeout(()=>{
+                    game.sfx.play('whoosh')
+                }, 3000);
+
+                setTimeout(()=>{
+                    game.sfx.play('whoosh', () => {
+                        // TODO DO THIS ON SPEECH INSTEAD!
+                        game.pages.story.scenes[1].animate();
+                    })
+                }, 4500);
+
+                
 
                 /* Animate the compass needle in time with the compass appearing on the display. */
                 tl.to('.scene0 .items .compass-needle', 1, {
@@ -240,6 +255,8 @@ game.pages.story = {
                 $('.scene').removeClass('scene--active');
                 $('.scene3').addClass('scene--active');
                 
+                game.bgm.play('morning');
+
                 let tl = gsap.timeline({ onComplete: () => {
                     /* After completion, display Maggie's room */
                     let tl2 = gsap.timeline({ onComplete: () => {
@@ -302,7 +319,7 @@ game.pages.story = {
                         $('.scene5 .sleepbubbles').hide();
                         $('.scene5 .maggie-pajamas .expression-sleeping').hide();
                         $('.scene5 .maggie-pajamas .expression-shocked').show();
-
+                        game.bgm.stop(0);
                         game.sfx.play('magnet')
                         gsap.to('.scene5 .clock', .2, {
                             left: 562,
