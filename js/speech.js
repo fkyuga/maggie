@@ -1,7 +1,7 @@
 /** This JS file exclusively contains speech objects for the story mode. **/
 
 const SPEECH_MORNING = {
-    message: "Our story begins in the quiet town of Magnetville, the land of all of the magnets."
+    message: "Our story begins in the quiet town of Magnetville, the land where all of the magnets live."
 }
 
 const SPEECH_MAGGIE_INTRO = {
@@ -17,7 +17,7 @@ const SPEECH_MAGGIE_LATE = {
 }
 
 const SPEECH_SCHOOL = {
-    message: "Magnetville Academy - Maggie's school. She can't stand school. Things always tend to go wrong for her..."
+    message: "Magnetville Academy - Maggie's school. Maggie can't <em>stand school</em>. Things always tend to go wrong for her..."
 }
 
 const SPEECH_SNOW_DAY = {
@@ -31,15 +31,15 @@ const SPEECH_AFTER_FLASHBACK = {
 }
 
 const SPEECH_AFTER_FLASHBACK_GUIDANCE = {
-    message: "Can you give Maggie a helpng hand? Try giving her the push she needs by dragging her into school!"
+    message: "Can you give Maggie a helping hand? Try giving her the push she needs by dragging her into school!"
 }
 
 const SPEECH_AFTER_SCHOOL = {
-    message: "Wait... that's a magnet Maggie hasn't seen before! She hasn't made any friends, but she kind of wishes she had..."
+    message: "Wait... that's a magnet Maggie hasn't seen before! She hasn't made any friends at school, but she kind of wishes she had..."
 }
 
 const SPEECH_AFTER_SCHOOL_GUIDANCE = {
-    message: "Try and encourage Maggie to speak to them and see what happens..."
+    message: "Go on - try and encourage Maggie to speak to them and see what happens..."
 }
 
 const SPEECH_OH_NO = {
@@ -51,11 +51,11 @@ const SPEECH_POOR_MAGGIE = {
 }
 
 const SPEECH_POOR_MAGGIE_2 = {
-    message: "...She should get some rest. Do you want to tuck her in her blanket so she can sleep?"
+    message: "...She should get some rest. Do you want to tuck her in her blanket so she can get some sleep?"
 }
 
 const SPEECH_WAKE_UP = {
-    message: "Maggie felt very different this morning. She felt confident, like she could do anything, if only she believes in herself!"
+    message: "Maggie felt very different after her dream. She felt confident, like she could do anything, if only she believes in herself!"
 }
 
 const SPEECH_AFTER_SCHOOL_HARRY = {
