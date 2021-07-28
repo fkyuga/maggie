@@ -256,6 +256,7 @@ game.pages.story = {
                 $('.scene3').addClass('scene--active');
                 
                 game.bgm.play('morning');
+                game.speech.display(SPEECH_MORNING);
 
                 let tl = gsap.timeline({ onComplete: () => {
                     /* After completion, display Maggie's room */
@@ -278,6 +279,7 @@ game.pages.story = {
         {
             /* Scene 4 -- Maggie's room, Maggie asleep in bed. */
             animate: () => {
+                game.speech.display(SPEECH_MAGGIE_INTRO);
                 /* Wait for speech to complete. */
                 setTimeout(function(){
                     /* Switch to scene 2. */
@@ -289,6 +291,7 @@ game.pages.story = {
         {
             /* Scene 5 -- Maggie in bed closeup. */
             animate: () => {
+                game.speech.display(SPEECH_MAGGIE_SLEEPING);
                 $('.scene').removeClass('scene--active');
                 $('.scene5').addClass('scene--active');
 
@@ -312,6 +315,7 @@ game.pages.story = {
 
                 /* Play alarm clock sound after 2s */
                 setTimeout(function(){
+                    game.speech.hideBubble();
                     game.sfx.play('alarm');
                     setTimeout(function(){
                         /* Wake maggie up (stop her sleeping anim) */
@@ -336,7 +340,9 @@ game.pages.story = {
                                         x: -800
                                     })
                                     game.sfx.play('whee');
+                                    game.speech.display(SPEECH_MAGGIE_LATE);
                                     setTimeout(function(){
+                                        game.speech.hideBubble();
                                         game.pages.story.scenes[6].animate();
                                     }, 3000);
                                 }, 2000)
@@ -357,6 +363,7 @@ game.pages.story = {
                 let transitionTimeline = gsap.timeline();
 
                 setTimeout(function(){
+                    game.speech.display(SPEECH_SCHOOL);
                     game.sfx.play('organ');
                 }, 500);
                 
@@ -381,6 +388,7 @@ game.pages.story = {
         {
             /* Scene 7: Flashback to snow day */
             animate: () => {
+                game.speech.display(SPEECH_SNOW_DAY);
                 game.sfx.play('flashback');
                 let transitionTimeline = gsap.timeline();
                 transitionTimeline.to('.scene7', .00000001, { opacity: 0 });
@@ -398,6 +406,7 @@ game.pages.story = {
 
 
                 let animationTimeline = gsap.timeline({ onComplete: () => {
+                    game.speech.hideBubble();
                     maggieWalkingTimeline.pause();
 
                     /* Once Maggie has approached the school, get Tomas to throw the snowball. */
@@ -480,15 +489,9 @@ game.pages.story = {
                 game.bgm.play('sunny');
                 gsap.to('.scene8 .character-maggie', .00001, { scaleY: .4, scaleX: -.4 });
                 let transitionTimeline = gsap.timeline({onComplete: () => {
-                game.speech.display({
-                    message: "Poor Maggie... No wonder she's scared of school! But she must be brave... she never knows what tomorrow might bring.",
-                    sync: [300, 1250, 100, 300, 100, 200, 1000, 200, 200, 300, 100, 500, 300, 400, 300, 200, 500, 200, 100],
-                    delay: 100 // was 8000
-                }, () => {
+                game.speech.display(SPEECH_AFTER_FLASHBACK, () => {
                     
-                    game.speech.display({
-                        message: "Can you give Maggie a helping hand? Try giving her a little push by dragging her into school!"
-                    })
+                    game.speech.display(SPEECH_AFTER_FLASHBACK_GUIDANCE)
 
                     /** ENABLE DRAGGABILITY (it's our fave code block again) **/
                     let instance = Draggable.create('.scene8 .character-maggie', {
