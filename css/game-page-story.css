@@ -83,6 +83,12 @@
     background-color: #543982
 }
 
+.scene1 .drag-prompt {
+    --amount: -350px;
+    top: 440px;
+    left: 704px;
+}
+
 .scene .character-jessie {
     top: 343px;
     left: 216px;

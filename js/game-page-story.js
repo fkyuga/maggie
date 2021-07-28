@@ -4,7 +4,7 @@
 
 game.pages.story = {
     onload: function(){
-        game.pages.story.scenes[0].animate();
+        game.pages.story.scenes[1].animate();
     },
 
     scenes: [
@@ -64,6 +64,11 @@ game.pages.story = {
                            we lock him to the x-axis, and constrain his movement to the path we display on screen. */
                         /* i would use inertia here, but it is a paid plugin :( */
 
+                           /* After 1.5s of inactivity, assume the user needs guidance - show the drag prompt. */
+                           setTimeout(function(){
+                            $('.scene1 .drag-prompt').removeClass('hidden');
+                           }, 1500)
+
                            let instance = Draggable.create('.scene1 .character-haroon', {
                                type: 'x',
                                bounds: '.scene1 .drag-progress',
@@ -72,6 +77,7 @@ game.pages.story = {
                                    // To do this we need the -relative- position of the draggable element to the game stage.
                                    // *sigh* have i over engineered this?
 
+                                   $('.scene1 .drag-prompt').addClass('hidden');
 
                                    let draggableRect = e.target.getBoundingClientRect();
                                    let stageRect = document.querySelector('.game-page-story').getBoundingClientRect();
@@ -97,8 +103,8 @@ game.pages.story = {
                                        instance[0].kill();
                                        game.sfx.play('magnet');
                                        gsap.to('.scene1 .character-haroon', .15, { x: "-415px" })
-                                       gsap.to('.drag-progress', .15, { '--progress': "550px" })
-                                       gsap.to('.drag-progress', .25, { opacity: 0, y: -24 });
+                                       gsap.to('.scene1 .drag-progress', .15, { '--progress': "550px" })
+                                       gsap.to('.scene1 .drag-progress', .25, { opacity: 0, y: -24 });
                                    
                                        gsap.to('.scene1 .text1', .25, { opacity: 0, y: -64})
                                        
@@ -115,7 +121,8 @@ game.pages.story = {
                                    /* If percentage is less than 65% (complete), return to initial pos */
                                    if(this.perc < 0.65){
                                         gsap.to('.scene1 .character-haroon', .25, {x:0})
-                                        gsap.to('.drag-progress', .25, { '--progress': 0 })
+                                        gsap.to('.scene1 .drag-progress', .25, { '--progress': 0 })
+                                        $('.scene1 .drag-prompt').removeClass('hidden');
                                    }
                                }
                            })
