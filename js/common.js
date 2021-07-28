@@ -261,8 +261,134 @@ var game = {
         }
     },
 
+    speech: {
+        _timeouts: [],
+        hideBubble: function(){
+            /* Hide the bubble. */
+            /* Clean up any timeouts */
+            for ( let t of game.speech._timeouts) {
+                clearTimeout(t);
+            }
+
+            /* Animate away */
+            gsap.to('.speech-bubble-container', .5, { opacity: 0, y: -128 })
+        },
+        display: function(messageObj, callback = () => {}){
+            /* Display (and optionally, play) a Speech object.
+               They look like this:
+
+               {
+                   message: "whatever you want to say",
+                   sound: "[name of speech file in speech directory]",
+                   sync: [300, 400, 200, 100, 400] /* time in ms to say each word
+                   delay: 1000 // if no sound is specified, wait 1000ms to dismiss msg
+                }
+
+               sync is important if you want the message displayed on screen to line up
+               with the audio that's being spoken!
+               
+               After the audio is finished (or after the selected time period), we can also
+               optionally execute a callback*/
+                
+            let { message } = messageObj;
+
+            /* Clean up any timeouts */
+            for ( let t of game.speech._timeouts) {
+                clearTimeout(t);
+            }
+
+            /* let's split message by word - we need to do this so we can individually
+               target words if/when we need to highlight them. */
+            let words = message.split(' ');
+
+            /* Now, let's append each word as a separate span - with incrementing ID numbers */
+            /* i hate this for syntax but i need the iterator variable so... */
+            let html = '';
+            for ( let [ i, word] of words.entries() ){
+                html += `<span class="speech-word speech-word${i}">${word}&nbsp;</span>`
+            } 
+
+            /* Let's replace speechbubble's content. */
+            $('.speech-bubble-container .dialogue').html(html);
+            
+            /** Set up dismiss routine **/
+            const dismiss = () => {
+                /* Hide the speech bubble */
+                game.speech.hideBubble();
+
+                /* Callback */
+                callback();
+            }
+
+            /* Play audio if we have any. */
+            if(messageObj.sound){
+                /* Callback is set to our dismiss function, so it dismisses
+                   as soon as audio ends */
+                game.sfx.play(messageObj.sound, dismiss, 'speech');
+            } else {
+                /* If we don't have audio, hide after delay if we have one of those */
+                if(messageObj.delay){
+                    setTimeout(dismiss, messageObj.delay);
+                }
+            }
+
+            /** If we have sync property, let's set that up now **/
+            if(messageObj.sync){
+                /* Okay. So basically, each index in the sync array corresponds
+                   to how long each word lasts.
+                   Let's take the sentence "hello, my name is faiz"
+                   if the word hello takes 500ms to say, element 0 of sync is 500
+                   if the world my takes 100ms, element 1 is 100.
+                   et cetera, et cetera.
+                   so what we need to do is:
+                        * ALWAYS higlight the first word straight away.
+                        * for each subsequent word, wait however many ms the word
+                          prior took. so for word 1, wait word 0's sync value to highlight.
+                        * for word 2, we wait word 0 + 1's sync values combined.
+                */
+
+                /* "dim" all words */
+                $('.speech-bubble-container .dialogue .speech-word').addClass('dimmed');
+            
+                for ( let [ i, value ] of messageObj.sync.entries() ){
+                    let word = words[i];
+                    if(i == 0){
+                        /* undim immediately */
+                        $('.speech-bubble-container .dialogue .speech-word0').removeClass('dimmed');
+                    } else {
+
+                        /* create set timeout of each value prior. */
+                        /* to do this, get only the values in sync array that precede i.
+                        so, if i == 2, get values 0 + 1
+                        we can do this with slice! */
+                        
+                        let syncValues = messageObj.sync.slice(0, i);
+                        
+                        /* sum the array */
+                        let ms = syncValues.reduce((a, b) => a + b, 0);
+
+                        /* wait that many ms before showing this word.
+                           add it to our timeouts array so we can clean up properly
+                           when the bubble despawns */
+                        let timeout = setTimeout(() => {
+                            $('.speech-bubble-container .dialogue .speech-word'+i).removeClass('dimmed');
+                        }, ms)
+                        game.speech._timeouts.push(timeout);
+
+                    }
+                }
+            }
+
+            /** Okay, now let's animate the speech bubble onto the page! **/
+            let tl = gsap.timeline();
+            tl.to('.speech-bubble-container', .000001, { opacity: 0, y: -128});
+            tl.to('.speech-bubble-container', .5, { opacity: 1, y: 0});
+            
+        }
+    },
+
     sfx: {
-        play: function(name, callback=()=>{}){
+        play: function(name, callback=()=>{}, directory = 'sfx'){
             /* Play given SFX. example: game.sfx.play('falling');
                Optionally, can provide a callback to run some code after
                SFX finished playing */
@@ -281,7 +407,7 @@ var game = {
             console.log(`playing SFX: ${name}`)
             $('.sound-effects-container').append(`
                 <audio id="sound-effect-${id}">
-                    <source src="sfx/${name}.mp3" type="audio/mpeg">
+                    <source src="${directory}/${name}.mp3" type="audio/mpeg">
                 </audio>
             `)
             $(`#sound-effect-${id}`).one('ended', function(){

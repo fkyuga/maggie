@@ -238,6 +238,34 @@ img {
     animation: fade-out 300ms;
 }
 
+/******** Speech Bubble (for Dialogue in story) ******************/
+.speech-bubble-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 596px;
+    height: 218px;
+    background-image: url(../img/speechbubble@2x.png);
+    background-size: contain;
+    background-position: center center;
+    z-index: 4;
+}
+
+.speech-bubble-container .dialogue {
+    position: relative;
+    top: 70px;
+    left: 88px;
+    font-size: 24px;
+    max-width: 447px;
+    height: 101px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.speech-bubble-container .dialogue .dimmed {
+    opacity: .5;
+}
+
 /********* Characters **************/
 
 .character-expression {
