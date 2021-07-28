@@ -428,6 +428,44 @@ img {
     left: -3px; 
 }
 
+.character-maggie-expression-crying {
+    background-image: url(../img/maggie/expression-crying.png);
+    width: 100px;
+    height: 76px;
+    top: 34px;
+    left: -3px;
+}
+
+.character-maggie-expression-crying .teardrop0 {
+    background-image: url(../img/story/teardrop@2x.png);
+    width: 21px;
+    height: 30px;
+    top: 14px;
+    left: 8px;
+    animation: .8s infinite teardrop0;
+}
+
+.character-maggie-expression-crying .teardrop1 {
+    background-image: url(../img/story/teardrop@2x.png);
+    width: 21px;
+    height: 30px;
+    top: 14px;
+    left: 71px;
+    animation: .8s infinite teardrop1;
+}
+
+@keyframes teardrop0 {
+    0% {opacity: 0;}
+    60% { opacity: .8; transform: translateY(64px) }
+    100% {opacity: 0; transform: translateY(80px) }
+}
+
+@keyframes teardrop1 {
+    0% {opacity: 0;}
+    60% { opacity: .8; transform: translateY(80px) }
+    100% {opacity: 0; transform: translateY(100px) }
+}
+
 /**** Drag Prompt ****/
 @keyframes drag-prompt {
     0% { opacity: 0; transform: scale(1.5); }

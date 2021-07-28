@@ -741,8 +741,53 @@
     left: 28px !important;
 }
 
+.character-rosie-expression-surprised {
+    background-image: url(../img/characters/rosie/expression-rosie-surprised.png);
+    width: 44px;
+    height: 46px;
+    z-index: 3;
+    top: 25px !important;
+    left: 28px !important;
+}
+
 .scene9 .character-maggie {
     transform: scale(.4);
     top: 282px;
+    left: 550px;
+    z-index: 1;
+}
+
+.scene9 .drag-progress {
+    width: 400px;
+    height: 32px;
+    border-radius: 900px;
+    background-color: rgba(255,255,255,.3);
+    top: 497px;
+    left: 199px;
+    position: absolute;
+    z-index: 0;
+    opacity: 0;
+    transform: scaleX(-1) !important;
+}
+
+.scene9 .drag-progress:after {
+    /* We store width of the :after element (which is what displays the progress inside the bar)
+    as a CSS custom property - which we adjust in JS. We do this because we cannot easily
+    modify styles of pseudo-elements. */
+
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: var(--progressScene9);
+    height: 32px;
+    border-radius: 900px;
+    background-color: rgba(255,255,255,.8);
+    z-index: 0;
+}
+
+
+.scene9 .drag-prompt {
+    --amount: -300px;
+    top: 500px;
     left: 550px;
 }

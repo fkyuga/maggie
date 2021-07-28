@@ -551,7 +551,7 @@ game.pages.story = {
                 game.speech.display(SPEECH_AFTER_FLASHBACK, () => {
                     
                     game.speech.display(SPEECH_AFTER_FLASHBACK_GUIDANCE, () => {
-                        $('.scene8 .drag-prompt').removeClass('hidden')
+                    $('.scene8 .drag-prompt').removeClass('hidden')
                     /** ENABLE DRAGGABILITY (it's our fave code block again) **/
                     let instance = Draggable.create('.scene8 .character-maggie', {
                         type: 'x',
@@ -652,10 +652,94 @@ game.pages.story = {
             animate: () => {
                 $('.scene8').removeClass('scene--active');
                 $('.scene9').addClass('scene--active');
+                game.bgm.play('sunny');
 
                 setTimeout(function(){
                     game.speech.display(SPEECH_AFTER_SCHOOL, () => {
-                        game.speech.display(SPEECH_AFTER_SCHOOL_GUIDANCE);
+                        game.speech.display(SPEECH_AFTER_SCHOOL_GUIDANCE, () => {
+                            /* draggability time... -yay- */
+                            gsap.to('.scene9 .drag-progress', .5, { opacity: 1 });
+                            $('.scene9 .drag-prompt').removeClass('hidden');
+
+                            let instance = Draggable.create('.scene9 .character-maggie', {
+                                type: 'x',
+
+                                //bounds: '.scene9 .drag-progress',
+
+                                onDrag: function(e){
+                                    /* Calculate the percentage of the interaction that has been completed. */
+                                    // To do this we need the -relative- position of the draggable element to the game stage.
+                                    // *sigh* have i over engineered this?
+                                    $('.scene9 .drag-prompt').addClass('hidden')
+        
+                                    let draggableRect = e.target.getBoundingClientRect();
+                                    let stageRect = document.querySelector('.game-page-story').getBoundingClientRect();
+        
+                                    let x = draggableRect.left - stageRect.left;
+        
+                                    let xMax   = 550;
+                                    let xMin   = 170;
+        
+                                    let perc = (x + xMin / xMax - xMin) / (xMax - xMin); /* i don't know how this works, but it does */
+                                    /* invert percentage */
+                                        perc = Math.abs( 1 - perc );
+                                    this.perc = perc;
+        
+                                    let progress = perc * 471;
+        
+                                    console.log(progress);
+        
+                                    if(perc >= 0.65){
+                                        /* Destroy the Draggable */
+                                        instance[0].kill();
+        
+                                        /* hide speech bubble */
+                                        game.speech.hideBubble();
+                                        
+                                        /* Repel Rosie and Maggie */
+                                        gsap.to('.scene9 .character-rosie', .15, { x: '-415px' });
+                                        gsap.to('.scene9 .character-maggie', .15, { x: 0 });
+                                        game.sfx.play('whee');
+
+                                        setTimeout(function(){
+                                            game.speech.display(SPEECH_OH_NO)
+                                        }, 250);
+
+                                        /* Hide the drag stuff */
+                                        $('.scene9 .drag-prompt').addClass('hidden')
+                                        gsap.to('.scene9 .drag-progress', .5, { opacity: 0 });   
+                                    }
+        
+                                    $('.scene9 .drag-progress')[0].style.setProperty('--progressScene9', `${progress}px`)
+                                },
+                                onDragStart: function(){
+                                    /* change maggie's expression and rotation */
+                                    $('.scene9 .character-maggie-expression-frown').removeClass('active');
+                                    $('.scene9 .character-maggie-expression-surprised').addClass('active');
+                                    gsap.to('.scene9 .character-maggie', .1, { rotate: -20 });
+
+                                    /* change rosie's expression */
+                                    $('.scene9 .character-rosie-expression-neutral').removeClass('active');
+                                    $('.scene9 .character-rosie-expression-surprised').addClass('active');
+                                    
+                                },
+                                onDragEnd: function(){
+
+                                    $('.scene9 .character-maggie-expression-frown').addClass('active');
+                                    $('.scene9 .character-maggie-expression-surprised').removeClass('active');
+                                    gsap.to('.scene9 .character-maggie', .1, { rotate: 0 });
+        
+                                    /* If percentage is less than 65% (complete), return to initial pos */
+                                    if(this.perc < 0.65){
+                                        $('.scene9 .character-rosie-expression-neutral').addClass('active');
+                                        $('.scene9 .character-rosie-expression-surprised').removeClass('active');
+                                        $('.scene9 .drag-prompt').removeClass('hidden')
+                                        gsap.to('.scene9 .character-maggie', .25, {x:-50})
+                                        gsap.to('.scene9 .drag-progress', .25, { '--progressScene9': 0 })
+                                    }
+                                }
+                            })
+                        });
                     })
                 }, 500)
 
