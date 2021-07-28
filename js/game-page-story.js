@@ -4,14 +4,34 @@
 
 game.pages.story = {
     onload: function(){
-        game.pages.story.scenes[1].animate();
+        game.pages.story.scenes[0].animate();
     },
 
     scenes: [
         {
             /* Scene 0 - Magnets are in everything! */
             animate: () => {
-                game.bgm.play('what-is-love');
+                game.bgm.play('what-is-love', 1000, .1);
+                setTimeout(function(){
+                    game.sfx.play('SPEECH_MAGNETS_INTRO', () => {
+                        /* After narration is complete, move to next page
+                        i know, i know. callback hell. i shoulda used async/await.
+                        */
+                        setTimeout(function(){
+                            game.pages.story.scenes[1].animate();
+                        }, 2000)
+                    }, 'speech');
+                /* Start displaying the items in time with the narration. */
+                    tl.to('.scene0 .items .card', .5, { opacity: 1, y: 0 }, '+=3');
+                    tl.to('.scene0 .items .compass', .5, { opacity: 1, y: 0 }, '+=.5');
+                    tl.to('.scene0 .items .phone', .5, { opacity: 1, y: 0 }, '+=1');
+
+                    /* Animate the compass needle in time with the compass appearing on the display. */
+                    tl.to('.scene0 .items .compass-needle', 1, {
+                        rotate: 359
+                    }, '-=2')
+                }, 1500)
+
                 $('.scene0').addClass('scene--active')
                 let tl = gsap.timeline()
 
@@ -23,32 +43,19 @@ game.pages.story = {
                 /* Fade in the text */
                 tl.to('.scene0 .text', .5, { opacity: 1 });
 
-                /* Start displaying the items in time with the narration. */
-                tl.to('.scene0 .items .card', .5, { opacity: 1, y: 0 }, '+=1');
-                tl.to('.scene0 .items .compass', .5, { opacity: 1, y: 0 }, '+=1');
-                tl.to('.scene0 .items .phone', .5, { opacity: 1, y: 0 }, '+=1');
-
+                /* Time whoosh SFX to when the elements appear */
                 setTimeout(()=>{
                     game.sfx.play('whoosh')
-                }, 1500);
-
-                setTimeout(()=>{
-                    game.sfx.play('whoosh')
-                }, 3000);
-
-                setTimeout(()=>{
-                    game.sfx.play('whoosh', () => {
-                        // TODO DO THIS ON SPEECH INSTEAD!
-                        game.pages.story.scenes[1].animate();
-                    })
                 }, 4500);
 
+                setTimeout(()=>{
+                    game.sfx.play('whoosh')
+                }, 5500);
                 
+                setTimeout(()=>{
+                    game.sfx.play('whoosh')
+                }, 7000);
 
-                /* Animate the compass needle in time with the compass appearing on the display. */
-                tl.to('.scene0 .items .compass-needle', 1, {
-                    rotate: 359
-                }, '-=2')
             }
         },
 

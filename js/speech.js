@@ -1,49 +1,60 @@
 /** This JS file exclusively contains speech objects for the story mode. **/
 
 const SPEECH_MORNING = {
-    message: "Our story begins in the quiet town of Magnetville, the land where all of the magnets live."
+    message: "Our story begins in the quiet town of Magnetville, the land where all of the magnets live.",
+    sound: "SPEECH_MORNING"
 }
 
 const SPEECH_MAGGIE_INTRO = {
-    message: "But our story today is about a very special magnet called Maggie."
+    message: "But our story today is about a very special magnet called Maggie.",
+    sound: "SPEECH_MAGGIE_INTRO"
 }
 
 const SPEECH_MAGGIE_SLEEPING = {
-    message: "Shhh... it looks like she's still asleep..."
+    message: "Shhh... it looks like she's still asleep...",
+    sound: "SPEECH_MAGGIE_SLEEPING",
 }
 
 const SPEECH_MAGGIE_LATE = {
-    message: "Looks like she's late for school again..."
+    message: "Looks like she's late for school again...",
+    sound: "SPEECH_MAGGIE_LATE"
 }
 
 const SPEECH_SCHOOL = {
-    message: "Magnetville Academy - Maggie's school. Maggie can't <em>stand school</em>. Things always tend to go wrong for her..."
+    message: "Magnetville Academy - Maggie's school. Maggie can't <em>stand school</em>. Things always tend to go wrong for her...",
+    sound: "SPEECH_SCHOOL"
 }
 
 const SPEECH_SNOW_DAY = {
-    message: "Like that snow day..."
+    message: "Like that snow day...",
+    sound: "SPEECH_SNOW_DAY",
 }
 
 const SPEECH_AFTER_FLASHBACK = {
     message: "Poor Maggie... No wonder she's scared of school! But she must be brave... she never knows what tomorrow might bring.",
     sync: [300, 1250, 100, 300, 100, 200, 1000, 200, 200, 300, 100, 500, 300, 400, 300, 200, 500, 200, 100],
-    delay: 8000 // was 8000
+    delay: 8000, // was 8000,
+    sound: "SPEECH_AFTER_FLASHBACK"
 }
 
 const SPEECH_AFTER_FLASHBACK_GUIDANCE = {
-    message: "Can you give Maggie a helping hand? Try giving her the push she needs by dragging her into school!"
+    message: "Can you give Maggie a helping hand? Try giving her the push she needs by dragging her into school!",
+    sound: "SPEECH_AFTER_FLASHBACK_GUIDANCE"
 }
 
 const SPEECH_AFTER_SCHOOL = {
-    message: "Wait... that's a magnet Maggie hasn't seen before! She hasn't made any friends at school, but she kind of wishes she had..."
+    message: "Wait... that's a magnet Maggie hasn't seen before! She hasn't made any friends at school, but she kind of wishes she had...",
+    sound: "SPEECH_AFTER_SCHOOL"
 }
 
 const SPEECH_AFTER_SCHOOL_GUIDANCE = {
-    message: "Go on - try and encourage Maggie to speak to them and see what happens..."
+    message: "Go on - try and encourage Maggie to speak to them and see what happens...",
+    sound: "SPEECH_AFTER_SCHOOL_GUIDANCE"
 }
 
 const SPEECH_OH_NO = {
-    message: "Oh no, they repelled..."
+    message: "Oh no, they repelled...",
+    sound: "SPEECH_OH_NO"
 }
 
 const SPEECH_POOR_MAGGIE = {

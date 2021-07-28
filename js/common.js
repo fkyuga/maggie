@@ -390,7 +390,7 @@ var game = {
 
     bgm: {
         _currentBgm: null,
-        play: function(name, fade = 2000){
+        play: function(name, fade = 2000, volume = 1){
             /* Play given BGM sound. This differs from SFX in that it loops, and can be stopped/replaced with another
                long-lasting sound at any time. And only one can play at a time. */
             
@@ -413,7 +413,7 @@ var game = {
                 })
                 $(`#bgm-${id}`).animate({volume: 0}, 1);
                 $(`#bgm-${id}`)[0].play();         
-                $(`#bgm-${id}`).animate({volume: 1}, fade);
+                $(`#bgm-${id}`).animate({volume}, fade);
                });
 
                  
