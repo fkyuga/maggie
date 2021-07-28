@@ -388,6 +388,54 @@ var game = {
         }
     },
 
+    bgm: {
+        _currentBgm: null,
+        play: function(name){
+            /* Play given BGM sound. This differs from SFX in that it loops, and can be stopped/replaced with another
+               long-lasting sound at any time. And only one can play at a time. */
+            
+
+               game.bgm.stop(()=>{
+                /* Generate a random ID for the sound effect instance */
+                let id = Math.round(Math.random() * 1E10)
+                game.bgm._currentBgm = id;
+
+                console.log(`playing BGM: ${name}`)
+                $('.sound-effects-container').append(`
+                    <audio id="bgm-${id}" loop>
+                        <source src="bgm/${name}.mp3" type="audio/mpeg">
+                    </audio>
+                `)
+                $(`#bgm-${id}`).one('ended', function(){
+                    console.log(`finished SFX: ${name}`)
+                    $(`#bgm-${id}`).remove()
+                    if(callback) callback();
+                })
+                $(`#bgm-${id}`).animate({volume: 0}, 1);
+                $(`#bgm-${id}`)[0].play();         
+                $(`#bgm-${id}`).animate({volume: 1}, 2000);
+               });
+
+                 
+        },
+        stop: function(callback){
+            /* Stop playing BGM */
+            if(!game.bgm._currentBgm){
+                console.warn("nothing playing - nothing to stop.")
+                return callback();
+            }
+
+            $(`#bgm-${game.bgm._currentBgm}`).animate({volume: 0}, 2000);
+
+            setTimeout(()=>{
+                $(`#bgm-${game.bgm._currentBgm}`)[0].pause(); 
+                $(`#bgm-${game.bgm._currentBgm}`).remove();
+                game.bgm._currentBgm = null;
+                return callback();
+            }, 1000);
+        }
+    },
+
     sfx: {
         play: function(name, callback=()=>{}, directory = 'sfx'){
             /* Play given SFX. example: game.sfx.play('falling');

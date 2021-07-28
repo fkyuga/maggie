@@ -4,7 +4,7 @@
 
 game.pages.story = {
     onload: function(){
-        game.pages.story.scenes[8].animate();
+        game.pages.story.scenes[6].animate();
     },
 
     scenes: [
@@ -364,6 +364,7 @@ game.pages.story = {
         {
             /* Scene 7: Flashback to snow day */
             animate: () => {
+                game.sfx.play('flashback');
                 let transitionTimeline = gsap.timeline();
                 transitionTimeline.to('.scene7', .00000001, { opacity: 0 });
                 $('.scene7').addClass('scene--active')
@@ -371,6 +372,7 @@ game.pages.story = {
                 transitionTimeline.to('.scene7', 2, { opacity: 1 }, '+=.5')
                 setTimeout(function(){
                     game.sfx.play('snow');
+                    game.bgm.play('windy');
                 }, 1000)
 
                 let maggieWalkingTimeline = gsap.timeline({yoyo: true, repeat: 10});
@@ -457,6 +459,8 @@ game.pages.story = {
         {
             /* Scene 8: Encourage Maggie to go into school */
             animate: () => {
+                game.sfx.play('flashback');
+                game.bgm.play('sunny');
                 gsap.to('.scene8 .character-maggie', .00001, { scaleY: .4, scaleX: -.4 });
                 let transitionTimeline = gsap.timeline({onComplete: () => {
                 game.speech.display({
@@ -499,6 +503,33 @@ game.pages.story = {
                             if(perc >= 0.8){
                                 /* Destroy the Draggable */
                                 instance[0].kill();
+
+                                /* hide speech bubble */
+                                game.speech.hideBubble();
+
+                                /* Play door sound */
+                                game.sfx.play('door');
+                                
+                                /* Fade out BGM */
+                                game.bgm.stop();
+
+                                /* And fade to black */
+
+                                $('.scene-interstitial p').html("<p>Maggie, with all her strength, worked as hard as she could at school today...</p>");
+
+                                let transitionTimeline = gsap.timeline({onComplete: () => {
+                                    /* after we show the interstitial message, play the school bell and move on to next scene! */
+                                    game.sfx.play('schoolsout', () => {
+                                        game.pages.story.scenes[9].animate();
+                                    });
+                                }});
+                                    transitionTimeline.to('.scene-interstitial p', .000001, { opacity: 0 });
+                                    transitionTimeline.to('.scene8', 1, { opacity: 0 });
+                                    transitionTimeline.to('.scene-interstitial', 1, { opacity: 1 }, '-=1');
+                                    transitionTimeline.to({}, 1, {}); /* wait 1s */
+                                    transitionTimeline.to('.scene-interstitial p', .5, { opacity: 1 });
+                                    transitionTimeline.to({}, 3, {}); /* wait 3s */
+                                    transitionTimeline.to('.scene-interstitial p', .5, { opacity: 0 });
                             }
 
                             $('.scene8 .drag-progress')[0].style.setProperty('--progressScene8', `${progress}px`)
@@ -530,6 +561,15 @@ game.pages.story = {
                 $('.scene8').addClass('scene--active')
                 transitionTimeline.to('.scene7', 0.1, { opacity: 0 });
                 transitionTimeline.to('.scene8', 2, { opacity: 1 }, '+=.5')
+            }
+        },
+
+        {
+            /* Scene 9: Maggie sees somebody she's never met before outside school! */
+            animate: () => {
+                let transitionTimeline = () => {
+
+                }
             }
         }
     ]

@@ -16,6 +16,22 @@
     background-repeat: no-repeat;
 }
 
+.scene-interstitial {
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 36px;
+    text-align: center;
+    opacity: 0;
+}
+
+.scene-interstitial p {
+    max-width: 800px;
+    margin: 0 auto;
+    white-space: pre-wrap;
+}
 
 /*** magnetic items scene ***/
 .scene0 {
