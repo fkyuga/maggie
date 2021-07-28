@@ -771,7 +771,19 @@ game.pages.story = {
         {
             /* Scene 10 - Maggie has run home from school in tears. */
             animate: () => {
-                game.speech.display(SPEECH_POOR_MAGGIE);
+                let transitionTimeline = gsap.timeline({});
+
+                $('.scene10').addClass('scene--active');
+                gsap.to('.scene10', .000001, { opacity: 0 })
+
+                /* fade to black */
+                $('.scene-interstitial p').html('');
+
+
+                transitionTimeline.to('.scene-interstitial', 1, { opacity: 1 });
+                transitionTimeline.to('.scene9', 1, { opacity: 0 }, '-=1')
+                transitionTimeline.to({}, 2, {});
+                transitionTimeline.to('.scene10', 1, { opacity: 1})
             }
         }
     ]

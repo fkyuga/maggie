@@ -791,3 +791,10 @@
     top: 500px;
     left: 550px;
 }
+
+/****** SCENE 10 ******/
+.scene10 {
+    background-image: url(../img/story/maggies-room.png);
+    background-size: cover;
+    z-index: 99;
+}
