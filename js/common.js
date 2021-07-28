@@ -406,11 +406,6 @@ var game = {
                         <source src="bgm/${name}.mp3" type="audio/mpeg">
                     </audio>
                 `)
-                $(`#bgm-${id}`).one('ended', function(){
-                    console.log(`finished SFX: ${name}`)
-                    $(`#bgm-${id}`).remove()
-                    if(callback) callback();
-                })
                 $(`#bgm-${id}`).animate({volume: 0}, 1);
                 $(`#bgm-${id}`)[0].play();         
                 $(`#bgm-${id}`).animate({volume}, fade);

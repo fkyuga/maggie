@@ -201,81 +201,94 @@ game.pages.story = {
                 //1tl.timeScale(10);
                 /* Set initial state */
 
+                setTimeout(function(){
+                    game.sfx.play('SPEECH_MAGNETS_INTRO_REPEL', () => {
+                        $('.scene2 .drag-prompt').removeClass('hidden');
+
+                        /* this code makes lil draggable.
+                            basically the same as scene1. a less time-constrained me would abstract this away into a new function... but -yeah- */
+                            gsap.to('.scene2 .para1', .5, { opacity: 1, y: 0 })
+                            game.sfx.play('SPEECH_MAGNETS_INTRO_GO_AHEAD', () => {}, 'speech');
+    
+                            let instance_scene2 = Draggable.create('.scene2 .character-lil-full', {
+                                type: 'x',
+                                bounds: {minX: 0, maxX: -495},
+                                onDrag: function(e){
+                                    /* Calculate the percentage of the interaction that has been completed. */
+                                    // To do this we need the -relative- position of the draggable element to the game stage.
+                                    // *sigh* have i over engineered this?
+                                    $('.scene2 .drag-prompt').addClass('hidden');
+
+                                    let draggableRect = e.target.getBoundingClientRect();
+                                    let stageRect = document.querySelector('.game-page-story').getBoundingClientRect();
+    
+                                    let x = draggableRect.left - stageRect.left;
+    
+                                    let xMax   = 700;
+                                    let xMin   = 191;
+    
+                                    let perc = (x + xMin / xMax - xMin) / (xMax - xMin); /* i don't know how this works, but it does */
+                                    /* invert percentage */
+                                        perc = Math.abs( 1 - perc );
+                                    this.perc = perc;
+    
+                                    let progress = (perc * 550) / 0.65;
+    
+                                    if(perc >= 0.65){
+                                        /* Complete the interaction if the user is at 65% (magnets would attract at that point) */
+                                        /* Destroy the Draggable */
+                                        $('.scene2 .drag-prompt').addClass('hidden');
+
+                                        let completeTl = gsap.timeline();
+                                        instance_scene2[0].kill();
+                                        game.sfx.play('whee');
+                                        gsap.to('.scene2 .character-lil-full', .15, { x: "1000px" })
+                                        gsap.to('.scene2 .character-jessie', .15, { x: "-415px" })
+                                        gsap.to('.scene2 .drag-progress', .15, { '--progress2': "550px" })
+                                        gsap.to('.scene2 .drag-progress', .25, { opacity: 0, y: -24 });
+                                
+                                        setTimeout(function(){
+                                            /* Show well done! */
+                                            let tl = gsap.timeline();
+                                            tl.to('.scene2 .text1', .0000001, { opacity: 0, y: 64});
+                                            tl.to('.scene2 .text1', .0000001, { opacity: 0, y: 64});
+                                            tl.to('.scene2 .text0', .25, { opacity: 0, y: -64});
+                                            $('.scene2 .text1').removeClass('inactive').addClass('active');
+                                            tl.to('.scene2 .text1', .25, { opacity: 1, y: 0}, '+=.5')
+    
+                                            /* Move to Scene 3 on button press*/
+                                            $('.scene2 button').off().on('click', function () {
+                                                game.pages.story.scenes[3].animate();
+                                            })
+                                        }, 1250)
+                                    }
+    
+                                    $('.scene2 .drag-progress')[0].style.setProperty('--progress2', `${progress}px`)
+                                },
+                                onDragEnd: function(){
+                                    /* If percentage is less than 65% (complete), return to initial pos */
+                                    
+
+                                    if(this.perc < 0.65){
+                                        $('.scene2 .drag-prompt').removeClass('hidden');
+                                        gsap.to('.scene2 .character-lil-full', .25, {x:0})
+                                        gsap.to('.scene2 .drag-progress', .25, { '--progress2': 0 })
+                                    }
+                                }
+                            })
+                    }, 'speech');
+                }, 1000);
+
                 $('.scene1').addClass('scene--active')
                 $('.scene2').addClass('scene--active')
+                
+                tl.to('.scene2 .para1', .000001, { opacity: 0, y: 64});
                 tl.to('.scene1, .scene1 .character-jessie, .scene1 .character-haroon', .000001, { y: 0, opacity: 1})
                 tl.to('.scene2', .000001, { y: 128, opacity: 0});
 
                 /* Hide scene0 and slide in scene1 */
                 tl.to('.scene1, .scene1 .character-jessie, .scene1 .character-haroon', .5, { y: -128, opacity: 0 });
-                tl.to('.scene2, .scene2 .drag-progress', .5, { y: 0, opacity: 1, onComplete: () => {
-                
-                    /* this code makes lil draggable.
-                        basically the same as scene1. a less time-constrained me would abstract this away into a new function... but -yeah- */
-
-                        let instance_scene2 = Draggable.create('.scene2 .character-lil-full', {
-                            type: 'x',
-                            bounds: {minX: 0, maxX: -495},
-                            onDrag: function(e){
-                                /* Calculate the percentage of the interaction that has been completed. */
-                                // To do this we need the -relative- position of the draggable element to the game stage.
-                                // *sigh* have i over engineered this?
-
-                                let draggableRect = e.target.getBoundingClientRect();
-                                let stageRect = document.querySelector('.game-page-story').getBoundingClientRect();
-
-                                let x = draggableRect.left - stageRect.left;
-
-                                let xMax   = 700;
-                                let xMin   = 191;
-
-                                let perc = (x + xMin / xMax - xMin) / (xMax - xMin); /* i don't know how this works, but it does */
-                                /* invert percentage */
-                                    perc = Math.abs( 1 - perc );
-                                this.perc = perc;
-
-                                let progress = (perc * 550) / 0.65;
-
-                                if(perc >= 0.65){
-                                    /* Complete the interaction if the user is at 65% (magnets would attract at that point) */
-                                    /* Destroy the Draggable */
-                                    let completeTl = gsap.timeline();
-                                    instance_scene2[0].kill();
-                                    game.sfx.play('repel');
-                                    gsap.to('.scene2 .character-lil-full', .15, { x: "1000px" })
-                                    gsap.to('.scene2 .character-jessie', .15, { x: "-415px" })
-                                    gsap.to('.scene2 .drag-progress', .15, { '--progress2': "550px" })
-                                    gsap.to('.scene2 .drag-progress', .25, { opacity: 0, y: -24 });
-                            
-                                    setTimeout(function(){
-                                        /* Show well done! */
-                                        let tl = gsap.timeline();
-                                        tl.to('.scene2 .text1', .0000001, { opacity: 0, y: 64});
-                                        tl.to('.scene2 .text1', .0000001, { opacity: 0, y: 64});
-                                        tl.to('.scene2 .text0', .25, { opacity: 0, y: -64});
-                                        $('.scene2 .text1').removeClass('inactive').addClass('active');
-                                        tl.to('.scene2 .text1', .25, { opacity: 1, y: 0}, '+=.5')
-
-                                        /* Move to Scene 3 on button press*/
-                                        $('.scene2 button').off().on('click', function () {
-                                            game.pages.story.scenes[3].animate();
-                                        })
-                                    }, 1250)
-                                }
-
-                                $('.scene2 .drag-progress')[0].style.setProperty('--progress2', `${progress}px`)
-                            },
-                            onDragEnd: function(){
-                                /* If percentage is less than 65% (complete), return to initial pos */
-                                if(this.perc < 0.65){
-                                    gsap.to('.scene1 .character-haroon', .25, {x:0})
-                                    gsap.to('.drag-progress', .25, { '--progress': 0 })
-                                }
-                            }
-                        })
-                }
-                
-                });
+                tl.to('.scene2, .scene2 .drag-progress', .5, { y: 0, opacity: 1});
             }
         },
 
