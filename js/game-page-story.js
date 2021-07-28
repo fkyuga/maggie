@@ -4,7 +4,7 @@
 
 game.pages.story = {
     onload: function(){
-        game.pages.story.scenes[1].animate();
+        game.pages.story.scenes[0].animate();
     },
 
     scenes: [
@@ -252,13 +252,29 @@ game.pages.story = {
                                             let tl = gsap.timeline();
                                             tl.to('.scene2 .text1', .0000001, { opacity: 0, y: 64});
                                             tl.to('.scene2 .text1', .0000001, { opacity: 0, y: 64});
+                                            tl.to('.scene2 #beginStory', .0000001, { opacity: 0, y: 64});
                                             tl.to('.scene2 .text0', .25, { opacity: 0, y: -64});
                                             $('.scene2 .text1').removeClass('inactive').addClass('active');
                                             tl.to('.scene2 .text1', .25, { opacity: 1, y: 0}, '+=.5')
+
+                                            setTimeout(function(){
+                                                game.sfx.play('SPEECH_MAGNETS_INTRO_STORY_TIME', () => {
+                                                    gsap.to('.scene2 #beginStory', .5, { opacity: 1, y: 0 });
+                                                }, 'speech');
+                                            }, 1500);
     
                                             /* Move to Scene 3 on button press*/
-                                            $('.scene2 button').off().on('click', function () {
-                                                game.pages.story.scenes[3].animate();
+                                            $('.scene2 #beginStory').off().on('click', function () {
+                                                let transitionTimeline = gsap.timeline({onComplete: () => {
+                                                    game.pages.story.scenes[3].animate();
+                                                }});
+                                                /* fade to black */
+                                                $('.scene-interstitial p').html('');
+
+                                                transitionTimeline.to('.scene-interstitial', 1, { opacity: 1 });
+                                                transitionTimeline.to('.scene2', 1, { opacity: 0 }, '-=1')
+                                                transitionTimeline.to({}, 3, {}); /* wait 3s */
+                                                game.bgm.stop();
                                             })
                                         }, 1250)
                                     }
@@ -295,9 +311,12 @@ game.pages.story = {
         {
             /* Scene 3 - Story time! */
             animate: () => {
-                $('.scene').removeClass('scene--active');
+                $('.scene0, .scene1, .scene2').removeClass('scene--active');
+                gsap.to('.scene3', .000001, { opacity: 0 });
+                gsap.to('.scene-interstitial', 1, { opacity: 0})
+                gsap.to('.scene3', 1, { opacity: 1});
                 $('.scene3').addClass('scene--active');
-                
+
                 game.bgm.play('morning');
                 game.speech.display(SPEECH_MORNING);
 
