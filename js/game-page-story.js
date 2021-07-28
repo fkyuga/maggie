@@ -1,6 +1,6 @@
 game.pages.story = {
     onload: function(){
-        game.pages.story.scenes[7].animate();
+        game.pages.story.scenes[8].animate();
     },
 
     scenes: [
@@ -419,7 +419,11 @@ game.pages.story = {
                                 .removeClass('inactive');
 
                             setTimeout(function(){
-                                let exitTimeline = gsap.timeline();
+                                let exitTimeline = gsap.timeline({onComplete: () => {
+                                    setTimeout(function(){
+                                        game.pages.story.scenes[8].animate();
+                                    }, 1000);
+                                }});
                                 exitTimeline.to('.scene7 .character-maggie-body', .0000001, {
                                     scaleX: -1
                                 })
@@ -443,6 +447,17 @@ game.pages.story = {
                 animationTimeline.to('.scene7 .character-maggie', 3, { x: 200, ease: Linear.easeNone })
 
 
+            }
+        },
+
+        {
+            /* Scene 8: Encourage Maggie to go into school */
+            animate: () => {
+                let transitionTimeline = gsap.timeline();
+                transitionTimeline.to('.scene8', .00000001, { opacity: 0 });
+                $('.scene8').addClass('scene--active')
+                transitionTimeline.to('.scene7', 0.1, { opacity: 0 });
+                transitionTimeline.to('.scene8', 2, { opacity: 1 }, '+=.5')
             }
         }
     ]

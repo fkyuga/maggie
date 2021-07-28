@@ -628,3 +628,21 @@
 .scene7 .character-maggie-body {
     transform: scaleX(-1);
 }
+
+/** Scene 8 - back in the schoolyard, in the present moment. encourage maggie
+    to persevere **/
+.scene8 {
+    background-image: url(../img/story/school-sunny.png);
+    background-size: cover;
+}
+
+.scene8 .character-maggie {
+    transform: scale(.4) scaleX(-1);
+    top: 283px;
+    left: 182px;
+    transition: none;
+}
+
+.scene8 .character-maggie-body {
+    transform: scaleX(-1);
+}
