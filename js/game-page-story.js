@@ -4,7 +4,7 @@
 
 game.pages.story = {
     onload: function(){
-        game.pages.story.scenes[8].animate();
+        game.pages.story.scenes[9].animate();
     },
 
     scenes: [
@@ -650,9 +650,20 @@ game.pages.story = {
         {
             /* Scene 9: Maggie sees somebody she's never met before outside school! */
             animate: () => {
-                let transitionTimeline = () => {
+                $('.scene8').removeClass('scene--active');
+                $('.scene9').addClass('scene--active');
 
-                }
+                setTimeout(function(){
+                    game.speech.display(SPEECH_AFTER_SCHOOL, () => {
+                        game.speech.display(SPEECH_AFTER_SCHOOL_GUIDANCE);
+                    })
+                }, 500)
+
+                gsap.to('.scene9', .00001, { opacity: 0 });
+                gsap.to('.scene-interstitial', 1, {opacity: 0});
+                gsap.to('.scene9', 1, {opacity: 1});
+
+                gsap.to('.scene9 .character-maggie', 1, { x: -50,ease:Linear.easeNone })
             }
         }
     ]

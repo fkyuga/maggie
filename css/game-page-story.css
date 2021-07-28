@@ -709,3 +709,40 @@
     background-color: rgba(255,255,255,.8);
     z-index: 0;
 }
+
+/** scene 9 - maggie and rosie repel **/
+.scene9 {
+    background-image: url(../img/story/school-sunny-b.png);
+    background-size: cover;
+}
+
+.scene9 .character-maggie { transition: none; }
+
+.scene9 .character-rosie {
+    position: absolute;
+    left: 177px;
+    top: 384px;
+    z-index: 2;
+}
+
+.scene9 .character-rosie-body {
+    background-image: url(../img/characters/rosie/rosie-body.png);
+    width: 104px;
+    height: 242px;
+    z-index: 2;
+}
+
+.character-rosie-expression-neutral {
+    background-image: url(../img/characters/rosie/expression-rosie-neutral.png);
+    width: 44px;
+    height: 46px;
+    z-index: 3;
+    top: 25px !important;
+    left: 28px !important;
+}
+
+.scene9 .character-maggie {
+    transform: scale(.4);
+    top: 282px;
+    left: 550px;
+}
