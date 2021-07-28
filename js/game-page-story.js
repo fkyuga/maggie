@@ -1,3 +1,7 @@
+/* I was pretty happy with how i laid out the rest of the code.
+   This file, however, is a disaster.
+   Please read at your own caution. */
+
 game.pages.story = {
     onload: function(){
         game.pages.story.scenes[8].animate();
@@ -453,7 +457,75 @@ game.pages.story = {
         {
             /* Scene 8: Encourage Maggie to go into school */
             animate: () => {
-                let transitionTimeline = gsap.timeline();
+                gsap.to('.scene8 .character-maggie', .00001, { scaleY: .4, scaleX: -.4 });
+                let transitionTimeline = gsap.timeline({onComplete: () => {
+                game.speech.display({
+                    message: "Poor Maggie... No wonder she's scared of school! But she must be brave... she never knows what tomorrow might bring.",
+                    sync: [300, 1250, 100, 300, 100, 200, 1000, 200, 200, 300, 100, 500, 300, 400, 300, 200, 500, 200, 100],
+                    delay: 100 // was 8000
+                }, () => {
+                    
+                    game.speech.display({
+                        message: "Can you give Maggie a helping hand? Try giving her a little push by dragging her into school!"
+                    })
+
+                    /** ENABLE DRAGGABILITY (it's our fave code block again) **/
+                    let instance = Draggable.create('.scene8 .character-maggie', {
+                        type: 'x',
+                        bounds: '.scene8 .drag-progress',
+                        onDrag: function(e){
+                            /* Calculate the percentage of the interaction that has been completed. */
+                            // To do this we need the -relative- position of the draggable element to the game stage.
+                            // *sigh* have i over engineered this?
+
+
+                            let draggableRect = e.target.getBoundingClientRect();
+                            let stageRect = document.querySelector('.game-page-story').getBoundingClientRect();
+
+                            let x = draggableRect.left - stageRect.left;
+
+                            let xMax   = 220;
+                            let xMin   = 600;
+
+                            let perc = (x + xMin / xMax - xMin) / (xMax - xMin); /* i don't know how this works, but it does */
+                            /* invert percentage */
+                                perc = Math.abs( 1 - perc );
+                            this.perc = perc;
+
+                            let progress = perc * 471;
+
+                             console.log(progress);
+
+                            if(perc >= 0.8){
+                                /* Destroy the Draggable */
+                                instance[0].kill();
+                            }
+
+                            $('.scene8 .drag-progress')[0].style.setProperty('--progressScene8', `${progress}px`)
+                        },
+                        onDragStart: function(){
+                            /* change maggie's expression and rotation */
+                            $('.scene8 .character-maggie-expression-frown').removeClass('active');
+                            $('.scene8 .character-maggie-expression-surprised').addClass('active');
+                            
+                            gsap.to('.scene8 .character-maggie', .1, { rotate: 20, scaleY: .4, scaleX: -.4 });
+                        },
+                        onDragEnd: function(){
+                            $('.scene8 .character-maggie-expression-frown').addClass('active');
+                            $('.scene8 .character-maggie-expression-surprised').removeClass('active');
+                            gsap.to('.scene8 .character-maggie', .1, { rotate: 0 });
+
+                            /* If percentage is less than 80% (complete), return to initial pos */
+                            if(this.perc < 0.8){
+                                 gsap.to('.scene8 .character-maggie', .25, {x:0})
+                                 gsap.to('.scene8 .drag-progress', .25, { '--progressScene8': 0 })
+                            }
+                        }
+                    })
+
+
+                })
+                }});
                 transitionTimeline.to('.scene8', .00000001, { opacity: 0 });
                 $('.scene8').addClass('scene--active')
                 transitionTimeline.to('.scene7', 0.1, { opacity: 0 });

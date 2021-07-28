@@ -637,12 +637,38 @@
 }
 
 .scene8 .character-maggie {
-    transform: scale(.4) scaleX(-1);
     top: 283px;
     left: 182px;
     transition: none;
+    z-index: 1;
 }
 
 .scene8 .character-maggie-body {
     transform: scaleX(-1);
+}
+
+.scene8 .drag-progress {
+    width: 471px;
+    height: 32px;
+    border-radius: 900px;
+    background-color: rgba(255,255,255,.3);
+    top: 497px;
+    left: 199px;
+    position: absolute;
+    z-index: 0;
+}
+
+.scene8 .drag-progress:after {
+    /* We store width of the :after element (which is what displays the progress inside the bar)
+    as a CSS custom property - which we adjust in JS. We do this because we cannot easily
+    modify styles of pseudo-elements. */
+
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: var(--progressScene8);
+    height: 32px;
+    border-radius: 900px;
+    background-color: rgba(255,255,255,.8);
+    z-index: 0;
 }

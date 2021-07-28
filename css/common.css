@@ -241,7 +241,7 @@ img {
 /******** Speech Bubble (for Dialogue in story) ******************/
 .speech-bubble-container {
     position: absolute;
-    top: 0;
+    opacity: 0;
     left: 0;
     width: 596px;
     height: 218px;
@@ -260,6 +260,10 @@ img {
     height: 101px;
     display: flex;
     flex-wrap: wrap;
+}
+
+.speech-bubble-container .dialogue span {
+    flex-grow: 0;
 }
 
 .speech-bubble-container .dialogue .dimmed {

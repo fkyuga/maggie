@@ -317,6 +317,7 @@ var game = {
                 game.speech.hideBubble();
 
                 /* Callback */
+                console.log(callback);
                 callback();
             }
 
