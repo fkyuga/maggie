@@ -33,7 +33,6 @@ const SPEECH_SNOW_DAY = {
 const SPEECH_AFTER_FLASHBACK = {
     message: "Poor Maggie... No wonder she's scared of school! But she must be brave... she never knows what tomorrow might bring.",
     sync: [300, 1250, 100, 300, 100, 200, 1000, 200, 200, 300, 100, 500, 300, 400, 300, 200, 500, 200, 100],
-    delay: 8000, // was 8000,
     sound: "SPEECH_AFTER_FLASHBACK"
 }
 

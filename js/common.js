@@ -291,6 +291,11 @@ var game = {
                optionally execute a callback*/
                 
             let { message } = messageObj;
+            if(messageObj.delay){
+                var { delay } = messageObj;
+            } else {
+                var delay = 500;
+            }
 
             /* Clean up any timeouts */
             for ( let t of game.speech._timeouts) {
@@ -324,8 +329,10 @@ var game = {
             /* Play audio if we have any. */
             if(messageObj.sound){
                 /* Callback is set to our dismiss function, so it dismisses
-                   as soon as audio ends */
-                game.sfx.play(messageObj.sound, dismiss, 'speech');
+                   when audio ends + delay. */
+                game.sfx.play(messageObj.sound, () => {
+                    setTimeout(() => {dismiss()}, delay)
+                }, 'speech');
             } else {
                 /* If we don't have audio, hide after delay if we have one of those */
                 if(messageObj.delay){

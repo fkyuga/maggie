@@ -4,7 +4,7 @@
 
 game.pages.story = {
     onload: function(){
-        game.pages.story.scenes[0].animate();
+        game.pages.story.scenes[8].animate();
     },
 
     scenes: [
@@ -425,8 +425,11 @@ game.pages.story = {
                 let transitionTimeline = gsap.timeline();
 
                 setTimeout(function(){
-                    game.speech.display(SPEECH_SCHOOL);
-                    game.sfx.play('organ');
+                    game.speech.display(SPEECH_SCHOOL, () => {
+                        game.speech.display(SPEECH_SNOW_DAY, () => {
+                            game.pages.story.scenes[7].animate()
+                        });
+                    });
                 }, 500);
                 
                 transitionTimeline.to('.scene6', .000001, { opacity: 0 })
@@ -436,12 +439,7 @@ game.pages.story = {
                 transitionTimeline.to('.scene6', 1, { opacity: 1 }, '-=1')
 
 
-                let animationTimeline = gsap.timeline({onComplete: ()=>{
-                    /* Once done, wait 2 seconds and move on to the flashback scene */
-                    setTimeout(()=>{
-                        game.pages.story.scenes[7].animate()
-                    }, 2000)
-                }});
+                let animationTimeline = gsap.timeline();
                 animationTimeline.to('.magnetfield-academy-front', 5, { y: -100 })
                 animationTimeline.to('.maggie-back', 5, { y: 100 }, '-=5')
             }
@@ -450,7 +448,6 @@ game.pages.story = {
         {
             /* Scene 7: Flashback to snow day */
             animate: () => {
-                game.speech.display(SPEECH_SNOW_DAY);
                 game.sfx.play('flashback');
                 let transitionTimeline = gsap.timeline();
                 transitionTimeline.to('.scene7', .00000001, { opacity: 0 });
@@ -553,8 +550,8 @@ game.pages.story = {
                 let transitionTimeline = gsap.timeline({onComplete: () => {
                 game.speech.display(SPEECH_AFTER_FLASHBACK, () => {
                     
-                    game.speech.display(SPEECH_AFTER_FLASHBACK_GUIDANCE)
-
+                    game.speech.display(SPEECH_AFTER_FLASHBACK_GUIDANCE, () => {
+                        $('.scene8 .drag-prompt').removeClass('hidden')
                     /** ENABLE DRAGGABILITY (it's our fave code block again) **/
                     let instance = Draggable.create('.scene8 .character-maggie', {
                         type: 'x',
@@ -563,7 +560,7 @@ game.pages.story = {
                             /* Calculate the percentage of the interaction that has been completed. */
                             // To do this we need the -relative- position of the draggable element to the game stage.
                             // *sigh* have i over engineered this?
-
+                            $('.scene8 .drag-prompt').addClass('hidden')
 
                             let draggableRect = e.target.getBoundingClientRect();
                             let stageRect = document.querySelector('.game-page-story').getBoundingClientRect();
@@ -580,7 +577,7 @@ game.pages.story = {
 
                             let progress = perc * 471;
 
-                             console.log(progress);
+                            console.log(progress);
 
                             if(perc >= 0.8){
                                 /* Destroy the Draggable */
@@ -630,11 +627,15 @@ game.pages.story = {
 
                             /* If percentage is less than 80% (complete), return to initial pos */
                             if(this.perc < 0.8){
-                                 gsap.to('.scene8 .character-maggie', .25, {x:0})
-                                 gsap.to('.scene8 .drag-progress', .25, { '--progressScene8': 0 })
+                                $('.scene8 .drag-prompt').removeClass('hidden')
+                                gsap.to('.scene8 .character-maggie', .25, {x:0})
+                                gsap.to('.scene8 .drag-progress', .25, { '--progressScene8': 0 })
                             }
                         }
                     })
+                    })
+
+                    
 
 
                 })
