@@ -4,7 +4,7 @@
 
 game.pages.story = {
     onload: function(){
-        game.pages.story.scenes[0].animate();
+        game.pages.story.scenes[1].animate();
     },
 
     scenes: [
@@ -64,6 +64,14 @@ game.pages.story = {
             animate: () => {
                 const onComplete = () => {
                     /* Part 2 of this scene - demonstrate magnetic attraction using drag and drop */
+                    game.sfx.play('SPEECH_MAGNETS_INTRO_ATTRACT', () => {
+                        game.sfx.play('SPEECH_MAGNETS_INTRO_TRY_IT', () => {}, 'speech');
+                        /* Enable draggable here. */
+
+
+                        onComplete2();
+
+                    }, 'speech');
                     let tl2 = gsap.timeline();
                     const onComplete2 = () => {
                         /* this code is a -disaster- */
@@ -71,10 +79,7 @@ game.pages.story = {
                            we lock him to the x-axis, and constrain his movement to the path we display on screen. */
                         /* i would use inertia here, but it is a paid plugin :( */
 
-                           /* After 1.5s of inactivity, assume the user needs guidance - show the drag prompt. */
-                           setTimeout(function(){
-                            $('.scene1 .drag-prompt').removeClass('hidden');
-                           }, 1500)
+                        $('.scene1 .drag-prompt').removeClass('hidden');
 
                            let instance = Draggable.create('.scene1 .character-haroon', {
                                type: 'x',
@@ -142,11 +147,22 @@ game.pages.story = {
                     }, 250)
                     tl2.to('.scene1 .text0', .25, { y: -64, opacity: 0 });
                     tl2.to('.scene1 .text1', .0000001, { opacity: 0, y: 64 });
-                    tl2.to('.scene1 .text1', .25, { y: 0, opacity: 1, onComplete2});
+                    tl2.to('.scene1 .text1', .25, { y: 0, opacity: 1});
                 }
 
                 let tl = gsap.timeline();
+                /* Play speech. */
+                setTimeout(function(){
+                    game.sfx.play('SPEECH_MAGNETS_POLES', () => {}, 'speech');
+                }, 1000);
+                setTimeout(function(){
+                    game.sfx.play('SPEECH_MAGNETS_INTRO_NORTH', () => {}, 'speech');
+                }, 3000);
+                setTimeout(function(){
+                    game.sfx.play('SPEECH_MAGNETS_INTRO_SOUTH', () => {}, 'speech');
+                }, 4500);
                 
+
                 /* Set initial state */
 
                 $('.scene0').addClass('scene--active')
