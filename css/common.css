@@ -428,6 +428,14 @@ img {
     left: -3px; 
 }
 
+.character-maggie-expression-pre-crying {
+    background-image: url(../img/maggie/expression-pre-crying.png);
+    width: 100px;
+    height: 77px;
+    top: 27px;
+    left: -3px;
+}
+
 .character-maggie-expression-crying {
     background-image: url(../img/maggie/expression-crying.png);
     width: 100px;

@@ -702,7 +702,24 @@ game.pages.story = {
                                         game.sfx.play('whee');
 
                                         setTimeout(function(){
-                                            game.speech.display(SPEECH_OH_NO)
+                                            game.speech.display(SPEECH_OH_NO, () => {
+                                                $('.scene9 .character-maggie-expression-pre-crying').removeClass('active');
+                                                $('.scene9 .character-maggie-expression-crying').addClass('active');
+                                                setTimeout(function(){
+                                                    gsap.to('.scene9 .character-maggie', 1, { x: -750 })
+                                                    let maggieWalkingTimeline = gsap.timeline({yoyo: true, repeat: 10});
+                                                    maggieWalkingTimeline.timeScale(3);
+                                                    maggieWalkingTimeline.to('.scene9 .character-maggie-leg-l', .35, { y: -10, ease: Linear.easeNone })
+                                                    maggieWalkingTimeline.to('.scene9 .character-maggie-leg-r', .35, { y: -10, ease: Linear.easeNone }, '-=.175')
+                                                    setTimeout(function(){
+                                                        
+                                                        game.pages.story.scenes[10].animate();
+                                                        
+                                                    }, 2000)
+                                                }, 2000);                            
+                                            })
+                                            $('.scene9 .character-maggie .character-expression').removeClass('active');
+                                            $('.scene9 .character-maggie-expression-pre-crying').addClass('active');
                                         }, 250);
 
                                         /* Hide the drag stuff */
@@ -748,6 +765,13 @@ game.pages.story = {
                 gsap.to('.scene9', 1, {opacity: 1});
 
                 gsap.to('.scene9 .character-maggie', 1, { x: -50,ease:Linear.easeNone })
+            }
+        },
+
+        {
+            /* Scene 10 - Maggie has run home from school in tears. */
+            animate: () => {
+                game.speech.display(SPEECH_POOR_MAGGIE);
             }
         }
     ]
