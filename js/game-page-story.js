@@ -4,6 +4,8 @@
 
 game.pages.story = {
     onload: function(){
+        // Help is unavailable in story mode. 
+        $('.btn-help').hide();
         game.pages.story.scenes[0].animate();
     },
 

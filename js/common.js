@@ -1,5 +1,11 @@
 var game = {
 
+    /* this is used for certain purposes like:
+        -> ?skip=1 - skip the intro screen animation
+        -> ?screen=<screenName> - start on a specified screen.
+    */
+    params: new URLSearchParams(window.location.search),
+
     currentPage: null,
     loadPage: function(pageName, opts = {}){
         /* Load a page.
@@ -179,10 +185,6 @@ var game = {
 
     modals: {
         labTutorial: function(){
-            function toSlide2(){
-                alert('foo')
-            }
-
             let content = `
                 <div class="slide slide1 slide--active">
                     <div class="video-container">
@@ -246,6 +248,67 @@ var game = {
                             </div>
                         </div>
                     </div>
+                </div>
+            `;
+
+            let actions = `
+            `
+
+            game.modal.display(
+                'How To Play',
+                content,
+                actions,
+                'lab-howto'
+            )
+        },
+
+        labTutorialInGame: function(){
+            let content = `
+                <div class="slide slide1 slide--active">
+                    <div class="video-container">
+                        <video autoplay loop muted>
+                            <source src="video/lab-tutorial1.webm" type="video/webm">
+                        </video>
+                    </div>
+                    <div>
+                        <p>To see if an object is magnetic, move it over to Maggie the magnet!</p>
+                        <div class="modal-action">
+                            <button onclick="game.modal.slide(2)" class="btn-circle btn-yes"></button>
+                            <div class="modal-action-label">Next</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide slide2">
+                    <div class="video-container">
+                        <video autoplay loop muted>
+                            <source src="video/lab-tutorial2.webm" type="video/webm">
+                        </video>
+                    </div>
+                    <div>
+                        <p>If you think the object isn't magnetic, put it in the "Not Magnetic" box.</p>
+                        <div class="modal-action">
+                            <button onclick="game.modal.slide(3)" class="btn-circle btn-yes"></button>
+                            <div class="modal-action-label">Next</div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="slide slide3">
+                    <div class="video-container">
+                        <video autoplay loop muted>
+                            <source src="video/lab-tutorial3.webm" type="video/webm">
+                        </video>
+                    </div>
+                    <div>
+                        <p>And if you think it <em>is</em> magnetic, put it in the "Magnetic" box!</p>
+                        <div class="modal-action">
+                            <button onclick="game.modal.hide()" class="btn-circle btn-yes"></button>
+                            <div class="modal-action-label">Got It</div>
+                        </div>
+                    </div>
+                </div>
                 </div>
             `;
 

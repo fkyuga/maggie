@@ -1,7 +1,20 @@
 game.pages.start = {
     onload: function(){
+        $('.btn-help').hide();
+        const startGame = () => {
+            game.loadPage(game.params.get('screen') || 'title');
+        }
+
+        // If audioskip is specified, start the game immediately
+        // if it isn't, ask the user to click the screen before we start
+        // i had to do this to get the home button working. kludgy but works
+
+        if(game.params.get('audioskip')){
+            return startGame();
+        }
+
         $('.game-page-start-content').off().on('click', function(){
-            game.loadPage('story');
+            startGame();    
         })
     }
 }

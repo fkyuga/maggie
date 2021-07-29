@@ -322,6 +322,8 @@ handlers: {
 },
 
 onload: ()=>{
+    $('.btn-help').show().off().on('click', game.modals.labTutorialInGame);
+
     /* Reset/initialise moves counter. */
     game.pages.lab.moves = 0;
     game.pages.lab.maggieHasMagnet = false;
