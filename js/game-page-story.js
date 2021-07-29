@@ -4,7 +4,7 @@
 
 game.pages.story = {
     onload: function(){
-        game.pages.story.scenes[11].animate();
+        game.pages.story.scenes[10].animate();
     },
 
     scenes: [
@@ -777,7 +777,7 @@ game.pages.story = {
                         onComplete: () => {
                             /* Show the speech bubble for this scene, then move on to scene 11. */
                             game.speech.display(SPEECH_POOR_MAGGIE, () => {
-                                console.log('next scene ...');
+                                game.pages.story.scenes[11].animate()
                             });
                         }
                     });
@@ -821,7 +821,8 @@ game.pages.story = {
                 transitionTimeline.to('.scene-interstitial', 1, { opacity: 1 });
                 transitionTimeline.to('.scene9', 1, { opacity: 0 }, '-=1')
                 transitionTimeline.to({}, 1, {});
-                transitionTimeline.to('.scene10', 1, { opacity: 1})
+                transitionTimeline.to('.scene-interstitial', 1, { opacity: 0})
+                transitionTimeline.to('.scene10', 1, { opacity: 1}, "-=1")
                 transitionTimeline.to({}, 1, {});
             }
         },
