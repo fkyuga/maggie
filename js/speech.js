@@ -57,11 +57,13 @@ const SPEECH_OH_NO = {
 }
 
 const SPEECH_POOR_MAGGIE = {
-    message: "Poor Maggie... she tries and tries but just can't seem to be happy with herself..."
+    message: "Poor Maggie... she tries and tries but just can't seem to be happy with herself...",
+    sound: "SPEECH_POOR_MAGGIE"
 }
 
 const SPEECH_POOR_MAGGIE_2 = {
-    message: "...She should get some rest. Do you want to tuck her in her blanket so she can get some sleep?"
+    message: "...She should get some rest. Do you want to tuck her in her blanket so she can get some sleep?",
+    sound: "SPEECH_POOR_MAGGIE_2"
 }
 
 const SPEECH_WAKE_UP = {

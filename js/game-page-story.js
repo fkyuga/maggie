@@ -771,7 +771,45 @@ game.pages.story = {
         {
             /* Scene 10 - Maggie has run home from school in tears. */
             animate: () => {
-                let transitionTimeline = gsap.timeline({});
+                let onComplete = () => {
+                    /* This function runs after we transition into the scene. */
+                    let maggieTimeline = gsap.timeline({
+                        onComplete: () => {
+                            /* Show the speech bubble for this scene, then move on to scene 11. */
+                            game.speech.display(SPEECH_POOR_MAGGIE, () => {
+                                console.log('next scene ...');
+                            });
+                        }
+                    });
+
+                    /* Open the door */
+                    game.sfx.play('door-open');
+                    $('.scene10 .door-closed').removeClass('active').addClass('inactive');
+                    $('.scene10 .door-open, .scene10 .door-light').addClass('active').removeClass('inactive');
+                
+                    /* Delay 1s */
+                    maggieTimeline.to({}, 1, {});
+
+                    /* Maggie runs in, crying */
+                    maggieTimeline.to('.scene10 .character-maggie', 1, { x: 452, ease: Linear.easeNone });
+
+                    /* And then jumps face-first onto her bed */
+                    maggieTimeline.to('.scene10 .character-maggie', .5, {
+                        x: 600,
+                        y: -200,
+                        rotate: 220,
+                        ease: Linear.easeNone
+                    });
+
+                    maggieTimeline.to('.scene10 .character-maggie', .5, {
+                        x: 800,
+                        y: 20,
+                        rotate: 260,
+                        ease: Linear.easeNone
+                    });     
+                }
+
+                let transitionTimeline = gsap.timeline({onComplete});
 
                 $('.scene10').addClass('scene--active');
                 gsap.to('.scene10', .000001, { opacity: 0 })
@@ -782,8 +820,9 @@ game.pages.story = {
 
                 transitionTimeline.to('.scene-interstitial', 1, { opacity: 1 });
                 transitionTimeline.to('.scene9', 1, { opacity: 0 }, '-=1')
-                transitionTimeline.to({}, 2, {});
+                transitionTimeline.to({}, 1, {});
                 transitionTimeline.to('.scene10', 1, { opacity: 1})
+                transitionTimeline.to({}, 1, {});
             }
         }
     ]

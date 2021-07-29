@@ -248,7 +248,7 @@ img {
     background-image: url(../img/speechbubble@2x.png);
     background-size: contain;
     background-position: center center;
-    z-index: 4;
+    z-index: 998;
 }
 
 .speech-bubble-container .dialogue {

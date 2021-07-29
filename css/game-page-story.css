@@ -854,3 +854,52 @@
     z-index: 100;
     top: 523.2px; left: 629.6px
 }
+
+.scene10 .door-closed {
+    background-image: url(../img/story/door-closed@2x.png);
+    width: 68px;
+    height: 302px;
+    top: 432.8px !important;
+    left: 96px !important;
+    z-index: 100;
+}
+
+.scene10 .door-open {
+    background-image: url(../img/story/door-open@2x.png);
+    width: 137px;
+    height: 294px;
+    top: 435.2px !important;
+    left: 98.8px !important;
+    z-index: 102;
+}
+
+.scene10 .door-light {
+    background-image: url(../img/story/door-light@2x.png);
+    width: 240px;
+    height: 465px;
+    top: 261.2px !important;
+    left: 100.8px !important;
+    z-index: 100;
+}
+
+.scene10 .character-maggie {
+    z-index: 101;
+    transition: none;
+    transform: scaleY(.4) scaleX(-0.4);
+    top: 375px;
+    left: 0;
+}
+
+.scene10 .character-maggie-body {
+    transform: scaleX(-1);
+}
+
+.scene10 .door-mask {
+    background: #380900;
+    position: absolute;
+    bottom: 38px;
+    left: 0;
+    width: 100px;
+    height: 273px;
+    z-index: 102;
+}
