@@ -61,13 +61,13 @@ game.pages.title = {
 
         /* Register handlers */
         $('.btn-orb-start').on('touchend mouseup', game.pages.title.onClickStartButton);
-        $('.menu-option').on('touchend mouseup', game.pages.title.onClickActivity)
     },
 
     onClickStartButton: function(){
         /* CLICK START BUTTON
            Fade the start button to 0 opacity, hide it, and animate in menu options one-by-one. */
         
+        $('.menu-option').on('touchend mouseup', game.pages.title.onClickActivity)
         $('.btn-orb-start')
             .one('animationend', (e)=>{
                 console.log(e);

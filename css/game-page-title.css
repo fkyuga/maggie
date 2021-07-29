@@ -137,19 +137,29 @@
     right: 0;
 }
 
-.menu-option {
-    background: white;
+.menu-option {    
+    background-image: url(../img/menu-cloud.png);
+    background-size: contain;
+    height: 180px;
+    text-align: center;
+    width: 270px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 270px;
-    height: 134px;
     white-space: pre-wrap;
     text-align: center;
     justify-content: center;
     padding: 0 16px;
     opacity: 0;
     transition: 0.3s ease-in-out;
+}
+
+.menu-option.animating.locked {
+    opacity: .4;
+}
+
+.menu-option:active {
+    transform: scale(0.9);
 }
 
 .menu-option.animating {

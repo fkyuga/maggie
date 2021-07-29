@@ -213,6 +213,8 @@ img#item-bar__backdrop {
 .modal.lab-howto .slide4 .buttons {
     justify-content: center;
     gap: 32px;
+    flex-direction: row;
+    display: flex;
 }
 
 .slide {
