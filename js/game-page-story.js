@@ -834,7 +834,97 @@ game.pages.story = {
                 $('.scene10').removeClass('scene--active');
                 $('.scene11').addClass('scene--active');
                 
-                game.speech.display(SPEECH_POOR_MAGGIE_2);
+                game.speech.display(SPEECH_POOR_MAGGIE_2, () => {
+                /* Draggable Time! */
+                
+                $('.drag-prompt').removeClass('hidden')
+                gsap.to('.drag-progress', .5, {
+                    opacity: 1
+                });
+
+                let instance = Draggable.create('.scene11 .blanket-closeup', {
+                    type: 'y',
+
+
+                    onDrag: function(e){
+                        /* Calculate the percentage of the interaction that has been completed. */
+                        // To do this we need the -relative- position of the draggable element to the game stage.
+                        // *sigh* have i over engineered this?
+                        $('.scene11 .drag-prompt').addClass('hidden')
+
+                        let draggableRect = e.target.getBoundingClientRect();
+                        let stageRect = document.querySelector('.game-page-story').getBoundingClientRect();
+
+                        let y = draggableRect.top - stageRect.top;
+
+                        let yMax   = 631;
+                        let yMin   = 360;
+
+                        let perc = (y + yMin / yMax - yMin) / (yMax - yMin); /* i don't know how this works, but it does */
+                        /* invert percentage */
+                            perc = Math.abs( 1 - perc );
+                        this.perc = perc;
+
+                        let progress = perc * 296;
+
+                        console.log(progress);
+
+                        if(perc >= 0.8){
+                            /* Destroy the Draggable */
+                            instance[0].kill();
+
+                            /* Move blanket */
+                            gsap.to('.scene11 .blanket-closeup', .5, {
+                                y: -260
+                            })
+
+                            /* Hide the drag stuff */
+                            $('.scene11 .drag-prompt').addClass('hidden')
+
+                            game.sfx.play('blanket');
+
+                            setTimeout(function(){
+                                /* Change facial expression to sleep */
+                                gsap.to(".scene11 .character-maggie-expression-crying", .25, {
+                                    opacity: 0,
+                                    onComplete: (e) => {
+                                        $(".scene11 .character-maggie-expression-crying").removeClass('active');
+                                        $('.scene11 .character-maggie-expression-sleeping').css({
+                                            opacity: 0
+                                        }).addClass('active');
+                                        gsap.to('.scene11 .character-maggie-expression-sleeping', .25, {
+                                            opacity: 1,
+                                            onComplete: () => {
+                                                // After 1.5s, fade to black
+                                                setTimeout(function(){
+                                                    $('.scene-interstitial p').html('');
+                                                    let transitionTimeline = gsap.timeline();
+                                                    transitionTimeline.to('.scene-interstitial', 1, { opacity: 1 });
+                                                    transitionTimeline.to('.scene11', 1, { opacity: 0 }, '-=1')
+                                                    transitionTimeline.to({}, 1, {});
+
+                                                    /* Then animate to dream sequence (scene 12) */
+                                                }, 2500)
+                                            }
+                                        })
+                                    }
+                                })
+                            }, 500)
+                        }
+                    },
+                    onDragStart: function(){
+                        
+                    },
+                    onDragEnd: function(){
+                        /* If percentage is less than 80% (complete), return to initial pos */
+                        if(this.perc < 0.8){
+                            $('.scene11 .drag-prompt').removeClass('hidden');
+                            gsap.to('.scene11 .blanket-closeup', .25, { y: 0 });
+                        }
+                    }
+                })
+
+                });
 
             }
         }

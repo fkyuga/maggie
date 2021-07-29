@@ -453,7 +453,7 @@
     width: 709.5px; height: 657.5px;
     background-image: url(../img/story/blanket-closeup.png);
     top: 493.6px; left: 165.6px;
-    z-index: 1;
+    z-index: 4;
 }
 
 .scene5 .maggie-pajamas {
@@ -930,4 +930,60 @@
     top: 163px !important;
     left: 368px !important;
     transition: none;
+}
+
+.scene11 .drag-progress {
+    width: 296px;
+    height: 32px;
+    border-radius: 900px;
+    background-color: rgba(0,0,0,.6);
+    top: 594px;
+    left: 366px;
+    position: absolute;
+    z-index: 3;
+    opacity: 0;
+    transform: rotate(90deg) !important;
+}
+
+.scene11 .drag-progress:after {
+    /* We store width of the :after element (which is what displays the progress inside the bar)
+    as a CSS custom property - which we adjust in JS. We do this because we cannot easily
+    modify styles of pseudo-elements. */
+
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 6px;
+    width: var(--progressScene11);
+    height: 22px;
+    border-radius: 900px;
+    background-color: rgba(255,255,255,.9);
+    z-index: 0;
+}
+
+@keyframes drag-prompt-vertical {
+    0% { opacity: 0; transform: scale(1.5); }
+    20% { opacity: 1; transform: scale(1); }
+    60% { opacity: 1; transform: translateY(var(--amount))}
+    100% { opacity: 0; transform: scale(1.5) translateY(calc(var(--amount) / 1.5)) }
+}
+
+.scene11 .drag-prompt {
+    --amount: -280px;
+    top: 747px;
+    left: 477px;
+}
+
+.scene11 .drag-prompt img {
+    animation: 2s infinite drag-prompt-vertical;
+}
+
+ .character-maggie-expression-sleeping {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 99.5px;
+    height: 127.5px;
+    background-image: url(../img/story/expression-sleeping.png);
+    top: -14px;
 }
