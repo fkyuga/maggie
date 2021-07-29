@@ -4,7 +4,7 @@
 
 game.pages.story = {
     onload: function(){
-        game.pages.story.scenes[10].animate();
+        game.pages.story.scenes[12].animate();
     },
 
     scenes: [
@@ -927,6 +927,17 @@ game.pages.story = {
 
                 });
 
+            }
+        },
+
+        {
+            /* Scene 12 (dream sequence!) */
+            animate: () => {
+                $('.scene12').addClass('scene--active');
+                
+                /* Animate the background! */
+                let anim = gsap.to('.scene12', { '--x': 1024, '--y': 768, duration: 60, yoyo: true, repeat: 20 })
+            
             }
         }
     ]

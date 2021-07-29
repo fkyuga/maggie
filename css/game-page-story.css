@@ -987,3 +987,21 @@
     background-image: url(../img/story/expression-sleeping.png);
     top: -14px;
 }
+
+/******** SCENE 12 **********/
+/*** Background gradient stuff -- this guy on codepen
+     https://codepen.io/ben-eb/pen/qqygBO ***/
+
+.scene12 {
+    --x: 304;
+    --y: 721;
+
+    background: radial-gradient(
+        circle farthest-side at
+          calc(var(--x, 1) * 1px)
+          calc(var(--y, 1) * 1px),
+        hsl(var(--x, 5), 75%, 30%),
+        hsl(var(--y, 45), 75%, 30%)
+      );
+
+};
