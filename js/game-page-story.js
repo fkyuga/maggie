@@ -934,10 +934,53 @@ game.pages.story = {
             /* Scene 12 (dream sequence!) */
             animate: () => {
                 $('.scene12').addClass('scene--active');
-                
+                game.bgm.play('dream');
+
+                const fadeOut = (callback = () => {}) => {
+                    /* Fade out the text. */
+                    gsap.to('.scene12 .text', .5, { opacity: 0, onComplete: callback })
+                }
+
+                const fadeIn = (callback = () => {}) => {
+                    /* Fade in the text. */
+                    gsap.to('.scene12 .text', .5, { opacity: 1, onComplete: callback });
+                }                
+
+                const display = (speech, callback) => {
+                    fadeOut(()=>{
+                        game.speech.display(speech, callback);
+                        fadeIn();
+                    })
+                }
+
                 /* Animate the background! */
                 let anim = gsap.to('.scene12', { '--x': 1024, '--y': 768, duration: 60, yoyo: true, repeat: 20 })
-            
+                
+                window.fadeOut = fadeOut;
+
+                /** now i REALLY wish i had used async/await. this is going to be disgusting. */
+                setTimeout(()=>{
+                
+                    /* for this speech, we want it to appear at the bottom. wait 500ms and do that */
+                    setTimeout(()=>{
+                        $('.dream-text').addClass('bottom');
+                    }, 500)
+                    display(SPEECH_DREAM_9, () => {
+                        display(SPEECH_DREAM_10, () => {    
+                            /* move it to the center again */
+                            setTimeout(()=>{
+                                $('.dream-text').removeClass('bottom');
+                            }, 500);
+
+                            display(SPEECH_DREAM_11, () => {
+                                display(SPEECH_DREAM_12, () => {
+                                   
+                                })
+                            })
+                        })
+                    })
+
+                }, 500)
             }
         }
     ]

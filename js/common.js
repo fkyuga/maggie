@@ -297,6 +297,12 @@ var game = {
                 var delay = 500;
             }
 
+            let { target } = messageObj;
+            console.log(target);
+            if(!target){
+                target = '.speech-bubble-container .dialogue';
+            }
+
             /* Clean up any timeouts */
             for ( let t of game.speech._timeouts) {
                 clearTimeout(t);
@@ -314,12 +320,14 @@ var game = {
             } 
 
             /* Let's replace speechbubble's content. */
-            $('.speech-bubble-container .dialogue').html(html);
+            $(target).html(html);
             
             /** Set up dismiss routine **/
             const dismiss = () => {
                 /* Hide the speech bubble */
-                game.speech.hideBubble();
+                if(target == '.speech-bubble-container .dialogue'){
+                    game.speech.hideBubble();
+                }
 
                 /* Callback */
                 console.log(callback);
@@ -356,13 +364,13 @@ var game = {
                 */
 
                 /* "dim" all words */
-                $('.speech-bubble-container .dialogue .speech-word').addClass('dimmed');
+                $('.speech-word').addClass('dimmed');
             
                 for ( let [ i, value ] of messageObj.sync.entries() ){
                     let word = words[i];
                     if(i == 0){
                         /* undim immediately */
-                        $('.speech-bubble-container .dialogue .speech-word0').removeClass('dimmed');
+                        $('.speech-word0').removeClass('dimmed');
                     } else {
 
                         /* create set timeout of each value prior. */
@@ -379,7 +387,7 @@ var game = {
                            add it to our timeouts array so we can clean up properly
                            when the bubble despawns */
                         let timeout = setTimeout(() => {
-                            $('.speech-bubble-container .dialogue .speech-word'+i).removeClass('dimmed');
+                            $('.speech-word'+i).removeClass('dimmed');
                         }, ms)
                         game.speech._timeouts.push(timeout);
 
@@ -388,9 +396,11 @@ var game = {
             }
 
             /** Okay, now let's animate the speech bubble onto the page! **/
-            let tl = gsap.timeline();
-            tl.to('.speech-bubble-container', .000001, { opacity: 0, y: -128});
-            tl.to('.speech-bubble-container', .5, { opacity: 1, y: 0});
+            if(target == '.speech-bubble-container .dialogue'){
+                let tl = gsap.timeline();
+                tl.to('.speech-bubble-container', .000001, { opacity: 0, y: -128});
+                tl.to('.speech-bubble-container', .5, { opacity: 1, y: 0});
+            }
             
         }
     },

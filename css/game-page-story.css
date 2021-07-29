@@ -1003,5 +1003,30 @@
         hsl(var(--x, 5), 75%, 30%),
         hsl(var(--y, 45), 75%, 30%)
       );
+}
 
-};
+.dream-text {
+    opacity: .8;
+    display: flex;
+    height: 100%;
+    width: 70%;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.dream-text p {
+    max-width: 70%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.dream-text.bottom {
+    align-items: flex-end;
+}
+
+.dream-text.bottom p {
+    padding-bottom: 60px;
+}

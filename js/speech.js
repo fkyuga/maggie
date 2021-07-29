@@ -66,6 +66,85 @@ const SPEECH_POOR_MAGGIE_2 = {
     sound: "SPEECH_POOR_MAGGIE_2"
 }
 
+/***** DREAM SEQUENCE *****/
+const SPEECH_DREAM_0 = {
+    message: "Maggie, my friend... I know you are upset...",
+    sound: "SPEECH_DREAM_0",
+    target: ".scene12 .text p"
+};
+
+const SPEECH_DREAM_1 = {
+    message: "You feel like you can never belong, that there's something wrong with you...",
+    sound: "SPEECH_DREAM_1",
+    target: ".scene12 .text p"
+}
+
+const SPEECH_DREAM_2 = {
+    message: "I'm here to tell you that this isn't true.",
+    sound: "SPEECH_DREAM_2",
+    target: ".scene12 .text p"
+}
+
+const SPEECH_DREAM_3 = {
+    message: "You are beautiful, in your own, so very special way.",
+    sound: "SPEECH_DREAM_3",
+    target: ".scene12 .text p"
+}
+
+const SPEECH_DREAM_4 = {
+    message: "And never let anyone tell you anything else.",
+    sound: "SPEECH_DREAM_4",
+    target: ".scene12 .text p"
+}
+
+const SPEECH_DREAM_5 = {
+    message: "Even you, at home... (yeah, I can see you too!)",
+    sound: "SPEECH_DREAM_5",
+    target: ".scene12 .text p"
+}
+
+const SPEECH_DREAM_6 = {
+    message: "Oh, and Maggie, there is something else you haven't realised, that it seems nobody ever told you...",
+    sound: "SPEECH_DREAM_6",
+    target: ".scene12 .text p"
+}
+
+const SPEECH_DREAM_7 = {
+    message: "You are a South Pole magnet... this is why you repel other South Pole magnets.",
+    sound: "SPEECH_DREAM_7",
+    target: ".scene12 .text p"
+}
+
+const SPEECH_DREAM_8 = {
+    message: "If you find a North Pole magnet... you will attract them.",
+    sound: "SPEECH_DREAM_8",
+    target: ".scene12 .text p"
+}
+
+const SPEECH_DREAM_9 = {
+    message: "Very soon, you will see what I mean. There is another very special magnet waiting for you...",
+    sound: "SPEECH_DREAM_9",
+    target: ".scene12 .text p"
+}
+
+const SPEECH_DREAM_10 = {
+    message: "But I'll leave that to you.",
+    sound: "SPEECH_DREAM_10",
+    target: ".scene12 .text p"
+}
+
+const SPEECH_DREAM_11 = {
+    message: "Remember this advice in your heart, and always keep your chin up.",
+    sound: "SPEECH_DREAM_11",
+    target: ".scene12 .text p"
+}
+
+const SPEECH_DREAM_12 = {
+    message: "You never know what tomorrow will bring.",
+    sound: "SPEECH_DREAM_12",
+    target: ".scene12 .text p"
+}
+
 const SPEECH_WAKE_UP = {
     message: "Maggie felt very different after her dream. She felt confident, like she could do anything, if only she believes in herself!"
 }
