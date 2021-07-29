@@ -299,7 +299,7 @@
     transform: scale(.9) translate(100px, 0);
 }
 
-.scene3 .sun {
+.city .sun {
     position: absolute;
     background-image: url(../img/story/sun.png);
     background-size: contain;
@@ -308,7 +308,7 @@
     top: 32px; left: 32px;
 }
 
-.scene3 .buildings {
+.city .buildings {
     position: absolute;
     background-image: url(../img/story/buildings.png);
     background-size: contain;
@@ -318,7 +318,7 @@
     top: 33px; left: -163px;
 }
 
-.scene3 .magbux {
+.city .magbux {
     position: absolute;
     background-image: url(../img/story/magbux.png);
     background-size: contain;
@@ -329,7 +329,7 @@
     z-index: 2;
 }
 
-.scene3 .bank {
+.city .bank {
     position: absolute;
     background-image: url(../img/story/bank.png);
     background-size: contain;
@@ -340,7 +340,7 @@
     z-index: 2;
 }
 
-.scene3 .tree {
+.city .tree {
     position: absolute;
     background-image: url(../img/story/tree.png);
     background-size: contain;
@@ -351,15 +351,15 @@
     z-index: 2;
 }
 
-.scene3 .tree0 {
+.city .tree0 {
     top: 336.805px; left: 321.457px;
 }
 
-.scene3 .tree1 {
+.city .tree1 {
     top: 340.215px; left: 850.964px;
 }
 
-.scene3 .pavement {
+.city .pavement {
     position: absolute;
     background-image: url(../img/story/pavement.png);
     background-size: contain;
@@ -369,7 +369,7 @@
     top: 547.414px; left: -208.904px;
 }
 
-.scene3 .road {
+.city .road {
     position: absolute;
     background-image: url(../img/story/road.png);
     background-size: contain;
@@ -380,7 +380,7 @@
     z-index: 3;
 }
 
-.scene3 .car {
+.city .car {
     position: absolute;
     background-image: url(../img/story/car.png);
     background-size: contain;
@@ -793,8 +793,64 @@
 }
 
 /****** SCENE 10 ******/
-.scene10 {
-    background-image: url(../img/story/maggies-room.png);
-    background-size: cover;
+.scene10 .city {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: scale(.5) translate(810px, 505px);
     z-index: 99;
+    opacity: .5;
+}
+
+.scene10 .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.scene10 .sky--night {
+    position: absolute;
+    top: 149px;
+    left: 90px;
+    z-index: 99;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.scene10 .moon {
+    position: absolute;
+    z-index: 99;
+    top: 220px;
+    left: 346px;
+    width: 93px;
+    height: 97px;
+    background-image: url(../img/story/moon.png);
+    background-size: contain;
+}
+
+.scene10 .bed {
+    position: absolute;
+    background-image: url(../img/story/bed.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 364.5px;
+    height: 276px;
+    z-index: 100;
+    top: 478.4px; left: 635.2px;
+}
+
+.scene10 .blanket {
+    position: absolute;
+    background-image: url(../img/story/blanket.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 339.5px;
+    height: 107.5px;
+    z-index: 100;
+    top: 523.2px; left: 629.6px
 }

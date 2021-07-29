@@ -4,7 +4,7 @@
 
 game.pages.story = {
     onload: function(){
-        game.pages.story.scenes[9].animate();
+        game.pages.story.scenes[10].animate();
     },
 
     scenes: [
