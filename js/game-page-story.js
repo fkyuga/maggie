@@ -4,7 +4,7 @@
 
 game.pages.story = {
     onload: function(){
-        game.pages.story.scenes[12].animate();
+        game.pages.story.scenes[0].animate();
     },
 
     scenes: [
@@ -905,6 +905,7 @@ game.pages.story = {
                                                     transitionTimeline.to({}, 1, {});
 
                                                     /* Then animate to dream sequence (scene 12) */
+                                                    game.pages.story.scenes[12].animate();
                                                 }, 2500)
                                             }
                                         })
@@ -933,6 +934,23 @@ game.pages.story = {
         {
             /* Scene 12 (dream sequence!) */
             animate: () => {
+
+                /* First, show interstitial scene so the player isn't completely confused as to what is going on */
+                $('.scene-interstitial p').html('That night, Maggie had a very strange dream...');
+                let transitionTimeline = gsap.timeline();
+                transitionTimeline.to('.scene-interstitial', .00000000001, { opacity: 1 });
+                transitionTimeline.to('.scene11', 1, { opacity: 0 }, '-=1')
+                transitionTimeline.to({}, 1, {});
+
+                game.sfx.play('dreamstart', () => {
+                    setTimeout(function(){
+                        gsap.to('.scene-interstitial', 2, { opacity: 0 })
+                        game.pages.story.scenes[12].animateDream()
+                    }, 2000)
+                })
+            },
+
+            animateDream: () => {
                 $('.scene12').addClass('scene--active');
                 game.bgm.play('dream');
 
@@ -991,7 +1009,14 @@ game.pages.story = {
                     
                                                                 display(SPEECH_DREAM_11, () => {
                                                                     display(SPEECH_DREAM_12, () => {
-                                                                    
+                                                                        setTimeout(function(){
+                                                                            gsap.to('.scene-interstitial', 2, { opacity: 1 })
+                                                                            $('.scene-interstitial p').text('')
+                                                                            game.bgm.stop()
+                                                                            game.sfx.play('dreamend')
+                                                                            /* xition to next scene! */
+
+                                                                        }, 2000);
                                                                     })
                                                                 })
                                                             })
@@ -1006,7 +1031,7 @@ game.pages.story = {
                         })
                     })
                     
-                }, 500)
+                }, 3000)
             }
         }
     ]
