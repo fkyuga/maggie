@@ -5,6 +5,7 @@ var game = {
         -> ?screen=<screenName> - start on a specified screen.
     */
     params: new URLSearchParams(window.location.search),
+    audioEnabled: true,
 
     currentPage: null,
     loadPage: function(pageName, opts = {}){
@@ -66,19 +67,87 @@ var game = {
         /* Remember what page we're on so we can clean it up before we exit
         it */
         this.currentPage = pageName;
+
+        /* Hide the home button if we are at home. Show it on all other pages. */
+        if(this.currentPage == "title"){
+            $('.btn-home').hide();
+        } else {
+            $('.btn-home').show();
+        }
     },
 
-    pages: {},
+    pages: {
+        blank: {}
+    },
 
     helpers: {
         goHome: function(){
             game.sfx.play('xylo');
             game.modal.hide();
-            game.loadPage('title', {
+            game.loadPage('blank', {
                 transition: 'circle',
                 twoStep: true
             });  
+            setTimeout(function(){
+                window.location.href = window.location.pathname+"?"+$.param({
+                    'audioskip': 1,
+                    'titleskip': 1,
+                    'screen': 'title'
+                })
+            }, 1000)
         },
+
+        toggleAudio: function(){
+            /* This function:
+                enables/disables audio (sets game.audioEnabled = true/false)
+                if disable - set volume of all <audio> elements to 0
+                if enable - set volume of all <audio> elements to 1
+                changes button image to indicate the change */
+
+            if(game.__soundButtonLock){return;}
+
+            if(game.audioEnabled){
+                /* Disable audio. */
+                game.audioEnabled = false;
+                document.querySelectorAll('audio').forEach(audio => {
+                    /* Stash current volume so we can return to it if unmute */
+                    audio.stashedVolume = audio.volume;
+
+                    /* Now set volume to 0 */
+                    audio.volume = 0;
+                });
+                $('.btn-sound').addClass('btn-sound--off');
+            } else {
+                /* Enable audio. */
+                game.audioEnabled = true;
+                document.querySelectorAll('audio').forEach(audio => {
+                    if(audio.stashedVolume){
+                        audio.volume = audio.stashedVolume;
+                    } else {
+                        audio.volume = 1;
+                    }
+                });    
+                $('.btn-sound').removeClass('btn-sound--off');            
+            }
+
+            /* Show feedback */
+            game.__soundButtonLock = true;
+            let feedbackEl = `.btn-sound-feedback--${ game.audioEnabled ? 'on' : 'off' }`;
+            $('.btn-sound-feedback--on, .btn-sound-feedback--off').addClass('inactive');
+            $(feedbackEl).removeClass('inactive');
+            let tl = gsap.timeline({onComplete: () => {
+                game.__soundButtonLock = false;
+                $('.btn-sound-feedback--on, .btn-sound-feedback--off').addClass('inactive');
+            }})
+
+            tl.to(feedbackEl, .00000001, { opacity: 0});
+            tl.to(feedbackEl, .5, { opacity: 1});
+            tl.to(feedbackEl, .5, { opacity: 0});
+
+            
+
+        },
+
         homePrompt: function(){
             /* Shows home prompt in a modal. */
             let content = `
@@ -486,6 +555,15 @@ var game = {
                         <source src="bgm/${name}.mp3" type="audio/mpeg">
                     </audio>
                 `)
+
+                if(!game.audioEnabled){
+                    /* Audio is disabled. Store the volume in stashedVolume so we can unmute to the correct volume later. */
+                    $(`#bgm-${id}`)[0].stashedVolume = volume;
+                    $(`#bgm-${id}`)[0].volume = 0;
+                    $(`#bgm-${id}`)[0].play();
+                    return;
+                }
+
                 $(`#bgm-${id}`).animate({volume: 0}, 1);
                 $(`#bgm-${id}`)[0].play();         
                 $(`#bgm-${id}`).animate({volume}, fade);
@@ -528,6 +606,7 @@ var game = {
             /* Generate a random ID for the sound effect instance */
             let id = Math.round(Math.random() * 1E10)
 
+            
             console.log(`playing SFX: ${name}`)
             $('.sound-effects-container').append(`
                 <audio id="sound-effect-${id}">
@@ -539,6 +618,13 @@ var game = {
                 $(`#sound-effect-${id}`).remove()
                 if(callback) callback();
             })
+
+            if(!game.audioEnabled){
+                /* Set volume to 0, and stashedVolume to 1 */
+                $(`#sound-effect-${id}`)[0].volume = 0;
+                $(`#sound-effect-${id}`)[0].stashedVolume = 1;
+            }
+
             $(`#sound-effect-${id}`)[0].play();
             
         }
@@ -550,10 +636,13 @@ $(document).ready(function(){
     /* add sound effects for all buttons */
     game.helpers.startButtonSounds();
 
-    /* Init home button */
+    /* Init  buttons */
     $('.btn-home').off().on('click', function(){
         game.helpers.homePrompt();
-    })
+    }); 
+    $('.btn-sound').off().on('click', function(){
+        game.helpers.toggleAudio();
+    });
 
     /* load the start page */
     game.loadPage('start')

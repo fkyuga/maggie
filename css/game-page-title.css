@@ -85,6 +85,10 @@
     transition: 1s ease-in-out;
 }
 
+.title-logo.no-animate {
+    animation: none !important;
+}
+
 .title-logo.with-btn {
     top: 110px;
 }

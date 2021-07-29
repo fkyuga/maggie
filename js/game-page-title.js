@@ -10,7 +10,7 @@ game.pages.start = {
         // i had to do this to get the home button working. kludgy but works
 
         if(game.params.get('audioskip')){
-            return startGame();
+            setTimeout(startGame, 1);
         }
 
         $('.game-page-start-content').off().on('click', function(){
@@ -21,6 +21,20 @@ game.pages.start = {
 
 game.pages.title = {
     onload: function(){
+        
+        if(game.params.get('titleskip')){
+            /* Adding ?titleskip=1 to the URL skips the title screen. We use this when the user presses the home button
+               - we stealthily reload the page so they don't notice.
+                I do this instead of changing pages because reverting the state of all the elements would be far 
+                too laborious. */
+    
+            $('.title-logo').addClass('with-btn no-animate');
+            $('.menu-options .menu-option').addClass('animating')
+            $('.menu-option').on('touchend mouseup', game.pages.title.onClickActivity)
+            $('.game-page-title .character-maggie').addClass('peeking');
+            return;
+        }
+
         game.sfx.play('falling', ()=>{
             game.sfx.play('drop', () => {
                 $('.character-maggie').addClass('peeking');
