@@ -1,10 +1,10 @@
 /* I was pretty happy with how i laid out the rest of the code.
    This file, however, is a disaster.
-   Please read at your own caution. */
+   Please read at your own discretion. */
 
 game.pages.story = {
     onload: function(){
-        game.pages.story.scenes[10].animate();
+        game.pages.story.scenes[11].animate();
     },
 
     scenes: [
@@ -823,6 +823,19 @@ game.pages.story = {
                 transitionTimeline.to({}, 1, {});
                 transitionTimeline.to('.scene10', 1, { opacity: 1})
                 transitionTimeline.to({}, 1, {});
+            }
+        },
+
+        {
+            /* Scene 11: Close up of Maggie crying in bed. The user has to tuck her
+               in to make her sleep. */
+            animate: () => {
+
+                $('.scene10').removeClass('scene--active');
+                $('.scene11').addClass('scene--active');
+                
+                game.speech.display(SPEECH_POOR_MAGGIE_2);
+
             }
         }
     ]
