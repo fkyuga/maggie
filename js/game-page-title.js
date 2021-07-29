@@ -30,7 +30,7 @@ game.pages.title = {
     
             $('.title-logo').addClass('with-btn no-animate');
             $('.menu-options .menu-option').addClass('animating')
-            $('.menu-option').on('touchend mouseup', game.pages.title.onClickActivity)
+            $('.menu-option').off().on('click', game.pages.title.onClickActivity)
             $('.game-page-title .character-maggie').addClass('peeking');
             return;
         }
@@ -67,7 +67,7 @@ game.pages.title = {
         /* CLICK START BUTTON
            Fade the start button to 0 opacity, hide it, and animate in menu options one-by-one. */
         
-        $('.menu-option').on('touchend mouseup', game.pages.title.onClickActivity)
+        $('.menu-option').off().on('click', game.pages.title.onClickActivity)
         $('.btn-orb-start')
             .one('animationend', (e)=>{
                 console.log(e);
@@ -98,6 +98,8 @@ game.pages.title = {
            what page to go to. */
 
            
+        console.log('onClickActivity FIRED');
+
         let pageName = e.currentTarget.getAttribute('data-activity');
         
         switch(pageName){

@@ -245,6 +245,10 @@ img {
     animation: circle-out 1s linear;
 }
 
+.circle-in {
+    animation: fade-in 500ms;
+}
+
 /******** Common Animation Classes ******************/
 .a-fade-out-300ms {
     animation: fade-out 300ms;
@@ -301,7 +305,7 @@ img {
 }
 
 .character-maggie.peeking {
-    transform: scale(0.25) rotate(-20deg);
+    transform: scale(0.25) rotate(-20deg) !important;
     left: -38px;
     top: -34px;
 }

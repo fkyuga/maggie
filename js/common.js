@@ -15,6 +15,8 @@ var game = {
             }
         */
        
+            console.log('loadPage GO!')
+
         if(!pageName) throw "need a page name!";
         if(!this.pages[pageName]) throw `page ${pageName} doesn't exist`;
 
@@ -26,6 +28,7 @@ var game = {
         /* Show page */
         let fromPage = `.game-page-${this.currentPage}`;
         let toPage = `.game-page-${pageName}`
+
         $(toPage).addClass('visible')
         if(opts.transition && !opts.twoStep){
             if(this.currentPage){
