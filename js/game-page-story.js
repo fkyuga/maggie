@@ -961,25 +961,51 @@ game.pages.story = {
                 /** now i REALLY wish i had used async/await. this is going to be disgusting. */
                 setTimeout(()=>{
                 
-                    /* for this speech, we want it to appear at the bottom. wait 500ms and do that */
-                    setTimeout(()=>{
-                        $('.dream-text').addClass('bottom');
-                    }, 500)
-                    display(SPEECH_DREAM_9, () => {
-                        display(SPEECH_DREAM_10, () => {    
-                            /* move it to the center again */
-                            setTimeout(()=>{
-                                $('.dream-text').removeClass('bottom');
-                            }, 500);
-
-                            display(SPEECH_DREAM_11, () => {
-                                display(SPEECH_DREAM_12, () => {
-                                   
+                    display(SPEECH_DREAM_0, () => {
+                        display(SPEECH_DREAM_1, () => {
+                            display(SPEECH_DREAM_2, () => {
+                                display(SPEECH_DREAM_3, () => {
+                                    display(SPEECH_DREAM_4, () => {
+                                        display(SPEECH_DREAM_5, () => {
+                                            display(SPEECH_DREAM_6, () => {
+                                                display(SPEECH_DREAM_7, () => {
+                                                    display(SPEECH_DREAM_8, () => {
+                                                        /* for this speech, we want it to appear at the bottom. wait 500ms and do that */
+                                                        $('.character-harry-dream').addClass('reveal').one('animationend', () => {
+                                                            gsap.to('.character-harry-dream', 1, {
+                                                                opacity: 0,
+                                                                onComplete: () => {
+                                                                    $('.character-harry-dream').removeClass('reveal').hide();
+                                                                }
+                                                            })
+                                                        })
+                                                        setTimeout(()=>{
+                                                            $('.dream-text').addClass('bottom');
+                                                        }, 500)
+                                                        display(SPEECH_DREAM_9, () => {
+                                                            display(SPEECH_DREAM_10, () => {    
+                                                                /* move it to the center again */
+                                                                setTimeout(()=>{
+                                                                    $('.dream-text').removeClass('bottom');
+                                                                }, 500);
+                    
+                                                                display(SPEECH_DREAM_11, () => {
+                                                                    display(SPEECH_DREAM_12, () => {
+                                                                    
+                                                                    })
+                                                                })
+                                                            })
+                                                        })
+                                                    })
+                                                })
+                                            })
+                                        })
+                                    })
                                 })
                             })
                         })
                     })
-
+                    
                 }, 500)
             }
         }

@@ -1030,3 +1030,30 @@
 .dream-text.bottom p {
     padding-bottom: 60px;
 }
+
+.scene12 .character-harry-dream {
+    width: 236px;
+    height: 450px;
+    left: 378px;
+    top: 100px;
+    background-image: url(../img/characters/harry/character-harry-dream.png);
+    opacity: 0;
+    transition: 0.2s linear;
+}
+
+.scene12 .character-harry-dream.reveal {
+    opacity: 1;
+    filter: brightness(1.8) contrast(1.2) blur(100px);
+    animation: 7s reveal;
+}
+
+
+@keyframes reveal {
+    0% {
+        filter: brightness(1.8) contrast(1.2) blur(100px);
+    }
+
+    100% {
+        filter: brightness(1) contrast(1) blur(10px);
+    }
+}
