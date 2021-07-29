@@ -245,7 +245,7 @@ img {
     animation: circle-out 1s linear;
 }
 
-.circle-in {
+.circle.in {
     animation: fade-in 500ms;
 }
 
