@@ -167,7 +167,7 @@ const SPEECH_MAGGIE_BEST_DAY_OF_SCHOOL = {
 }
 
 const SPEECH_AFTER_SCHOOL_HARRY = {
-    message: "Wait... Maggie saw a magnet like this one in her dreams! Could it be...?",
+    message: "Wait... Maggie saw a magnet like this one in her dream! Could it be...?",
     sound: "SPEECH_AFTER_SCHOOL_HARRY"
 }
 
@@ -177,22 +177,46 @@ const SPEECH_AFTER_SCHOOL_HARRY_GUIDANCE = {
 }
 
 const SPEECH_MAGGIE_HARRY_CLICK = {
-    message: "Wow! They clicked straight away!",
+    message: "Wow! They clicked right away!",
     sound: "SPEECH_MAGGIE_HARRY_CLICK"
 }
 
+const SPEECH_MAGGIE_HARRY_EPILOGUE = {
+    message: "His name was Harry, and from that moment on, he and Maggie were inseparable! They went everywhere together!",
+    sound: "SPEECH_MAGGIE_HARRY_EPILOGUE"
+}
+
 const SPEECH_MAGGIE_HARRY_DATE_1 = {
-    message: "They loved spending time together! First, they went to the cafe together..."
+    message: "First they went into town to grab a coffee...",
+    sound: "SPEECH_MAGGIE_HARRY_DATE_1"
 }
 
 const SPEECH_MAGGIE_HARRY_DATE_2 = {
-    message: "Then they spent some time at the park..."
+    message: "...then they played at the park together...",
+    sound: "SPEECH_MAGGIE_HARRY_DATE_2"
 }
 
 const SPEECH_MAGGIE_HARRY_DATE_3 = {
-    message: "Then Maggie showed Harry her room! Turns out they both like the same music, too!"
+    message: "...and then Maggie showed Harry her room!",
+    sound: "SPEECH_MAGGIE_HARRY_DATE_3"
 }
 
-const SPEECH_MAGGIE_HARRY_BRIDGE = {
-    message: "They were perfect for each other, and finally Maggie wasn't scared anymore. She knew she could make herself, and other people, happy!"
+const SPEECH_MAGGIE_HARRY_DATE_3a = {
+    message: "They even liked the same music!",
+    sound: "SPEECH_MAGGIE_HARRY_DATE_3a"
+}
+
+const SPEECH_MAGGIE_HARRY_BRIDGE_1 = {
+    message: "They were perfect for each other... and from that moment on, Maggie knew everything was going to be okay.",
+    sound: "SPEECH_MAGGIE_HARRY_BRIDGE_1"
+}
+
+const SPEECH_MAGGIE_HARRY_BRIDGE_2 = {
+    message: "She believed in herself, and she found somebody else who did too! And that was all she ever needed.",
+    sound: "SPEECH_MAGGIE_HARRY_BRIDGE_2"
+}
+
+const SPEECH_THE_END = {
+    message: "The End",
+    sound: "SPEECH_THE_END"
 }

@@ -1214,7 +1214,16 @@ game.pages.story = {
                                             $('.scene15 .drag-prompt').addClass('hidden')
                                             gsap.to('.scene15 .drag-progress', .5, { opacity: 0 });   
                                         
-                                            game.speech.display(SPEECH_MAGGIE_HARRY_CLICK);
+                                            game.speech.display(SPEECH_MAGGIE_HARRY_CLICK, () => {
+                                                setTimeout(() => {
+                                                    /* fade to black */
+                                                    $('.scene-interstitial p').html('');
+                                                    game.bgm.stop();
+
+                                                    gsap.to('.scene-interstitial', 1, { opacity: 1 });
+                                                    gsap.to('.scene15', 1, { opacity: 0 })
+                                                }, 1500)
+                                            });
                                         }
             
                                         $('.scene15 .drag-progress')[0].style.setProperty('--progressScene15', `${progress}px`)
