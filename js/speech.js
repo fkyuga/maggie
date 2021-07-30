@@ -146,7 +146,13 @@ const SPEECH_DREAM_12 = {
 }
 
 const SPEECH_WAKE_UP = {
-    message: "Maggie felt very different after her dream. She felt confident, like she could do anything, if only she believes in herself!"
+    message: "Maggie felt very different after that dream! She felt confident, like she could do anything, if only she believed in herself!",
+    sound: "SPEECH_WAKE_UP"
+}
+
+const SPEECH_MAGGIE_EXCITED_SCHOOL = {
+    message: "Maggie dashed out of bed and ran to school. She'd never been excited for school before!",
+    sound: "SPEECH_MAGGIE_EXCITED_SCHOOL"
 }
 
 const SPEECH_AFTER_SCHOOL_HARRY = {

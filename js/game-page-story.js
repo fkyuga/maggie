@@ -1017,7 +1017,9 @@ game.pages.story = {
                                                                             game.bgm.stop()
                                                                             game.sfx.play('dreamend')
                                                                             /* xition to next scene! */
-
+                                                                            setTimeout(()=>{
+                                                                                game.pages.story.scenes[13].animate();
+                                                                            }, 3676)
                                                                         }, 2000);
                                                                     })
                                                                 })
@@ -1042,8 +1044,20 @@ game.pages.story = {
                 /* Scene 13: Maggie has just woken up from her dream.
                    The alarm clock has rung again. This time, however, she is already awake
                    and is holding the alarm clock in her hand. */
-
+                $('.scene12').removeClass('scene--active');
                 $('.scene13').addClass('scene--active');
+                $('.scene-interstitial').css({opacity: 0});
+                game.speech.display(SPEECH_WAKE_UP, () => {
+                    game.sfx.play('whee');
+                    gsap.to('.scene13 .character-maggie, .scene13 .item.clock', .5, { x: -1600 });
+
+                    
+                    game.speech.display(SPEECH_MAGGIE_EXCITED_SCHOOL, () => {
+                        /* To scene 14 - Maggie storming into school confidently, everyone looking at her
+                           like -wow she's changed- or whatever */
+                        game.pages.story.scenes[14].animate();
+                    });
+                });
             }
         }
     ]

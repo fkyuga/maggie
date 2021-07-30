@@ -1080,6 +1080,7 @@
     top: 163px !important;
     left: 368px !important;
     transition: none;
+    z-index: 99;
 }
 
 .scene13 .clock {
@@ -1088,7 +1089,7 @@
     background-image: url(../img/items/clock@2x.png);
     top: 273px;
     left: 564px;
-    z-index: 3;
+    z-index: 100;
     transform: scale(.5) rotate(
     20deg
     );
