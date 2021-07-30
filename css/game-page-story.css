@@ -1132,8 +1132,29 @@
 
 /********** scene 14 - schoolyard, maggie confident *********/
 .scene14 {
-    background-image: url(../img/story/school-sunny.png);
+    background-image: url(../img/story/school-sunny--no-trees.png);
     background-size: cover;
+}
+
+.scene14 .tree {
+    background-image: url(../img/story/tree.png);
+    width: 588px;
+    height: 966px;
+}
+
+.scene14 .tree0 {
+    transform: scale(.32);
+    top: 105px;
+    left: -223px;
+    z-index: 9;
+}
+
+.scene14 .tree1 {
+    transform: scale(.27);
+    top: -59px;
+    left: -110px;
+    opacity: .8;
+    z-index: 8
 }
 
 .scene14 .character-maggie {
