@@ -112,12 +112,29 @@
     z-index: 2;
 }
 
+.scene .character-jessie .character-jessie-body-no-legs {
+    background-image: url(../img/characters/jessie/jessie-body-no-legs.png);
+    width: 91px;
+    height: 273px;
+    z-index: 2;
+}
+
 .scene .character-jessie-expression-happy {
     position: relative;
     top: 30px !important;
     left: 15px;
     background-image: url(../img/characters/jessie/expression-jessie-happy.png);
     width: 60px; height: 46px;
+    z-index: 3;
+    top: 0;
+}
+
+.scene .character-jessie-expression-look-up {
+    position: relative;
+    top: 30px !important;
+    left: 15px;
+    background-image: url(../img/characters/jessie/expression-jessie-look-up.png);
+    width: 60px; height: 48px;
     z-index: 3;
     top: 0;
 }
@@ -173,6 +190,13 @@
     height: 330px;
 }
 
+.scene .character-haroon .character-haroon-body-no-legs {
+    background-image: url(../img/characters/haroon/haroon-body-no-legs.png);
+    width: 133px;
+    height: 330px;
+    z-index: 2;
+}
+
 .scene .character-haroon .character-haroon-expression-smile {
     position: relative;
     top: 74px !important;
@@ -182,6 +206,17 @@
     z-index: 3;
     top: 0;
 }
+
+.scene .character-haroon .character-haroon-expression-look-down {
+    position: relative;
+    top: 74px !important;
+    left: 45px;
+    background-image: url(../img/characters/haroon/expression-haroon-look-down.png);
+    width: 59px; height: 52px;
+    z-index: 3;
+    top: 0;
+}
+
 
 .scene .character-haroon-arm-l {
     background-image: url(../img/characters/haroon/haroon-arm-l.png);
@@ -1124,4 +1159,32 @@
     left: 519px;
     z-index: 3;
     transform: scale(.7);
+}
+
+.scene14 .character-haroon .character-maggie-leg-l {
+    top: 293px;
+    left: 39px;
+    height: 36px;
+    width: 26px;
+}
+
+.scene14 .character-haroon .character-maggie-leg-r {
+    top: 295px;
+    left: 75px;
+    height: 36px;
+    width: 26px;
+}
+
+.scene14 .character-jessie .character-maggie-leg-l {
+    top: 236px;
+    left: 12px;
+    height: 36px;
+    width: 26px;
+}
+
+.scene14 .character-jessie .character-maggie-leg-r {
+    top: 240px;
+    left: 48px;
+    height: 36px;
+    width: 26px;
 }

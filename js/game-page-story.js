@@ -1082,9 +1082,10 @@ game.pages.story = {
                     okay that's not that much
                 */
 
-                let jessieHaroonWalkingTimeline = gsap.timeline({yoyo: true, repeat: 10});
-                jessieHaroonWalkingTimeline.to('.character-maggie-leg-l', .35, { y: -10, ease: Linear.easeNone })
-                jessieHaroonWalkingTimeline.to('.character-maggie-leg-r', .35, { y: -10, ease: Linear.easeNone }, '-=.175')
+                let jessieHaroonWalkingTimeline = gsap.timeline({yoyo: true, repeat: 20});
+                    jessieHaroonWalkingTimeline.to('.character-maggie-leg-l', .35, { y: -10, ease: Linear.easeNone })
+                    jessieHaroonWalkingTimeline.to('.character-maggie-leg-r', .35, { y: -10, ease: Linear.easeNone }, '-=.175')
+                gsap.to('.scene14 .character-jessie, .scene14 .character-haroon', 10, { x: -800, ease: Linear.easeNone })
             }
         }
     ]
