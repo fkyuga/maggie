@@ -1254,3 +1254,96 @@
 .scene14 .character-maggie-body {
     transform: scaleX(-1);
 }
+
+
+/******** SCENE 15 ***********/
+.scene15 {
+    background-image: url(../img/story/school-sunny-b.png);
+    background-size: cover;   
+}
+
+.scene15 .cloud0 {
+    top: 66px;
+    left: 200px;
+    opacity: .9;
+}
+
+.scene15 .cloud1 {
+    top: 0;
+    left: 410px;
+    opacity: .6;
+    transform: scale(.65)
+}
+
+.scene15 .character-maggie {
+    transform: scale(.4);
+    transform-origin: center 70%;
+    top: 250px;
+    left: 620px;
+    transition: none;
+    z-index: 8;
+}
+
+
+/************* HARRY STYLES (hahaha, get it?) *************/
+.scene .character-harry {
+    top: 348px;
+    left: 200px;
+    z-index: 2;
+    transform: scale(.77);
+}
+
+.scene .character-harry .character-harry-expression-reading {
+    position: relative;
+    top: 64px !important;
+    left: 15px;
+    background-image: url(../img/characters/harry/expression-harry-reading.png);
+    width: 55px;
+    height: 42px;
+    z-index: 3;
+    top: 0;
+}
+
+.scene .character-harry .character-harry-body {
+    background-image: url(../img/characters/harry/harry-body.png);
+    width: 133px;
+    height: 330px;
+    z-index: 2;
+}
+
+.scene .character-harry .character-harry-arms-reading {
+    background-image: url(../img/characters/harry/harry-arms-reading.png);
+    width: 129px;
+    height: 83px;
+    top: 117px;
+    left: -26px;
+    z-index: 4;
+}
+
+.character-harry .character-harry-leg-l {
+    top: 313px;
+    left: 5px;
+    height: 36px;
+    width: 26px;
+    background-image: url(../img/maggie/leg-l.png);
+    z-index: 1;
+}
+
+.character-harry .character-harry-leg-r {
+    top: 315px;
+    left: 43px;
+    height: 36px;
+    width: 26px;
+    background-image: url(../img/maggie/leg-r.png);
+    z-index: 1;
+}
+
+.character-harry .character-harry-earbuds {
+    background-image: url(../img/characters/harry/earbuds.png);
+    z-index: 3;
+    top: 83px;
+    width: 77px;
+    height: 200px;
+    transform: scaleX(-1);
+    left: 3px;
+}

@@ -6,7 +6,7 @@ game.pages.story = {
     onload: function(){
         // Help is unavailable in story mode. 
         $('.btn-help').hide();
-        game.pages.story.scenes[14].animate();
+        game.pages.story.scenes[15].animate();
     },
 
     scenes: [
@@ -1121,7 +1121,7 @@ game.pages.story = {
                                 gsap.to('.scene-interstitial p', 1, { opacity: 0 });
                                 game.sfx.play('schoolsout', () => {
                                     /* animate to scene 15 - Maggie back outside, sees Harry for the first time */
-                                    game.pages.scenes[15].animate();
+                                    game.pages.story.scenes[15].animate();
                                 });
                             }, 1000)
                         });
@@ -1129,6 +1129,19 @@ game.pages.story = {
                     }, 1500);
                 } });
                 transitionTimeline.to('.scene14', 1, { opacity: 0 }, '-=1')
+            }
+        },
+
+        /* Scene 15: Maggie, after school, standing outside. Harry is listening to music and reading a book under a tree. */
+        {
+            animate: () => {
+                $('.scene14').removeClass('scene--active');
+                $('.scene15').addClass('scene--active').css({opacity: 0});
+
+                gsap.to('.scene-interstitial', 1, { opacity: 0});
+                gsap.to('.scene15', 1, { opacity: 1});
+
+                game.bgm.play('sunny');
             }
         }
     ]
