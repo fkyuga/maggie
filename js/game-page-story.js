@@ -1200,13 +1200,21 @@ game.pages.story = {
                                             /* hide speech bubble */
                                             game.speech.hideBubble();
                                             
-                                            /* TODO Harry and Maggie attract! */
+                                            /* Harry and Maggie attract! */
                                             game.sfx.play('magnet');
-                                            gsap.to('.scene1 .character-haroon', .15, { x: "-415px" })
+                                            gsap.to('.scene15 .character-maggie', { x: -433 } )
+                                            $('.scene15 .character-harry-expression-blush').removeClass('active');
+                                            $('.scene15 .character-harry-expression-blush-down').addClass('active');
+                                            $('.scene15 .character-maggie-expression-blush').removeClass('active');
+                                            $('.scene15 .character-maggie-expression-blush-up').addClass('active');
+                                            $('.scene15 .character-harry-arms-reading').removeClass('active').addClass('inactive');
+                                            $('.scene15 .character-harry-arm-l-reading').removeClass('inactive').addClass('active');
 
                                             /* Hide the drag stuff */
                                             $('.scene15 .drag-prompt').addClass('hidden')
                                             gsap.to('.scene15 .drag-progress', .5, { opacity: 0 });   
+                                        
+                                            game.speech.display(SPEECH_MAGGIE_HARRY_CLICK);
                                         }
             
                                         $('.scene15 .drag-progress')[0].style.setProperty('--progressScene15', `${progress}px`)

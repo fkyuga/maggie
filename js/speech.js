@@ -177,7 +177,8 @@ const SPEECH_AFTER_SCHOOL_HARRY_GUIDANCE = {
 }
 
 const SPEECH_MAGGIE_HARRY_CLICK = {
-    message: "Wow! They clicked straight away!"
+    message: "Wow! They clicked straight away!",
+    sound: "SPEECH_MAGGIE_HARRY_CLICK"
 }
 
 const SPEECH_MAGGIE_HARRY_DATE_1 = {

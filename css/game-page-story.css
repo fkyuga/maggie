@@ -1322,9 +1322,9 @@
 
 /************* HARRY STYLES (hahaha, get it?) *************/
 .scene .character-harry {
-    top: 348px;
-    left: 200px;
-    z-index: 2;
+    top: 357px;
+    left: 199px;
+    z-index: 1001;
     transform: scale(.77);
 }
 
@@ -1355,10 +1355,29 @@
     z-index: 4;
 }
 
+.scene .character-harry .character-harry-arm-l-reading {
+    background-image: url(../img/characters/harry/harry-arm-l-reading.png);
+    width: 129px;
+    height: 126px;
+    top: 121px;
+    left: -35px;
+    z-index: 4;
+}
+
 .scene .character-harry .character-harry-expression-blush {
     top: 65px !important;
     left: 11px;
     background-image: url(../img/characters/harry/expression-harry-blush.png);
+    width: 61px;
+    height: 42px;
+    z-index: 3;
+    display: none;
+}
+
+.scene .character-harry .character-harry-expression-blush-down {
+    top: 65px !important;
+    left: 11px;
+    background-image: url(../img/characters/harry/expression-harry-blush-down.png);
     width: 61px;
     height: 42px;
     z-index: 3;
