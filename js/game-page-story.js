@@ -6,7 +6,7 @@ game.pages.story = {
     onload: function(){
         // Help is unavailable in story mode. 
         $('.btn-help').hide();
-        game.pages.story.scenes[15].animate();
+        game.pages.story.scenes[16].animate();
     },
 
     scenes: [
@@ -1222,6 +1222,12 @@ game.pages.story = {
 
                                                     gsap.to('.scene-interstitial', 1, { opacity: 1 });
                                                     gsap.to('.scene15', 1, { opacity: 0 })
+                                                    setTimeout(function(){
+                                                        game.speech.display(SPEECH_MAGGIE_HARRY_EPILOGUE, () => {
+                                                            /* to scene 16! woooot! we're so close to finshing this! */
+                                                            game.pages.story.scenes[16].animate();
+                                                        });
+                                                    }, 1500);
                                                 }, 1500)
                                             });
                                         }
@@ -1262,6 +1268,22 @@ game.pages.story = {
                     })
                 } });
 
+            }
+        },
+
+        /* Scene 16: Maggie and Harry - first date, in the city, walking attached to each other, then disappear into the cafe. */
+        {
+            animate: () => {
+                $('.scene15').removeClass('scene--active');
+                $('.scene16').css({opacity: 0}).addClass('scene--active');
+                gsap.to('.scene-interstitial', 1, { opacity: 0 });
+                gsap.to('.scene16', 1, { opacity: 1, onComplete: game.pages.story.scenes[16].afterTransition });
+            },
+
+            afterTransition: () => {
+                setTimeout(function(){
+                    game.speech.display(SPEECH_MAGGIE_HARRY_DATE_1);
+                }, 500)
             }
         }
     ]

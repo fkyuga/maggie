@@ -207,12 +207,12 @@ const SPEECH_MAGGIE_HARRY_DATE_3a = {
 }
 
 const SPEECH_MAGGIE_HARRY_BRIDGE_1 = {
-    message: "They were perfect for each other... and from that moment on, Maggie knew everything was going to be okay.",
+    message: "They were perfect for each other in every way ... and from that moment on, Maggie knew everything was going to be okay.",
     sound: "SPEECH_MAGGIE_HARRY_BRIDGE_1"
 }
 
 const SPEECH_MAGGIE_HARRY_BRIDGE_2 = {
-    message: "She believed in herself, and she found somebody else who did too! And that was all she ever needed.",
+    message: "She believed in herself, and she had finally found somebody else who did too. And that was all she ever needed.",
     sound: "SPEECH_MAGGIE_HARRY_BRIDGE_2"
 }
 

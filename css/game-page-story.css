@@ -1411,3 +1411,24 @@
     transform: scaleX(-1);
     left: 3px;
 }
+
+/************ scene16 *************/
+.scene16 .city {
+    left: 44px;
+    position: absolute;
+}
+
+.scene16 {
+    background-image: url(../img/story/sky--sunny.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden !important;
+}
+
+.scene16 .character-maggie {
+    z-index: 20;
+    transform: scale(.4);
+    top: 286px;
+    left: 187px;
+    transition: none;
+}
