@@ -6,7 +6,7 @@ game.pages.story = {
     onload: function(){
         // Help is unavailable in story mode. 
         $('.btn-help').hide();
-        game.pages.story.scenes[13].animate();
+        game.pages.story.scenes[14].animate();
     },
 
     scenes: [
@@ -1055,9 +1055,36 @@ game.pages.story = {
                     game.speech.display(SPEECH_MAGGIE_EXCITED_SCHOOL, () => {
                         /* To scene 14 - Maggie storming into school confidently, everyone looking at her
                            like -wow she's changed- or whatever */
+                        
                         game.pages.story.scenes[14].animate();
                     });
                 });
+            }
+        },
+
+        {
+            animate: () => {
+                /* Scene 14: Schoolyard. Maggie storms into school confidently! */
+
+                $('.scene14').addClass('scene--active');
+                $('.scene14').css({opacity: 0});
+
+                let transition = gsap.timeline({ onComplete: game.pages.story.scenes[14].afterTransition })
+                transition.to('.scene13', .5, { opacity: 0});
+                transition.to('.scene14', .5, { opacity: 1}, '-=1');
+            },
+            afterTransition: () => {
+
+                /* Okay, there's a lot of moving parts in this scene.
+                   -> Jessie and Haroon (attached) are walking towards the -left-, and both of their feet should be movin.
+                   -> Lil is standing behind the tree. She's not doing much / anything.
+                   -> Maggie runs into school confidently.
+                    okay that's not that much
+                */
+
+                let jessieHaroonWalkingTimeline = gsap.timeline({yoyo: true, repeat: 10});
+                jessieHaroonWalkingTimeline.to('.character-maggie-leg-l', .35, { y: -10, ease: Linear.easeNone })
+                jessieHaroonWalkingTimeline.to('.character-maggie-leg-r', .35, { y: -10, ease: Linear.easeNone }, '-=.175')
             }
         }
     ]
