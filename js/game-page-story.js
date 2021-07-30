@@ -1142,6 +1142,109 @@ game.pages.story = {
                 gsap.to('.scene15', 1, { opacity: 1});
 
                 game.bgm.play('sunny');
+
+                gsap.to('.character-maggie', 1, { x: -50, ease: Linear.easeNone, onComplete: () => {
+                    /* Change Maggie's expression to surprised */
+                    $('.scene15 .character-maggie-expression-smile').removeClass('active');
+                    $('.scene15 .character-maggie-expression-surprised').addClass('active');
+                    
+                    /* Change Maggie's expression to blush after 2.5s of speech (when i say - could it be?) */
+                    setTimeout(function(){
+                        $('.scene15 .character-maggie-expression-surprised').removeClass('active');
+                        $('.scene15 .character-maggie-expression-blush').addClass('active');
+                    }, 2500);
+
+                    game.speech.display(SPEECH_AFTER_SCHOOL_HARRY, () => {
+                        game.speech.display(SPEECH_AFTER_SCHOOL_HARRY_GUIDANCE, () => {
+                            /* Make harry draggable.
+                               Yep, that means that mess of spaghetti code is getting copied and pasted again.
+                               This is actually the last time i think i need to do this... :( kinda missing this project already */
+                                gsap.to('.scene15 .drag-progress', .5, { opacity: 1 });
+                                $('.scene15 .drag-prompt').removeClass('hidden');
+    
+                                let instance = Draggable.create('.scene15 .character-maggie', {
+                                    type: 'x',
+    
+                                    //bounds: '.scene15 .drag-progress',
+    
+                                    onDrag: function(e){
+                                        /* Calculate the percentage of the interaction that has been completed. */
+                                        // To do this we need the -relative- position of the draggable element to the game stage.
+                                        // *sigh* have i over engineered this?
+                                        $('.scene15 .drag-prompt').addClass('hidden')
+            
+                                        let draggableRect = e.target.getBoundingClientRect();
+                                        let stageRect = document.querySelector('.game-page-story').getBoundingClientRect();
+            
+                                        let x = draggableRect.left - stageRect.left;
+            
+                                        let xMax   = 550;
+                                        let xMin   = 130;
+            
+                                        let perc = (x + xMin / xMax - xMin) / (xMax - xMin); /* i don't know how this works, but it does */
+                                        /* invert percentage */
+                                            perc = 1 - perc;
+                                            if(perc < 0){
+                                                perc = 0;
+                                            }
+                                        this.perc = perc;
+            
+                                        let progress = perc * 471;
+                        
+                                        console.log(perc);
+
+                                        if(perc >= 0.5){
+                                            /* Destroy the Draggable */
+                                            instance[0].kill();
+            
+                                            /* hide speech bubble */
+                                            game.speech.hideBubble();
+                                            
+                                            /* TODO Harry and Maggie attract! */
+                                            game.sfx.play('magnet');
+                                            gsap.to('.scene1 .character-haroon', .15, { x: "-415px" })
+
+                                            /* Hide the drag stuff */
+                                            $('.scene15 .drag-prompt').addClass('hidden')
+                                            gsap.to('.scene15 .drag-progress', .5, { opacity: 0 });   
+                                        }
+            
+                                        $('.scene15 .drag-progress')[0].style.setProperty('--progressScene15', `${progress}px`)
+                                    },
+                                    onDragStart: function(){
+                                        /* change maggie's expression and rotation */
+                                        $('.scene15 .character-maggie-expression-blush').removeClass('active');
+                                        $('.scene15 .character-maggie-expression-surprised-blush').addClass('active');
+                                        gsap.to('.scene15 .character-maggie', .1, {});
+
+                                        /* change harry's expression */
+                                        $('.scene15 .character-harry-expression-reading').removeClass('active');
+                                        $('.scene15 .character-harry-expression-blush').addClass('active');
+                                    },
+                                    onDragEnd: function(){
+    
+                                        $('.scene15 .character-maggie-expression-blush').addClass('active');
+                                        $('.scene15 .character-maggie-expression-surprised-blush').removeClass('active');
+            
+                                        gsap.to('.scene15 .character-maggie', .1, { rotate: 0 });
+            
+                                        /* If percentage is less than 65% (complete), return to initial pos */
+                                        if(this.perc < 0.5){
+                                                
+                                            /* change harry's expression back*/
+                                            $('.scene15 .character-harry-expression-reading').addClass('active');
+                                            $('.scene15 .character-harry-expression-blush').removeClass('active');
+
+                                            $('.scene15 .drag-prompt').removeClass('hidden')
+                                            gsap.to('.scene15 .character-maggie', .25, {x:-50})
+                                            gsap.to('.scene15 .drag-progress', .25, { '--progressScene15': 0 })
+                                        }
+                                    }
+                                })
+                        });
+                    })
+                } });
+
             }
         }
     ]

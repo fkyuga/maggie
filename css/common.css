@@ -470,6 +470,22 @@ img {
     left: -3px; 
 }
 
+.character-maggie-expression-surprised-blush {
+    background-image: url(../img/maggie/expression-surprised-blush.png);
+    width: 100px;
+    height: 96px;
+    top: 16px;
+    left: -3px; 
+}
+
+.character-maggie-expression-blush {
+    background-image: url(../img/maggie/expression-blush.png);
+    width: 100px;
+    height: 96px;
+    top: 16px;
+    left: -3px; 
+}
+
 .character-maggie-expression-pre-crying {
     background-image: url(../img/maggie/expression-pre-crying.png);
     width: 100px;

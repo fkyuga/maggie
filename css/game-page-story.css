@@ -1285,6 +1285,41 @@
 }
 
 
+.scene15 .drag-progress {
+    width: 400px;
+    height: 32px;
+    border-radius: 900px;
+    background-color: rgba(255,255,255,.3);
+    top: 497px;
+    left: 250px;
+    position: absolute;
+    z-index: 0;
+    opacity: 0;
+    transform: scaleX(-1) !important;
+}
+
+.scene15 .drag-progress:after {
+    /* We store width of the :after element (which is what displays the progress inside the bar)
+    as a CSS custom property - which we adjust in JS. We do this because we cannot easily
+    modify styles of pseudo-elements. */
+
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: var(--progressScene15);
+    height: 32px;
+    border-radius: 900px;
+    background-color: rgba(255,255,255,.8);
+    z-index: 0;
+}
+
+
+.scene15 .drag-prompt {
+    --amount: -300px;
+    top: 500px;
+    left: 550px;
+}
+
 /************* HARRY STYLES (hahaha, get it?) *************/
 .scene .character-harry {
     top: 348px;
@@ -1294,7 +1329,7 @@
 }
 
 .scene .character-harry .character-harry-expression-reading {
-    position: relative;
+    display: none;
     top: 64px !important;
     left: 15px;
     background-image: url(../img/characters/harry/expression-harry-reading.png);
@@ -1318,6 +1353,16 @@
     top: 117px;
     left: -26px;
     z-index: 4;
+}
+
+.scene .character-harry .character-harry-expression-blush {
+    top: 65px !important;
+    left: 11px;
+    background-image: url(../img/characters/harry/expression-harry-blush.png);
+    width: 61px;
+    height: 42px;
+    z-index: 3;
+    display: none;
 }
 
 .character-harry .character-harry-leg-l {

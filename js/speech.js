@@ -173,7 +173,7 @@ const SPEECH_AFTER_SCHOOL_HARRY = {
 
 const SPEECH_AFTER_SCHOOL_HARRY_GUIDANCE = {
     message: "There's only one way to find out...",
-    sound: "SPEECH_AFTER_SCHOOL_GUIDANCE"
+    sound: "SPEECH_AFTER_SCHOOL_HARRY_GUIDANCE"
 }
 
 const SPEECH_MAGGIE_HARRY_CLICK = {
