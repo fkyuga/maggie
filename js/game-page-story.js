@@ -6,7 +6,7 @@ game.pages.story = {
     onload: function(){
         // Help is unavailable in story mode. 
         $('.btn-help').hide();
-        game.pages.story.scenes[0].animate();
+        game.pages.story.scenes[13].animate();
     },
 
     scenes: [
@@ -1034,6 +1034,16 @@ game.pages.story = {
                     })
                     
                 }, 3000)
+            }
+        },
+
+        {
+            animate: () => {
+                /* Scene 13: Maggie has just woken up from her dream.
+                   The alarm clock has rung again. This time, however, she is already awake
+                   and is holding the alarm clock in her hand. */
+
+                $('.scene13').addClass('scene--active');
             }
         }
     ]

@@ -410,6 +410,15 @@ img {
     top: 274px;
 }
 
+.character-maggie-arm-l-curved {
+    width: 58px;
+    height: 121px;
+    background-image: url(../img/maggie/arm-l-curved.png);
+    z-index: 1;
+    left: 28px;
+    top: 304px;
+}
+
 .character-maggie-arm-r {
     width: 58px;
     height: 121px;
@@ -417,6 +426,15 @@ img {
     z-index: 1;
     left: 209px;
     top: 274px;
+}
+
+.character-maggie-arm-r-holding {
+    width: 94px;
+    height: 83px;
+    background-image: url(../img/maggie/arm-r-holding.png);
+    z-index: 1;
+    left: 209px;
+    top: 232px;
 }
 
 .character-maggie-goggles {
@@ -434,6 +452,14 @@ img {
     height: 76px;
     top: 29px;
     left: -3px;
+}
+
+.character-maggie-expression-confident {
+    background-image: url(../img/maggie/expression-confident.png);
+    width: 94px;
+    height: 88px;
+    top: 11px;
+    left: 0px;
 }
 
 .character-maggie-expression-surprised {

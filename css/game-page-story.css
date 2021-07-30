@@ -910,9 +910,7 @@
     background-color: #361820;
 }
 
-/* yes i know code repetition idc
-   tbh code reptition is probably a bad thing for animations */
-
+/* yes i know code repetition idc */
 .scene11 .bed-closeup {
     width: 814px; height: 826px;
     background-image: url(../img/story/bed-closeup.png);
@@ -1057,3 +1055,42 @@
         filter: brightness(1) contrast(1) blur(10px);
     }
 }
+
+
+/******** SCENE 13
+          Maggie crying in bed :( ***********/
+    .scene13 {
+    background-color: #361820;
+}
+
+.scene13 .bed-closeup {
+    width: 814px; height: 826px;
+    background-image: url(../img/story/bed-closeup.png);
+    top: 145.6px; left: 100.8px;
+}
+
+.scene13 .blanket-closeup {
+    width: 709.5px; height: 657.5px;
+    background-image: url(../img/story/blanket-closeup.png);
+    top: 631.6px; left: 165.6px;
+    z-index: 2;
+}
+
+.scene13 .character-maggie {
+    top: 163px !important;
+    left: 368px !important;
+    transition: none;
+}
+
+.scene13 .clock {
+    width: 217.5px;
+    height: 216.75px;
+    background-image: url(../img/items/clock@2x.png);
+    top: 273px;
+    left: 564px;
+    z-index: 3;
+    transform: scale(.5) rotate(
+    20deg
+    );
+}
+
