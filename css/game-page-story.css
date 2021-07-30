@@ -1057,8 +1057,7 @@
 }
 
 
-/******** SCENE 13
-          Maggie crying in bed :( ***********/
+/******** SCENE 13 - maggie wakes up after dream ********/
     .scene13 {
     background-color: #361820;
 }
@@ -1095,3 +1094,34 @@
     );
 }
 
+
+/********** scene 14 - schoolyard, maggie confident *********/
+.scene14 {
+    background-image: url(../img/story/school-sunny.png);
+    background-size: cover;
+}
+
+.scene14 .character-maggie {
+    top: 283px;
+    left: 182px;
+    transition: none;
+    z-index: 1;
+}
+
+.scene14 .character-maggie-body {
+    transform: scaleX(-1);
+}
+
+.scene14 .character-haroon {
+    top: 495px;
+    left: 557px;
+    transform: scale(.7);
+    z-index: 2;
+}
+
+.scene14 .character-jessie {
+    top: 536px;
+    left: 519px;
+    z-index: 3;
+    transform: scale(.7);
+}
