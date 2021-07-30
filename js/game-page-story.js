@@ -1065,7 +1065,7 @@ game.pages.story = {
         {
             animate: () => {
                 /* Scene 14: Schoolyard. Maggie storms into school confidently! */
-
+                game.bgm.play('sunny');
                 $('.scene14').addClass('scene--active');
                 $('.scene14').css({opacity: 0});
 
@@ -1083,9 +1083,52 @@ game.pages.story = {
                 */
 
                 let jessieHaroonWalkingTimeline = gsap.timeline({yoyo: true, repeat: 20});
-                    jessieHaroonWalkingTimeline.to('.character-maggie-leg-l', .35, { y: -10, ease: Linear.easeNone })
-                    jessieHaroonWalkingTimeline.to('.character-maggie-leg-r', .35, { y: -10, ease: Linear.easeNone }, '-=.175')
-                gsap.to('.scene14 .character-jessie, .scene14 .character-haroon', 10, { x: -800, ease: Linear.easeNone })
+                    jessieHaroonWalkingTimeline.to('.scene14 .character-jessie .character-maggie-leg-l, .scene14 .character-haroon .character-maggie-leg-l', .35, { y: -10, ease: Linear.easeNone });
+                    jessieHaroonWalkingTimeline.to('.scene14 .character-jessie .character-maggie-leg-r, .scene14 .character-haroon .character-maggie-leg-r', .35, { y: -10, ease: Linear.easeNone }, '-=.175');
+                gsap.to('.scene14 .character-jessie, .scene14 .character-haroon', 10, { x: -800, ease: Linear.easeNone });
+                
+                // make clouds move
+                gsap.to('.scene14 .cloud0', 10, { x: -50 })
+                gsap.to('.scene14 .cloud1', 10, { x: -70 })
+
+                // make maggie storm into school!
+                game.speech.display(SPEECH_MAGGIE_SCHOOL_CONFIDENT, () => {
+                    game.pages.story.scenes[14].out();
+                });
+                let maggieRunningTimeline = gsap.timeline({yoyo: true, repeat: 20});
+                    maggieRunningTimeline.to('.scene14 .character-maggie .character-maggie-leg-l', .15, { y: -10, ease: Linear.easeNone });
+                    maggieRunningTimeline.to('.scene14 .character-maggie .character-maggie-leg-r', .15, { y: -10, ease: Linear.easeNone });
+                
+                let maggieMoveTimeline = gsap.timeline();
+                maggieMoveTimeline.to({}, 1, {});
+                maggieMoveTimeline.to('.scene14 .character-maggie', 1.5, { x: 760, ease: Linear.easeNone })
+                maggieMoveTimeline.to('.scene14 .character-maggie', .5, { opacity: 0, scale: 0 })
+                setTimeout(function(){
+                    game.sfx.play('door');
+                }, 2500);
+            },
+            out: () => {
+                game.bgm.stop();
+                let transitionTimeline = gsap.timeline();
+                /* fade to black */
+                $('.scene-interstitial p').html('');
+
+                transitionTimeline.to('.scene-interstitial', 1, { opacity: 1, onComplete: () => {
+                    gsap.to('.scene-interstitial p', .00001, { opacity: 0})
+                    setTimeout(function(){
+                        game.speech.display(SPEECH_MAGGIE_BEST_DAY_OF_SCHOOL, () => {
+                            setTimeout(function(){
+                                gsap.to('.scene-interstitial p', 1, { opacity: 0 });
+                                game.sfx.play('schoolsout', () => {
+                                    /* animate to scene 15 - Maggie back outside, sees Harry for the first time */
+                                    game.pages.scenes[15].animate();
+                                });
+                            }, 1000)
+                        });
+                        gsap.to('.scene-interstitial p', 1, { opacity: 1})
+                    }, 1500);
+                } });
+                transitionTimeline.to('.scene14', 1, { opacity: 0 }, '-=1')
             }
         }
     ]

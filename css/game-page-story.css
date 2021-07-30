@@ -1146,7 +1146,7 @@
     transform: scale(.32);
     top: 105px;
     left: -223px;
-    z-index: 9;
+    z-index: 12;
 }
 
 .scene14 .tree1 {
@@ -1172,13 +1172,13 @@
     top: 495px;
     left: 557px;
     transform: scale(.7);
-    z-index: 2;
+    z-index: 9;
 }
 
 .scene14 .character-jessie {
     top: 536px;
     left: 519px;
-    z-index: 3;
+    z-index: 10;
     transform: scale(.7);
 }
 
@@ -1219,4 +1219,38 @@
     z-index: 1;
     transform: scale(.7);
     opacity: .8;
+}
+
+.item.cloud {
+    top: 0; left: 0;
+    width: 586px;
+    height: 89px;
+    background-image: url(../img/story/cloud.png);
+    transform: scale(.7);
+}
+
+.scene14 .cloud0 {
+    top: 66px;
+    left: 200px;
+    opacity: .9;
+}
+
+.scene14 .cloud1 {
+    top: 0;
+    left: 410px;
+    opacity: .6;
+    transform: scale(.65)
+}
+
+.scene14 .character-maggie {
+    transform: scale(.4) scaleX(-1);
+    transform-origin: center 70%;
+    top: 273px;
+    left: -100px;
+    transition: none;
+    z-index: 8;
+}
+
+.scene14 .character-maggie-body {
+    transform: scaleX(-1);
 }

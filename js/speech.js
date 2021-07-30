@@ -155,12 +155,25 @@ const SPEECH_MAGGIE_EXCITED_SCHOOL = {
     sound: "SPEECH_MAGGIE_EXCITED_SCHOOL"
 }
 
+const SPEECH_MAGGIE_SCHOOL_CONFIDENT = {
+    message: "With this new feeling of confidence, Maggie ran straight into school. She knew she was going to ace it today!",
+    sound: "SPEECH_MAGGIE_SCHOOL_CONFIDENT"
+}
+
+const SPEECH_MAGGIE_BEST_DAY_OF_SCHOOL = {
+    message: "Maggie had the best day of school today...",
+    sound: "SPEECH_MAGGIE_BEST_DAY_OF_SCHOOL",
+    target: '.scene-interstitial p'
+}
+
 const SPEECH_AFTER_SCHOOL_HARRY = {
-    message: "Wait... Maggie saw a magnet like this one in her dreams! Could it be...?"
+    message: "Wait... Maggie saw a magnet like this one in her dreams! Could it be...?",
+    sound: "SPEECH_AFTER_SCHOOL_HARRY"
 }
 
 const SPEECH_AFTER_SCHOOL_HARRY_GUIDANCE = {
-    message: "There's only one way to find out..."
+    message: "There's only one way to find out...",
+    sound: "SPEECH_AFTER_SCHOOL_GUIDANCE"
 }
 
 const SPEECH_MAGGIE_HARRY_CLICK = {
