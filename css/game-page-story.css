@@ -1188,3 +1188,14 @@
     height: 36px;
     width: 26px;
 }
+
+.scene14 .character-lil-full {
+    top: 346px;
+    width: 100.5px;
+    height: 319.5px;
+    background-image: url(../img/characters/lil/character-lil-full.png);
+    left: 201px;
+    z-index: 1;
+    transform: scale(.7);
+    opacity: .8;
+}
