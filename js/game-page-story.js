@@ -6,7 +6,7 @@ game.pages.story = {
     onload: function(){
         // Help is unavailable in story mode. 
         $('.btn-help').hide();
-        game.pages.story.scenes[2].animate();
+        game.pages.story.scenes[0].animate();
     },
 
     scenes: [
@@ -158,10 +158,14 @@ game.pages.story = {
                     game.sfx.play('SPEECH_MAGNETS_POLES', () => {}, 'speech');
                 }, 1000);
                 setTimeout(function(){
-                    game.sfx.play('SPEECH_MAGNETS_INTRO_NORTH', () => {}, 'speech');
+                    game.sfx.play('SPEECH_MAGNETS_INTRO_NORTH', () => {
+                        game.sfx.play('CHARACTER_JESSIE_HELLO')
+                    }, 'speech');
                 }, 3000);
                 setTimeout(function(){
-                    game.sfx.play('SPEECH_MAGNETS_INTRO_SOUTH', () => {}, 'speech');
+                    game.sfx.play('SPEECH_MAGNETS_INTRO_SOUTH', () => {
+                        game.sfx.play('CHARACTER_HAROON_HELLO')
+                    }, 'speech');
                 }, 4500);
                 
 
