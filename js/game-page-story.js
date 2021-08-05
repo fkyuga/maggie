@@ -1311,19 +1311,34 @@ game.pages.story = {
                 gsap.to('.scene-interstitial', 0, { opacity: 0, onComplete: () => {
                     game.pages.story.scenes[17].afterTransition();
                 }})
+                gsap.to('.park', 30, { x: -800 })
+                gsap.to('.fence', 30, { x: 150 })
+                setTimeout(function(){
+                    gsap.to('.lil-billy-slide', 3, { x: 240, y: 180 })
+                }, 1500);
             },
 
             afterTransition: () => {
                 game.speech.display( SPEECH_MAGGIE_HARRY_DATE_2, () => {
                     setTimeout(function(){
                         /* Fade to black */
-                    }, 500)
+                        $('.scene-interstitial p').html('');
+
+                        let transitionTimeline = gsap.timeline({onComplete: game.pages.story.scenes[18].animate });
+                        transitionTimeline.to('.scene-interstitial', 1, { opacity: 1 });
+                        transitionTimeline.to('.scene17', 1, { opacity: 0 }, '-=1')
+                        transitionTimeline.to({}, .5, {});
+                    }, 2500)
                 } )   
             }
         },
 
         /* Scene 18: Maggie and Harry in Maggie's room. */
-        {},
+        {
+            animate: () => {
+
+            }
+        },
 
         /* Scene 19: Maggie and Harry sat together on a hill, overlooking a bridge */
         {

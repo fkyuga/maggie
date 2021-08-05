@@ -1475,6 +1475,7 @@
 
 .scene17 .park {
     top: 280px;
+    left: 0px;
     position: absolute;
 }
 
@@ -1496,6 +1497,64 @@
     background-size: contain;
     left: 900px;
     top: 0;
+}
+
+.scene17 .maggie-swing {
+    position: absolute;
+    top: 16px; left: 110px;
+    width: 135px;
+    height: 250.5px;
+    background-image: url(../img/story/park/maggie-swing.png);
+    background-size: contain;
+    animation: 3s infinite maggie-swinging;
+    transform-origin: top right;
+}
+
+.scene17 .harry-swing {
+    position: absolute;
+    top: 16px; left: 299px;
+    width: 141px;
+    height: 248px;
+    background-image: url(../img/story/park/harry-swing.png);
+    background-size: contain;
+    animation: 3s infinite harry-swinging;
+}
+
+.scene17 .lil-billy-slide {
+    position: absolute;
+    top: 0; left: 123px;
+    width: 122px;
+    height: 108px;
+    background-image: url(../img/story/park/lil-billy-slide.png);
+    background-size: contain;
+}
+
+@keyframes maggie-swinging {  
+    0% {
+        transform: rotate(0deg);
+    }
+    
+    50% { 
+        transform: rotate(-45deg);
+    }
+
+    100% { 
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes harry-swinging { 
+    0% {
+        transform: rotate(20deg);
+    }
+    
+    50% { 
+        transform: rotate(-45deg) translateX(100px);
+    }
+
+    100% { 
+        transform: rotate(20deg);
+    }
 }
 
 /************* scene19 *****************/
