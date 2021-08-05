@@ -31,9 +31,11 @@
 }
 
 .scene-interstitial p {
-    max-width: 800px;
-    margin: 0 auto;
+    display: flex;
     white-space: pre-wrap;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
 }
 
 /*** magnetic items scene ***/

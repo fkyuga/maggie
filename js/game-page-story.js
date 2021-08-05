@@ -6,7 +6,7 @@ game.pages.story = {
     onload: function(){
         // Help is unavailable in story mode. 
         $('.btn-help').hide();
-        game.pages.story.scenes[0].animate();
+        game.pages.story.scenes[18].animate();
     },
 
     scenes: [
@@ -348,6 +348,7 @@ game.pages.story = {
             /* Scene 4 -- Maggie's room, Maggie asleep in bed. */
             animate: () => {
                 game.speech.display(SPEECH_MAGGIE_INTRO);
+                game.sfx.play('CHARACTER_MAGGIE_SNORING', () => {}, 'sfx', .5);
                 /* Wait for speech to complete. */
                 setTimeout(function(){
                     /* Switch to scene 2. */
@@ -359,6 +360,7 @@ game.pages.story = {
         {
             /* Scene 5 -- Maggie in bed closeup. */
             animate: () => {
+                game.sfx.play('CHARACTER_MAGGIE_SNORING', () => {}, 'sfx', 1);
                 game.speech.display(SPEECH_MAGGIE_SLEEPING);
                 $('.scene').removeClass('scene--active');
                 $('.scene5').addClass('scene--active');
@@ -387,6 +389,9 @@ game.pages.story = {
                     game.sfx.play('alarm');
                     setTimeout(function(){
                         /* Wake maggie up (stop her sleeping anim) */
+                        
+                        $('[data-sfx-name="CHARACTER_MAGGIE_SNORING"]').prop('volume', 0);
+
                         $('.scene5 .maggie-pajamas').addClass('awake');
                         $('.scene5 .sleepbubbles').hide();
                         $('.scene5 .maggie-pajamas .expression-sleeping').hide();
@@ -400,6 +405,7 @@ game.pages.story = {
                                 setTimeout(function(){
                                     $('.scene5 .maggie-pajamas .expression-shocked').hide();
                                     $('.scene5 .maggie-pajamas .expression-screaming').show();
+                                    game.sfx.play('CHARACTER_MAGGIE_SCREAM');
                                 }, 1000)
                                 setTimeout(function(){
                                     $('.scene5 .maggie-pajamas .expression-sleeping').hide();
@@ -600,21 +606,23 @@ game.pages.story = {
 
                                 /* And fade to black */
 
-                                $('.scene-interstitial p').html("<p>Maggie, with all her strength, worked as hard as she could at school today...</p>");
-
-                                let transitionTimeline = gsap.timeline({onComplete: () => {
-                                    /* after we show the interstitial message, play the school bell and move on to next scene! */
-                                    game.sfx.play('schoolsout', () => {
-                                        game.pages.story.scenes[9].animate();
+                                setTimeout(function(){
+                                    game.speech.display(SPEECH_MAGGIE_STRENGTH_INTERSTITIAL, () => {
+                                        gsap.to('.scene-interstitial p', .5, { opacity: 0 });
+                                        setTimeout(function(){
+                                            game.sfx.play('schoolsout', () => {
+                                                game.pages.story.scenes[9].animate();
+                                            });
+                                        }, 1500);
                                     });
-                                }});
+                                }, 2000)
+
+                                let transitionTimeline = gsap.timeline();
                                     transitionTimeline.to('.scene-interstitial p', .000001, { opacity: 0 });
                                     transitionTimeline.to('.scene8', 1, { opacity: 0 });
                                     transitionTimeline.to('.scene-interstitial', 1, { opacity: 1 }, '-=1');
                                     transitionTimeline.to({}, 1, {}); /* wait 1s */
                                     transitionTimeline.to('.scene-interstitial p', .5, { opacity: 1 });
-                                    transitionTimeline.to({}, 3, {}); /* wait 3s */
-                                    transitionTimeline.to('.scene-interstitial p', .5, { opacity: 0 });
                             }
 
                             $('.scene8 .drag-progress')[0].style.setProperty('--progressScene8', `${progress}px`)
@@ -711,12 +719,14 @@ game.pages.story = {
                                             game.speech.display(SPEECH_OH_NO, () => {
                                                 $('.scene9 .character-maggie-expression-pre-crying').removeClass('active');
                                                 $('.scene9 .character-maggie-expression-crying').addClass('active');
+                                                game.sfx.play('CHARACTER_MAGGIE_CRYING')
                                                 setTimeout(function(){
                                                     gsap.to('.scene9 .character-maggie', 1, { x: -750 })
                                                     let maggieWalkingTimeline = gsap.timeline({yoyo: true, repeat: 10});
                                                     maggieWalkingTimeline.timeScale(3);
                                                     maggieWalkingTimeline.to('.scene9 .character-maggie-leg-l', .35, { y: -10, ease: Linear.easeNone })
                                                     maggieWalkingTimeline.to('.scene9 .character-maggie-leg-r', .35, { y: -10, ease: Linear.easeNone }, '-=.175')
+                                                    $('[data-sfx-name="CHARACTER_MAGGIE_CRYING"]').animate({ volume: 0 }, 3000)
                                                     setTimeout(function(){
                                                         
                                                         game.pages.story.scenes[10].animate();
@@ -789,6 +799,7 @@ game.pages.story = {
                     });
 
                     /* Open the door */
+                    game.sfx.play('CHARACTER_MAGGIE_CRYING', () => {}, 'sfx', .5);
                     game.sfx.play('door-open');
                     $('.scene10 .door-closed').removeClass('active').addClass('inactive');
                     $('.scene10 .door-open, .scene10 .door-light').addClass('active').removeClass('inactive');
@@ -798,6 +809,12 @@ game.pages.story = {
 
                     /* Maggie runs in, crying */
                     maggieTimeline.to('.scene10 .character-maggie', 1, { x: 452, ease: Linear.easeNone });
+
+                    /* SFX for jump */
+                    setTimeout(function(){
+                        game.sfx.play('jump');
+                    }, 2000)
+                
 
                     /* And then jumps face-first onto her bed */
                     maggieTimeline.to('.scene10 .character-maggie', .5, {
@@ -813,6 +830,12 @@ game.pages.story = {
                         rotate: 260,
                         ease: Linear.easeNone
                     });     
+
+                    /* SFX for landing on bed */
+                    setTimeout(function(){
+                        game.sfx.play('land_bed');
+                    }, 3000)
+
                 }
 
                 let transitionTimeline = gsap.timeline({onComplete});
@@ -1151,7 +1174,7 @@ game.pages.story = {
                     /* Change Maggie's expression to surprised */
                     $('.scene15 .character-maggie-expression-smile').removeClass('active');
                     $('.scene15 .character-maggie-expression-surprised').addClass('active');
-                    
+                     
                     /* Change Maggie's expression to blush after 2.5s of speech (when i say - could it be?) */
                     setTimeout(function(){
                         $('.scene15 .character-maggie-expression-surprised').removeClass('active');
@@ -1177,6 +1200,7 @@ game.pages.story = {
                                         // *sigh* have i over engineered this?
                                         $('.scene15 .drag-prompt').addClass('hidden')
             
+
                                         let draggableRect = e.target.getBoundingClientRect();
                                         let stageRect = document.querySelector('.game-page-story').getBoundingClientRect();
             
@@ -1219,26 +1243,34 @@ game.pages.story = {
                                             gsap.to('.scene15 .drag-progress', .5, { opacity: 0 });   
                                         
                                             game.speech.display(SPEECH_MAGGIE_HARRY_CLICK, () => {
-                                                setTimeout(() => {
-                                                    /* fade to black */
-                                                    $('.scene-interstitial p').html('');
-                                                    game.bgm.stop();
+                                                game.sfx.play('CHARACTER_MAGGIE_HELLO', () => {
+                                                    game.sfx.play('CHARACTER_HARRY_HEY', () => {
+                                                        /* fade to black */
+                                                        $('.scene-interstitial p').html('');
+                                                        game.bgm.stop();
 
-                                                    gsap.to('.scene-interstitial', 1, { opacity: 1 });
-                                                    gsap.to('.scene15', 1, { opacity: 0 })
-                                                    setTimeout(function(){
-                                                        game.speech.display(SPEECH_MAGGIE_HARRY_EPILOGUE, () => {
-                                                            /* to scene 16! woooot! we're so close to finshing this! */
-                                                            game.pages.story.scenes[16].animate();
-                                                        });
-                                                    }, 1500);
-                                                }, 1500)
+                                                        gsap.to('.scene-interstitial', 1, { opacity: 1 });
+                                                        gsap.to('.scene15', 1, { opacity: 0 })
+                                                        setTimeout(function(){
+                                                            game.speech.display(SPEECH_MAGGIE_HARRY_EPILOGUE, () => {
+                                                                /* to scene 16! woooot! we're so close to finshing this! */
+                                                                game.pages.story.scenes[16].animate();
+                                                            });
+                                                        }, 1500);
+                                                    }, 'sfx', .6)
+                                                })
                                             });
                                         }
             
                                         $('.scene15 .drag-progress')[0].style.setProperty('--progressScene15', `${progress}px`)
                                     },
                                     onDragStart: function(){
+
+                                        game.sfx.play('CHARACTER_MAGGIE_SURPRISED');
+                                        setTimeout(function(){
+                                            game.sfx.play('CHARACTER_HARRY_SURPRISED', () => {}, 'sfx', .4);
+                                        }, 250);
+
                                         /* change maggie's expression and rotation */
                                         $('.scene15 .character-maggie-expression-blush').removeClass('active');
                                         $('.scene15 .character-maggie-expression-surprised-blush').addClass('active');
@@ -1310,7 +1342,15 @@ game.pages.story = {
             animate: () => {
                 gsap.to('.scene17', .0000001, { opacity: 0 });
                 $('.scene17').addClass('scene--active');
-
+                game.sfx.play('CHARACTER_MAGGIE_WHEE_1', () => {
+                    game.sfx.play('CHARACTER_HARRY_WHEE_1', () => {
+                        game.sfx.play('CHARACTER_MAGGIE_WHEE_2', () => {
+                            game.sfx.play('CHARACTER_HARRY_WHEE_2', () => {
+                            
+                            }, 'sfx', .3)
+                        }, 'sfx', .5);
+                    }, 'sfx', .3)
+                }, 'sfx', .5)
                 gsap.to('.scene17', 1, { opacity: 1 });
                 gsap.to('.scene-interstitial', 0, { opacity: 0, onComplete: () => {
                     game.pages.story.scenes[17].afterTransition();
@@ -1354,6 +1394,8 @@ game.pages.story = {
                         'transform':        'scaleX(-1)',
                         'background-image': 'url(img/characters/harry/expression-harry-blush.png)' 
                     });
+
+                    game.sfx.play('CHARACTER_HARRY_LAUGHING', () => {}, 'sfx', 1);
 
                     game.speech.display(SPEECH_MAGGIE_HARRY_DATE_3a, () => {
                         $('.scene18 .character-harry-expression-blush-down').css({

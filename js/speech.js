@@ -160,6 +160,12 @@ const SPEECH_MAGGIE_SCHOOL_CONFIDENT = {
     sound: "SPEECH_MAGGIE_SCHOOL_CONFIDENT"
 }
 
+const SPEECH_MAGGIE_STRENGTH_INTERSTITIAL = {
+    message: "Maggie, with all her strength, worked as hard as she could at school today...",
+    sound: "SPEECH_MAGGIE_STRENGTH_INTERSTITIAL",
+    target: ".scene-interstitial p"
+}
+
 const SPEECH_MAGGIE_BEST_DAY_OF_SCHOOL = {
     message: "Maggie had the best day of school today...",
     sound: "SPEECH_MAGGIE_BEST_DAY_OF_SCHOOL",

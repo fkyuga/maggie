@@ -617,7 +617,7 @@ var game = {
     },
 
     sfx: {
-        play: function(name, callback=()=>{}, directory = 'sfx'){
+        play: function(name, callback=()=>{}, directory = 'sfx', volume = 1){
             /* Play given SFX. example: game.sfx.play('falling');
                Optionally, can provide a callback to run some code after
                SFX finished playing */
@@ -636,7 +636,7 @@ var game = {
             
             console.log(`playing SFX: ${name}`)
             $('.sound-effects-container').append(`
-                <audio id="sound-effect-${id}">
+                <audio id="sound-effect-${id}" data-sfx-name="${name}">
                     <source src="${directory}/${name}.mp3" type="audio/mpeg">
                 </audio>
             `)
@@ -649,7 +649,9 @@ var game = {
             if(!game.audioEnabled){
                 /* Set volume to 0, and stashedVolume to 1 */
                 $(`#sound-effect-${id}`)[0].volume = 0;
-                $(`#sound-effect-${id}`)[0].stashedVolume = 1;
+                $(`#sound-effect-${id}`)[0].stashedVolume = volume;
+            } else {
+                $(`#sound-effect-${id}`)[0].volume = volume;
             }
 
             $(`#sound-effect-${id}`)[0].play();
