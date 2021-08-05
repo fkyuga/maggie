@@ -80,7 +80,7 @@ game.pages.story = {
                         /* anyway, this code makes Haroon draggable so the player can drag him to Jessie.
                            we lock him to the x-axis, and constrain his movement to the path we display on screen. */
                         /* i would use inertia here, but it is a paid plugin :( */
-
+                        gsap.to('.scene1 .drag-progress', .5, { opacity: 1 });
                         $('.scene1 .drag-prompt').removeClass('hidden');
 
                            let instance = Draggable.create('.scene1 .character-haroon', {
@@ -173,6 +173,7 @@ game.pages.story = {
 
                 $('.scene0').addClass('scene--active')
                 $('.scene1').addClass('scene--active')
+                gsap.to('.scene1 .drag-progress', .00001, { opacity: 0 });
                 tl.to('.scene0 .items, .scene0 .text', .000001, { y: 0, opacity: 1})
                 tl.to('.scene1', .000001, { y: 128, opacity: 0});
                 tl.to('.scene1 .character-jessie', .000001, { y: 64, opacity: 0})
@@ -206,7 +207,7 @@ game.pages.story = {
                 let tl = gsap.timeline();
                 //1tl.timeScale(10);
                 /* Set initial state */
-
+                gsap.to('.scene2 .drag-progress', .00001, { opacity: 0 })
                 setTimeout(function(){
                     game.sfx.play('SPEECH_MAGNETS_INTRO_REPEL', () => {
                         $('.scene2 .drag-prompt').removeClass('hidden');
@@ -215,7 +216,9 @@ game.pages.story = {
                             basically the same as scene1. a less time-constrained me would abstract this away into a new function... but -yeah- */
                             gsap.to('.scene2 .para1', .5, { opacity: 1, y: 0 })
                             game.sfx.play('SPEECH_MAGNETS_INTRO_GO_AHEAD', () => {}, 'speech');
-    
+                            
+                            gsap.to('.scene2 .drag-progress', .5, { opacity: 1 });
+
                             let instance_scene2 = Draggable.create('.scene2 .character-lil-full', {
                                 type: 'x',
                                 bounds: {minX: 0, maxX: -495},
@@ -558,12 +561,15 @@ game.pages.story = {
             animate: () => {
                 game.sfx.play('flashback');
                 game.bgm.play('sunny');
+                gsap.to('.scene8 .drag-progress', .000001, { opacity: 0 });
                 gsap.to('.scene8 .character-maggie', .00001, { scaleY: .4, scaleX: -.4 });
                 let transitionTimeline = gsap.timeline({onComplete: () => {
                 game.speech.display(SPEECH_AFTER_FLASHBACK, () => {
                     
                     game.speech.display(SPEECH_AFTER_FLASHBACK_GUIDANCE, () => {
                     $('.scene8 .drag-prompt').removeClass('hidden')
+                    gsap.to('.scene8 .drag-progress', .5, { opacity: 1 });
+
                     /** ENABLE DRAGGABILITY (it's our fave code block again) **/
                     let instance = Draggable.create('.scene8 .character-maggie', {
                         type: 'x',
@@ -666,6 +672,7 @@ game.pages.story = {
             animate: () => {
                 $('.scene8').removeClass('scene--active');
                 $('.scene9').addClass('scene--active');
+                gsap.to('.scene9 .drag-progress', .0000001, { opacity: 0 });
                 game.bgm.play('sunny');
 
                 setTimeout(function(){
@@ -674,6 +681,7 @@ game.pages.story = {
                             /* draggability time... -yay- */
                             gsap.to('.scene9 .drag-progress', .5, { opacity: 1 });
                             $('.scene9 .drag-prompt').removeClass('hidden');
+                            gsap.to('.scene9 .drag-progress', .5, { opacity: 1 });
 
                             let instance = Draggable.create('.scene9 .character-maggie', {
                                 type: 'x',
@@ -860,7 +868,7 @@ game.pages.story = {
             /* Scene 11: Close up of Maggie crying in bed. The user has to tuck her
                in to make her sleep. */
             animate: () => {
-
+                gsap.to('.scene10 .drag-progress', .0000000001, { opacity: 0 });
                 $('.scene10').removeClass('scene--active');
                 $('.scene11').addClass('scene--active');
                 
@@ -868,7 +876,7 @@ game.pages.story = {
                 /* Draggable Time! */
                 
                 $('.drag-prompt').removeClass('hidden')
-                gsap.to('.drag-progress', .5, {
+                gsap.to('.scene10 .drag-progress', .5, {
                     opacity: 1
                 });
 
@@ -1166,6 +1174,8 @@ game.pages.story = {
                 $('.scene14').removeClass('scene--active');
                 $('.scene15').addClass('scene--active').css({opacity: 0});
 
+                gsap.to('.scene15 .drag-progress', .0000001, { opacity: 0});
+
                 gsap.to('.scene-interstitial', 1, { opacity: 0});
                 gsap.to('.scene15', 1, { opacity: 1});
 
@@ -1189,7 +1199,7 @@ game.pages.story = {
                                This is actually the last time i think i need to do this... :( kinda missing this project already */
                                 gsap.to('.scene15 .drag-progress', .5, { opacity: 1 });
                                 $('.scene15 .drag-prompt').removeClass('hidden');
-    
+
                                 let instance = Draggable.create('.scene15 .character-maggie', {
                                     type: 'x',
     
