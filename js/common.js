@@ -100,6 +100,22 @@ var game = {
             }, 1000)
         },
 
+        replayLab: function(){
+            game.sfx.play('xylo');
+            game.modal.hide();
+            game.loadPage('blank', {
+                transition: 'circle',
+                twoStep: true
+            });  
+            setTimeout(function(){
+                window.location.href = window.location.pathname+"?"+$.param({
+                    'audioskip': 1,
+                    'titleskip': 1,
+                    'screen': 'lab'
+                })
+            }, 1000)
+        },
+
         toggleAudio: function(){
             /* This function:
                 enables/disables audio (sets game.audioEnabled = true/false)
@@ -312,11 +328,11 @@ var game = {
                         <div class="buttons">
                             <div class="modal-action">
                                 <button onclick="game.sfx.play('xylo'); game.loadPage('lab', {transition: 'circle',twoStep: true});   game.modal.hide(); " class="btn-circle btn-96 btn-yes"></button>
-                                <div class="modal-action-label">Yes, Go Home</div>
+                                <div class="modal-action-label">Let's Go!</div>
                             </div>
                             <div class="modal-action">
                                 <button onclick="game.modal.hide()" class="btn-circle btn-96 btn-no"></button>
-                                <div class="modal-action-label">No, Take Me Back!</div>
+                                <div class="modal-action-label">Cancel</div>
                             </div>
                         </div>
                     </div>

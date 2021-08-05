@@ -1441,16 +1441,17 @@ game.pages.story = {
                 /* Hill animation */
                 game.speech.display(SPEECH_MAGGIE_HARRY_BRIDGE_1, () => {
                     game.speech.display(SPEECH_MAGGIE_HARRY_BRIDGE_2, () => {
-                        /* fade to black */
-                        gsap.to('.scene-interstitial p', .0000001, { opacity: 0 })
-                        $('.scene-interstitial p').text('The End');
+                        setTimeout(function(){
+                            /* fade to black */
+                            gsap.to('.scene-interstitial p', .0000001, { opacity: 0 })
+                            $('.scene-interstitial p').text('The End');
 
-                        let transitionTimeline = gsap.timeline({onComplete: game.pages.story.scenes[19].afterInterstitialTransition });
-                        transitionTimeline.to('.scene-interstitial', 1, { opacity: 1 });
-                        transitionTimeline.to('.scene19', 1, { opacity: 0 }, '-=1')
-                        transitionTimeline.to({}, .75, {});
-                        transitionTimeline.to('.scene-interstitial p', { opacity: 1 })
-                    
+                            let transitionTimeline = gsap.timeline({onComplete: game.pages.story.scenes[19].afterInterstitialTransition });
+                            transitionTimeline.to('.scene-interstitial', 1, { opacity: 1 });
+                            transitionTimeline.to('.scene19', 1, { opacity: 0 }, '-=1')
+                            transitionTimeline.to({}, .75, {});
+                            transitionTimeline.to('.scene-interstitial p', { opacity: 1 })    
+                        }, 2000);
                     });
                 });
             },

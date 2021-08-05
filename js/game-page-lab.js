@@ -70,7 +70,7 @@ modals: {
 
         let actions = `
             <div class="modal-action">
-                <button onclick="game.helpers.goHome()" class="btn-circle btn-96 btn-yes"></button>
+                <button onclick="game.helpers.replayLab()" class="btn-circle btn-96 btn-yes"></button>
                 <div class="modal-action-label">Play Again</div>
             </div>
             <div class="modal-action">
@@ -94,7 +94,7 @@ modals: {
 
         let actions = `
             <div class="modal-action">
-                <button onclick="game.helpers.goHome()" class="btn-circle btn-96 btn-yes"></button>
+                <button onclick="game.helpers.replayLab()" class="btn-circle btn-96 btn-yes"></button>
                 <div class="modal-action-label">Play Again</div>
             </div>
             <div class="modal-action">
@@ -118,7 +118,7 @@ modals: {
 
         let actions = `
             <div class="modal-action">
-                <button onclick="game.helpers.goHome()" class="btn-circle btn-96 btn-yes"></button>
+                <button onclick="game.helpers.replayLab()" class="btn-circle btn-96 btn-yes"></button>
                 <div class="modal-action-label">Play Again</div>
             </div>
             <div class="modal-action">
@@ -143,7 +143,7 @@ modals: {
 
         let actions = `
             <div class="modal-action">
-                <button onclick="game.helpers.goHome()" class="btn-circle btn-96 btn-yes"></button>
+                <button onclick="game.helpers.replayLab()" class="btn-circle btn-96 btn-yes"></button>
                 <div class="modal-action-label">Play Again</div>
             </div>
             <div class="modal-action">
@@ -330,8 +330,10 @@ onload: ()=>{
     game.pages.lab.usedMaggie = false;
     game.pages.lab.madeMistake = false;
 
-    /* play BGM */
-    game.bgm.play('killing-time-by-kevin-macleod-from-filmmusic-io');
+    setTimeout(() => {
+        /* play BGM */
+        game.bgm.play('killing-time-by-kevin-macleod-from-filmmusic-io', 1000, .3);
+    }, 1000);
 
     /* Shuffle the items array to randomise their order. */
     game.pages.lab.items = game.pages.lab.items
@@ -460,6 +462,8 @@ onload: ()=>{
                                     game.pages.lab.helpers.checkGameCompletion();
                                 }
                             })
+                            
+                            game.sfx.play('CHARACTER_MAGGIE_YAHOO')
                             game.sfx.play('correct')
 
                             /* re-enable movement */
@@ -536,6 +540,8 @@ onload: ()=>{
                                 .removeClass('active');
                             $('.game-page-lab .character-maggie-expression-surprised')
                                 .addClass('active');
+
+                            game.sfx.play('CHARACTER_MAGGIE_SURPRISED');
 
                             /* Store in var */
                             game.pages.lab.maggieHasMagnet = true;
