@@ -1414,7 +1414,7 @@
 
 /************ scene16 *************/
 .scene16 .city {
-    left: 44px;
+    left: 0;
     position: absolute;
 }
 
@@ -1429,10 +1429,74 @@
     z-index: 20;
     transform: scale(.4);
     top: 286px;
-    left: 187px;
+    left: 602px;
     transition: none;
 }
 
+.scene16 .character-harry {
+    left: 615px;
+    top: 357px;
+}
+
+/************ scene17 *************/
+.scene17 {
+    background-image: url(../img/story/sky--sunny.png);
+    background-size: contain;
+}
+
+.scene17 .sun {
+    position: absolute;
+    background-image: url(../img/story/sun.png);
+    background-size: contain;
+    width: 105.49195px;
+    height: 122.4207px;
+    top: 32px; left: 32px;
+}
+
+.scene17 .fence {
+    position: absolute;
+    background-image: url(../img/story/park/fence.png);
+    background-size: contain;
+    width: 2265px;
+    height: 191px;
+    top: 500px;
+    left: -100px;
+    z-index: 2;
+}
+
+.scene17 .ground {
+    width: 1282.5px;
+    height: 247px;
+    background-image: url(../img/story/park/park-grass.png);
+    background-size: contain;
+    top: 600px;
+    left: 0;
+}
+
+.scene17 .park {
+    top: 280px;
+    position: absolute;
+}
+
+.scene17 .swing-set {
+    position: absolute;
+    width: 576px;
+    height: 364.5px;
+    background-image: url(../img/story/park/swing-set.png);
+    background-size: contain;
+    left: 200px;
+    top: 0;
+}
+
+.scene17 .slide {
+    position: absolute;
+    width: 548px;
+    height: 328px;
+    background-image: url(../img/story/park/slide.png);
+    background-size: contain;
+    left: 900px;
+    top: 0;
+}
 
 /************* scene19 *****************/
 .scene19 .night-sky {

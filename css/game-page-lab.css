@@ -217,10 +217,10 @@ img#item-bar__backdrop {
     display: flex;
 }
 
-.slide {
+.modal .slide {
     display: none;
 }
 
-.slide--active {
+.modal .slide--active {
     display: flex;
 }

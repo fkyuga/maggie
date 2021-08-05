@@ -6,7 +6,7 @@ game.pages.story = {
     onload: function(){
         // Help is unavailable in story mode. 
         $('.btn-help').hide();
-        game.pages.story.scenes[19].animate();
+        game.pages.story.scenes[17].animate();
     },
 
     scenes: [
@@ -1143,7 +1143,7 @@ game.pages.story = {
 
                 game.bgm.play('sunny');
 
-                gsap.to('.character-maggie', 1, { x: -50, ease: Linear.easeNone, onComplete: () => {
+                gsap.to('.scene15 .character-maggie', 1, { x: -50, ease: Linear.easeNone, onComplete: () => {
                     /* Change Maggie's expression to surprised */
                     $('.scene15 .character-maggie-expression-smile').removeClass('active');
                     $('.scene15 .character-maggie-expression-surprised').addClass('active');
@@ -1278,17 +1278,49 @@ game.pages.story = {
                 $('.scene16').css({opacity: 0}).addClass('scene--active');
                 gsap.to('.scene-interstitial', 1, { opacity: 0 });
                 gsap.to('.scene16', 1, { opacity: 1, onComplete: game.pages.story.scenes[16].afterTransition });
+            
+                gsap.to('.scene16 .character-harry, .scene16 .character-maggie', 20, { x: -600, ease: Linear.easeNone })
+                gsap.to('.scene16 .city', 8, { x: 44, ease: Linear.easeNone })
             },
 
             afterTransition: () => {
                 setTimeout(function(){
-                    game.speech.display(SPEECH_MAGGIE_HARRY_DATE_1);
+                    game.speech.display(SPEECH_MAGGIE_HARRY_DATE_1, () => {
+                        setTimeout(function(){
+                            /* Fade to black */
+
+                            $('.scene-interstitial p').html('');
+
+                            let transitionTimeline = gsap.timeline({onComplete: game.pages.story.scenes[17].animate });
+                            transitionTimeline.to('.scene-interstitial', 1, { opacity: 1 });
+                            transitionTimeline.to('.scene16', 1, { opacity: 0 }, '-=1')
+                            transitionTimeline.to({}, .5, {});
+                        }, 500)
+                    });
                 }, 500)
             }
         },
 
         /* Scene 17 : Maggie and Harry at the park */
-        {},
+        {
+            animate: () => {
+                gsap.to('.scene17', .0000001, { opacity: 0 });
+                $('.scene17').addClass('scene--active');
+
+                gsap.to('.scene17', 1, { opacity: 1 });
+                gsap.to('.scene-interstitial', 0, { opacity: 0, onComplete: () => {
+                    game.pages.story.scenes[17].afterTransition();
+                }})
+            },
+
+            afterTransition: () => {
+                game.speech.display( SPEECH_MAGGIE_HARRY_DATE_2, () => {
+                    setTimeout(function(){
+                        /* Fade to black */
+                    }, 500)
+                } )   
+            }
+        },
 
         /* Scene 18: Maggie and Harry in Maggie's room. */
         {},
