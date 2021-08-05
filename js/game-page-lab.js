@@ -330,6 +330,9 @@ onload: ()=>{
     game.pages.lab.usedMaggie = false;
     game.pages.lab.madeMistake = false;
 
+    /* play BGM */
+    game.bgm.play('killing-time-by-kevin-macleod-from-filmmusic-io');
+
     /* Shuffle the items array to randomise their order. */
     game.pages.lab.items = game.pages.lab.items
         .map(a => ({sort: Math.random(), value: a}))

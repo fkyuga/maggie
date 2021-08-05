@@ -6,7 +6,7 @@ game.pages.story = {
     onload: function(){
         // Help is unavailable in story mode. 
         $('.btn-help').hide();
-        game.pages.story.scenes[18].animate();
+        game.pages.story.scenes[0].animate();
     },
 
     scenes: [
@@ -968,6 +968,7 @@ game.pages.story = {
                 $('.scene-interstitial p').html('That night, Maggie had a very strange dream...');
                 let transitionTimeline = gsap.timeline();
                 transitionTimeline.to('.scene-interstitial', .00000000001, { opacity: 1 });
+                transitionTimeline.to('.scene-interstitial p', .00000000001, { opacity: 1 });
                 transitionTimeline.to('.scene11', 1, { opacity: 0 }, '-=1')
                 transitionTimeline.to({}, 1, {});
 
@@ -1247,11 +1248,11 @@ game.pages.story = {
                                                     game.sfx.play('CHARACTER_HARRY_HEY', () => {
                                                         /* fade to black */
                                                         $('.scene-interstitial p').html('');
-                                                        game.bgm.stop();
 
                                                         gsap.to('.scene-interstitial', 1, { opacity: 1 });
                                                         gsap.to('.scene15', 1, { opacity: 0 })
                                                         setTimeout(function(){
+                                                            game.bgm.play('valse-gymnopedie-by-kevin-macleod-from-filmmusic-io', 1000, .4);
                                                             game.speech.display(SPEECH_MAGGIE_HARRY_EPILOGUE, () => {
                                                                 /* to scene 16! woooot! we're so close to finshing this! */
                                                                 game.pages.story.scenes[16].animate();
@@ -1381,8 +1382,13 @@ game.pages.story = {
         {
 
             animate: () => {
+                gsap.to('.scene18', .0000001, { opacity: 0});
                 $('.scene18').addClass('scene--active');
-                game.pages.story.scenes[18].afterTransition()
+                gsap.to('.scene18', 1, { opacity: 1});
+                gsap.to('.scene17, .scene-interstitial', 1, { opacity: 0, onComplete: () => {
+                    $('.scene17').removeClass('scene--active');
+                    game.pages.story.scenes[18].afterTransition()
+                }})
                 gsap.to('.scene18 .character-harry, .scene18 .character-maggie', 3, { x: 100, ease: Linear.easeNone })
             },
 
@@ -1436,7 +1442,6 @@ game.pages.story = {
                 game.speech.display(SPEECH_MAGGIE_HARRY_BRIDGE_1, () => {
                     game.speech.display(SPEECH_MAGGIE_HARRY_BRIDGE_2, () => {
                         /* fade to black */
-                        
                         gsap.to('.scene-interstitial p', .0000001, { opacity: 0 })
                         $('.scene-interstitial p').text('The End');
 
@@ -1453,7 +1458,7 @@ game.pages.story = {
             afterInterstitialTransition: () => {
                 game.sfx.play('SPEECH_THE_END', () => {
                     /* End of game!! */
-
+                    game.bgm.stop();
                     gsap.to('.scene-interstitial p', 2, { opacity: 0, onComplete: () => {
                         game.modals.storyFinished();
                     } });
