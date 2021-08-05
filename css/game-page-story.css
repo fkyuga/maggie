@@ -322,6 +322,10 @@
     top: 124px
 }
 
+.scene2 .btn-orb-start {
+    transition: unset;
+}
+
 /*** First scene (city) ***/
 .scene3 {
     background-image: url(../img/story/sky--sunny.png);

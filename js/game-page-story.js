@@ -6,7 +6,7 @@ game.pages.story = {
     onload: function(){
         // Help is unavailable in story mode. 
         $('.btn-help').hide();
-        game.pages.story.scenes[18].animate();
+        game.pages.story.scenes[2].animate();
     },
 
     scenes: [
@@ -266,7 +266,7 @@ game.pages.story = {
                                             }, 1500);
     
                                             /* Move to Scene 3 on button press*/
-                                            $('.scene2 #beginStory').off().on('click', function () {
+                                            $('.scene2 #beginStory').off().one('click', function () {
                                                 let transitionTimeline = gsap.timeline({onComplete: () => {
                                                     game.pages.story.scenes[3].animate();
                                                 }});
