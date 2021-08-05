@@ -1296,12 +1296,24 @@ game.pages.story = {
         /* Scene 19: Maggie and Harry sat together on a hill, overlooking a bridge */
         {
             animate: () => {
+                gsap.to('.scene19 .hill', .0000001, { top: 420, scale: 1.2 });
+                gsap.to('.scene19 .hill', 6, { top: 450, scale: 1 });
+
+                gsap.to('.scene19 .ocean', .0000001, { top: 300, scale: 1.05 });
+                gsap.to('.scene19 .ocean', 6, { top: 247, scale: 1 });
+
+                gsap.to('.scene19 .bridge', .0000001, { top: 300, left: 269, scale: 1.1 });
+                gsap.to('.scene19 .bridge', 6, { top: 258, left: 269, scale: 1 });
+
+                
+
                 $('.scene19').addClass('scene--active').css({opacity: 0});
                 gsap.to('.scene18', 1, { opacity: 0, onComplete: () => {$('.scene18').removeClass('scene--active')}});
                 gsap.to('.scene19', 1, { opacity: 1, onComplete: game.pages.story.scenes[19].afterTransition });
             },
 
             afterTransition: () => {
+                /* Hill animation */
                 game.speech.display(SPEECH_MAGGIE_HARRY_BRIDGE_1, () => {
 
                 });
