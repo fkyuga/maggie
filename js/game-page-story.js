@@ -6,7 +6,7 @@ game.pages.story = {
     onload: function(){
         // Help is unavailable in story mode. 
         $('.btn-help').hide();
-        game.pages.story.scenes[16].animate();
+        game.pages.story.scenes[19].animate();
     },
 
     scenes: [
@@ -1284,6 +1284,27 @@ game.pages.story = {
                 setTimeout(function(){
                     game.speech.display(SPEECH_MAGGIE_HARRY_DATE_1);
                 }, 500)
+            }
+        },
+
+        /* Scene 17 : Maggie and Harry at the park */
+        {},
+
+        /* Scene 18: Maggie and Harry in Maggie's room. */
+        {},
+
+        /* Scene 19: Maggie and Harry sat together on a hill, overlooking a bridge */
+        {
+            animate: () => {
+                $('.scene19').addClass('scene--active').css({opacity: 0});
+                gsap.to('.scene18', 1, { opacity: 0, onComplete: () => {$('.scene18').removeClass('scene--active')}});
+                gsap.to('.scene19', 1, { opacity: 1, onComplete: game.pages.story.scenes[19].afterTransition });
+            },
+
+            afterTransition: () => {
+                game.speech.display(SPEECH_MAGGIE_HARRY_BRIDGE_1, () => {
+
+                });
             }
         }
     ]
