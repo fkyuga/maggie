@@ -21,7 +21,7 @@ const SPEECH_MAGGIE_LATE = {
 }
 
 const SPEECH_SCHOOL = {
-    message: "Magnetville Academy - Maggie's school. Maggie can't <em>stand school</em>. Things always tend to go wrong for her...",
+    message: "Magnetville Academy - Maggie's school. Maggie can't <em>stand</em> school. Things always tend to go wrong for her...",
     sound: "SPEECH_SCHOOL"
 }
 
@@ -32,7 +32,6 @@ const SPEECH_SNOW_DAY = {
 
 const SPEECH_AFTER_FLASHBACK = {
     message: "Poor Maggie... No wonder she's scared of school! But she must be brave... she never knows what tomorrow might bring.",
-    sync: [300, 1250, 100, 300, 100, 200, 1000, 200, 200, 300, 100, 500, 300, 400, 300, 200, 500, 200, 100],
     sound: "SPEECH_AFTER_FLASHBACK"
 }
 

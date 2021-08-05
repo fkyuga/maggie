@@ -637,7 +637,8 @@ game.pages.story = {
                             /* change maggie's expression and rotation */
                             $('.scene8 .character-maggie-expression-frown').removeClass('active');
                             $('.scene8 .character-maggie-expression-surprised').addClass('active');
-                            
+                            game.sfx.play('CHARACTER_MAGGIE_SURPRISED')
+
                             gsap.to('.scene8 .character-maggie', .1, { rotate: 20, scaleY: .4, scaleX: -.4 });
                         },
                         onDragEnd: function(){
@@ -758,6 +759,7 @@ game.pages.story = {
                                     $('.scene9 .character-maggie-expression-frown').removeClass('active');
                                     $('.scene9 .character-maggie-expression-surprised').addClass('active');
                                     gsap.to('.scene9 .character-maggie', .1, { rotate: -20 });
+                                    game.sfx.play('CHARACTER_MAGGIE_SURPRISED')
 
                                     /* change rosie's expression */
                                     $('.scene9 .character-rosie-expression-neutral').removeClass('active');
@@ -875,8 +877,8 @@ game.pages.story = {
                 game.speech.display(SPEECH_POOR_MAGGIE_2, () => {
                 /* Draggable Time! */
                 
-                $('.drag-prompt').removeClass('hidden')
-                gsap.to('.scene10 .drag-progress', .5, {
+                $('.scene11 .drag-prompt').removeClass('hidden')
+                gsap.to('.scene11 .drag-progress', .5, {
                     opacity: 1
                 });
 
