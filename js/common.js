@@ -393,6 +393,30 @@ var game = {
                 actions,
                 'lab-howto'
             )
+        },
+
+        storyFinished: function(){
+            confetti({
+                particleCount: 300,
+                angle: 90,
+                spread: 180,
+                scalar: 2,
+                resize: true
+            })
+           game.sfx.play('applause');
+
+            game.modal.display(
+                "Well Done!",
+                "<p>You helped Maggie find her other half... and learned about North and South Pole magnets, attraction and repulsion along the way!</p><p>Next, you might want to try learning about what materials are and aren't magnetic in <strong>Magnet Lab</strong>!</p>",
+                `
+                <div class="buttons">
+                    <div class="modal-action">
+                        <button onclick="game.helpers.goHome(); " class="btn-circle btn-96 btn-yes"></button>
+                        <div class="modal-action-label">Go Home</div>
+                    </div>
+                </div>`,
+                'storyFinished'
+            )
         }
     },
 
