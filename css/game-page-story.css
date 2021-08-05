@@ -1364,6 +1364,17 @@
     z-index: 4;
 }
 
+
+.scene .character-harry .character-harry-arm-l {
+    background-image: url(../img/maggie/arm-l.png);
+    width: 33px;
+    height: 66px;
+    top: 153px;
+    left: -23px;
+    z-index: 4;
+    transform-origin: 79% 2%;
+}
+
 .scene .character-harry .character-harry-expression-blush {
     top: 65px !important;
     left: 11px;
@@ -1555,6 +1566,121 @@
     100% { 
         transform: rotate(20deg);
     }
+}
+
+
+/*************** scene18 ****************/
+.scene18 .city {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: scale(.5) translate(810px, 505px);
+    z-index: 99;
+    opacity: .5;
+}
+
+.scene18 .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.scene18 .sky--night {
+    position: absolute;
+    top: 149px;
+    left: 90px;
+    z-index: 99;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.scene18 .moon {
+    position: absolute;
+    z-index: 99;
+    top: 220px;
+    left: 346px;
+    width: 93px;
+    height: 97px;
+    background-image: url(../img/story/moon.png);
+    background-size: contain;
+}
+
+.scene18 .bed {
+    position: absolute;
+    background-image: url(../img/story/bed.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 364.5px;
+    height: 276px;
+    z-index: 100;
+    top: 478.4px; left: 635.2px;
+}
+
+.scene18 .blanket {
+    position: absolute;
+    background-image: url(../img/story/blanket.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 339.5px;
+    height: 107.5px;
+    z-index: 100;
+    top: 523.2px; left: 629.6px
+}
+
+.scene18 .door-closed {
+    background-image: url(../img/story/door-closed@2x.png);
+    width: 68px;
+    height: 302px;
+    top: 432.8px !important;
+    left: 96px !important;
+    z-index: 100;
+}
+
+.scene18 .door-open {
+    background-image: url(../img/story/door-open@2x.png);
+    width: 137px;
+    height: 294px;
+    top: 435.2px !important;
+    left: 98.8px !important;
+    z-index: 102;
+}
+
+.scene18 .door-light {
+    background-image: url(../img/story/door-light@2x.png);
+    width: 240px;
+    height: 465px;
+    top: 261.2px !important;
+    left: 100.8px !important;
+    z-index: 100;
+}
+
+.scene18 .door-mask {
+    background: #380900;
+    position: absolute;
+    bottom: 38px;
+    left: 0;
+    width: 100px;
+    height: 273px;
+    z-index: 102;
+}
+
+.scene18 .character-maggie {
+    transform: scaleY(.4) scaleX(-.4);
+    top: 344px;
+    left: 327px;
+    transition: none;
+    z-index: 999;
+}
+
+.scene18 .character-harry {
+    left: 449px;
+    top: 414px;
+    transform: scaleY(.77) scaleX(-.77);
 }
 
 /************* scene19 *****************/

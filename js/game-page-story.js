@@ -6,7 +6,7 @@ game.pages.story = {
     onload: function(){
         // Help is unavailable in story mode. 
         $('.btn-help').hide();
-        game.pages.story.scenes[17].animate();
+        game.pages.story.scenes[18].animate();
     },
 
     scenes: [
@@ -1335,9 +1335,35 @@ game.pages.story = {
 
         /* Scene 18: Maggie and Harry in Maggie's room. */
         {
-            animate: () => {
 
+            animate: () => {
+                $('.scene18').addClass('scene--active');
+                game.pages.story.scenes[18].afterTransition()
+                gsap.to('.scene18 .character-harry, .scene18 .character-maggie', 3, { x: 100, ease: Linear.easeNone })
+            },
+
+            afterTransition: () => {
+                game.speech.display(SPEECH_MAGGIE_HARRY_DATE_3, () => {
+
+                    gsap.to('.scene18 .character-harry-arm-l', .25, { rotate: 118 } )
+                    $('.scene18 .character-harry-expression-blush-down').css({
+                        'transform':        'scaleX(-1)',
+                        'background-image': 'url(img/characters/harry/expression-harry-blush.png)' 
+                    });
+
+                    game.speech.display(SPEECH_MAGGIE_HARRY_DATE_3a, () => {
+                        $('.scene18 .character-harry-expression-blush-down').css({
+                            'transform':        'scaleX(1)',
+                            'background-image': 'url(img/characters/harry/expression-harry-blush-down.png)' 
+                        });
+    
+                        setTimeout(()=>{
+                            game.pages.story.scenes[19].animate();
+                        }, 2000);
+                    })
+                })    
             }
+
         },
 
         /* Scene 19: Maggie and Harry sat together on a hill, overlooking a bridge */
