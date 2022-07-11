@@ -1,0 +1,1792 @@
+.scene {
+    width: 1024px;
+    height: 768px;
+    overflow: hidden;
+    display: none;
+    position: absolute;
+    top: 0; left: 0;
+}
+
+.scene--active { display: block; }
+
+.scene .item {
+    position: absolute;
+    top: 0; left: 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.scene-interstitial {
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 36px;
+    text-align: center;
+    opacity: 0;
+    z-index: 99999;
+    touch-action: none;
+    pointer-events: none;
+}
+
+.scene-interstitial p {
+    display: flex;
+    white-space: pre-wrap;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+}
+
+/*** magnetic items scene ***/
+.scene0 {
+    background-color: #543982
+}
+
+.scene0 .item.card {
+    background-image: url(../img/story/card.png);
+    width: 333px; height: 239px;
+    top: 211.555px; left: 39.1109px;
+}
+
+.scene0 .item.compass {
+    background-image: url(../img/story/compass-base.png);
+    width: 219px; height: 220px;
+    top: 215.111px; left: 441.778px;
+}
+
+.scene0 .item.compass-needle {
+    background-image: url(../img/story/compass-needle.png);
+    width: 129px; height: 113px;
+    position: relative; top: 59px; left: 45px;
+}
+
+.scene0 .item.phone {
+    background-image: url(../img/story/phone.png);
+    width: 184px; height: 317px;
+    top: 153.778px; left: 761.778px;
+}
+
+.game-page-story .text {
+    color: white;
+    font-size: 36px;
+    position: absolute;
+    text-align: center;
+    width: 1024px;
+}
+
+.scene0 .text {
+    top: 536.88px;
+}
+
+.game-page-story .text p {
+    margin: 12px 0;
+}
+
+/*** introducing poles page ***/
+.scene1 {
+    background-color: #543982
+}
+
+.scene1 .drag-prompt {
+    --amount: -350px;
+    top: 440px;
+    left: 704px;
+}
+
+.scene .character-jessie {
+    top: 343px;
+    left: 216px;
+    z-index: 1;
+}
+
+.scene .character-jessie-arms {
+    z-index: 0 !important /* I KNOW using !important is bad, but damn if it ain't a great quick fix :p */;
+    position: relative !important;
+    left: 17px !important;
+    z-index: 4;
+    top: 60px !important;
+}
+
+.scene .character-jessie-body {
+    background-image: url(../img/characters/jessie/jessie-body.png);
+    width: 91px; height: 273px;
+    z-index: 2;
+}
+
+.scene .character-jessie .character-jessie-body-no-legs {
+    background-image: url(../img/characters/jessie/jessie-body-no-legs.png);
+    width: 91px;
+    height: 273px;
+    z-index: 2;
+}
+
+.scene .character-jessie-expression-happy {
+    position: relative;
+    top: 30px !important;
+    left: 15px;
+    background-image: url(../img/characters/jessie/expression-jessie-happy.png);
+    width: 60px; height: 46px;
+    z-index: 3;
+    top: 0;
+}
+
+.scene .character-jessie-expression-look-up {
+    position: relative;
+    top: 30px !important;
+    left: 15px;
+    background-image: url(../img/characters/jessie/expression-jessie-look-up.png);
+    width: 60px; height: 48px;
+    z-index: 3;
+    top: 0;
+}
+
+.scene .character-jessie-expression-focussed {
+    position: relative;
+    top: 30px !important;
+    left: 10px;
+    background-image: url(../img/characters/jessie/expression-jessie-focussed.png);
+    width: 66px; height: 48px;
+    z-index: 3;
+    top: 0;
+}
+
+.scene .character-jessie-expression-surprised {
+    position: relative;
+    top: 30px !important;
+    left: 10px;
+    background-image: url(../img/characters/jessie/expression-jessie-surprised.png);
+    width: 67px; height: 52px;
+    z-index: 3;
+    top: 0;
+}
+
+.scene .character-jessie-arm-l {
+    background-image: url(../img/maggie/arm-l.png);
+    z-index: 1;
+    left: -41px;
+    width: 36px;
+    height: 77px;
+}
+
+.scene .character-jessie-arm-r {
+    background-image: url(../img/maggie/arm-r.png);
+    z-index: 1;
+    left: 38px;
+    width: 36px;
+    top: -68px;
+    height: 77px;
+    transform: rotate(44deg);
+    transform-origin: bottom;
+}
+
+.scene .character-haroon {
+    top: 291px;
+    left: 687px;
+    z-index: 2;
+}
+
+.scene .character-haroon .character-haroon-body {
+    background-image: url(../img/characters/haroon/haroon-body.png);
+    width: 133px;
+    height: 330px;
+}
+
+.scene .character-haroon .character-haroon-body-no-legs {
+    background-image: url(../img/characters/haroon/haroon-body-no-legs.png);
+    width: 133px;
+    height: 330px;
+    z-index: 2;
+}
+
+.scene .character-haroon .character-haroon-expression-smile {
+    position: relative;
+    top: 74px !important;
+    left: 45px;
+    background-image: url(../img/characters/haroon/expression-haroon-smile.png);
+    width: 59px; height: 52px;
+    z-index: 3;
+    top: 0;
+}
+
+.scene .character-haroon .character-haroon-expression-look-down {
+    position: relative;
+    top: 74px !important;
+    left: 45px;
+    background-image: url(../img/characters/haroon/expression-haroon-look-down.png);
+    width: 59px; height: 52px;
+    z-index: 3;
+    top: 0;
+}
+
+
+.scene .character-haroon-arm-l {
+    background-image: url(../img/characters/haroon/haroon-arm-l.png);
+    z-index: 1;
+    left: 6px;
+    width: 23px;
+    top: 121px;
+    height: 56px;
+    transform-origin: center 90%;
+}
+
+
+.scene .character-haroon-arm-r {
+    background-image: url(../img/characters/haroon/haroon-arm-r.png);
+    z-index: 1;
+    left: 110px;
+    width: 28px;
+    top: 166px;
+    height: 46px;
+    transform-origin: center 90%;
+}
+
+.scene1 .text {
+    top: 159px;
+}
+
+.scene1 .drag-progress,
+.scene2 .drag-progress {
+    width: 550px;
+    height: 32px;
+    border-radius: 900px;
+    background-color: rgba(255,255,255,.3);
+    top: 450px;
+    left: 239px;
+    position: absolute;
+
+    /* flip */
+    transform: scaleX(-1) !important;
+
+    z-index: 0;
+}
+
+.scene1 .drag-progress:after {
+    /* We store width of the :after element (which is what displays the progress inside the bar)
+    as a CSS custom property - which we adjust in JS. We do this because we cannot easily
+    modify styles of pseudo-elements. */
+
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: var(--progress);
+    height: 32px;
+    border-radius: 900px;
+    background-color: rgba(255,255,255,.8);
+    z-index: 0;
+}
+
+/*** Magnetic Repulsion ***/
+.scene2 .character-lil-full {
+    top: 300px;
+    width: 144.5px;
+    height: 319.5px;
+    background-image: url(../img/characters/lil/character-lil-full.png);
+    left: 678px;
+    z-index: 1;
+}
+
+.scene2 .character-jessie-arm-r { 
+    background-image: url(../img/maggie/arm-r.png);
+    z-index: 1;
+    left: 64px;
+    width: 36px;
+    top: -82px;
+    height: 77px;
+    transform: rotate(183deg);
+    transform-origin: bottom;
+}
+
+.scene2 .drag-progress:after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: var(--progress2);
+    height: 32px;
+    border-radius: 900px;
+    background-color: rgba(255,255,255,.8);
+    z-index: 0;
+}
+
+.scene2 .drag-prompt {
+    --amount: -350px;
+    top: 440px;
+    left: 704px;
+}
+
+.scene2 .text p {
+    max-width: 60%;
+    white-space: normal;
+    margin: 12px auto;
+}
+
+.scene2 .text {
+    top: 124px
+}
+
+.scene2 .btn-orb-start {
+    transition: unset;
+}
+
+/*** First scene (city) ***/
+.scene3 {
+    background-image: url(../img/story/sky--sunny.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden !important;
+}
+
+.scene3 .city {
+    transform: scale(.9) translate(100px, 0);
+}
+
+.city .sun {
+    position: absolute;
+    background-image: url(../img/story/sun.png);
+    background-size: contain;
+    width: 105.49195px;
+    height: 122.4207px;
+    top: 32px; left: 32px;
+}
+
+.city .buildings {
+    position: absolute;
+    background-image: url(../img/story/buildings.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 1168.25px;
+    height: 580.75px;
+    top: 33px; left: -163px;
+}
+
+.city .magbux {
+    position: absolute;
+    background-image: url(../img/story/magbux.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 362px;
+    height: 405px;
+    top: 203.703px; left: 470.674px;
+    z-index: 2;
+}
+
+.city .bank {
+    position: absolute;
+    background-image: url(../img/story/bank.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 187px;
+    height: 289px;
+    top: 321.457px; left: 94.6463px;
+    z-index: 2;
+}
+
+.city .tree {
+    position: absolute;
+    background-image: url(../img/story/tree.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 147px;
+    height: 241.5px;
+    top: 0; left: 0;
+    z-index: 2;
+}
+
+.city .tree0 {
+    top: 336.805px; left: 321.457px;
+}
+
+.city .tree1 {
+    top: 340.215px; left: 850.964px;
+}
+
+.city .pavement {
+    position: absolute;
+    background-image: url(../img/story/pavement.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 1227.25px;
+    height: 46.25px;
+    top: 547.414px; left: -208.904px;
+}
+
+.city .road {
+    position: absolute;
+    background-image: url(../img/story/road.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 1313.25px;
+    height: 246.5px;
+    top: 590px; left: -207px;
+    z-index: 3;
+}
+
+.city .car {
+    position: absolute;
+    background-image: url(../img/story/car.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 451.5px;
+    height: 262px;
+    top: 489px; left: -700px;
+    z-index: 4;
+}
+
+/*** Maggie's Room ***/
+.scene4 {
+    background-image: url(../img/story/maggies-room.png);
+    background-size: cover;
+    transform-origin: 45% 41%;
+}
+
+.scene4 .bed {
+    position: absolute;
+    background-image: url(../img/story/bed.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 364.5px;
+    height: 276px;
+    z-index: 1;
+    top: 478.4px; left: 635.2px;
+}
+
+.scene4 .maggie-sleep {
+    position: absolute;
+    background-image: url(../img/story/maggie-sleep.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 86px;
+    height: 101.5px;
+    z-index: 1;
+    top: 461px; left: 791.2px;
+    animation: 3s infinite sleeping;
+}
+
+.scene4 .blanket {
+    position: absolute;
+    background-image: url(../img/story/blanket.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 339.5px;
+    height: 107.5px;
+    z-index: 2;
+    top: 523.2px; left: 629.6px
+}
+
+@keyframes sleeping {
+    0% { transform: translateY(0) }
+    50% { transform: translateY(-5px) }
+    100% { transform: translateY(0) }
+}
+
+/**** Scene 2: Maggie close up in bed ****/
+.scene5 {
+    background-color: #361820;
+}
+
+.scene5 .bed-closeup {
+    width: 814px; height: 826px;
+    background-image: url(../img/story/bed-closeup.png);
+    top: 145.6px; left: 100.8px;
+}
+
+.scene5 .blanket-closeup {
+    width: 709.5px; height: 657.5px;
+    background-image: url(../img/story/blanket-closeup.png);
+    top: 493.6px; left: 165.6px;
+    z-index: 4;
+}
+
+.scene5 .maggie-pajamas {
+    width: 365.5px; height: 791px;
+    background-image: url(../img/story/maggie-pajamas.png);
+    top: 186.4px; left: 320.8px;
+    animation: 3s infinite sleeping;
+}
+
+.scene5 .maggie-pajamas.awake {
+    animation: unset;
+}
+
+.scene5 .expression-sleeping {
+    position: relative;
+    top: 0; left: 0;
+    width: 127.5px; height: 127.5px;
+    background-image: url(../img/story/expression-sleeping.png);
+    top: 177px; left: 111px;
+}
+
+.scene5 .expression-shocked {
+    position: relative;
+    top: 0; left: 0;
+    width: 127px; height: 124.5px;
+    background-image: url(../img/story/expression-shocked.png);
+    top: 177px; left: 111px;
+}
+
+.scene5 .expression-screaming {
+    position: relative;
+    top: 0; left: 0;
+    width: 127.5px; height: 134px;
+    background-image: url(../img/story/expression-screaming.png);
+    top: 177px; left: 111px;
+}
+
+.scene5 .sleepbubbles {
+    top: 470.2px;
+    left: 508.2px;
+    animation: 3s infinite sleeping;
+}
+
+.scene5 .sleepbubbles .sleepbubble0 {
+    width: 25.5px; height: 22.5px;
+    background-image: url(../img/story/sleepbubble0.png);
+    position: relative;
+}
+
+.scene5 .sleepbubbles .sleepbubble1 {
+    width: 38.5px; height: 39px;
+    background-image: url(../img/story/sleepbubble1.png);
+    position: relative;
+    top: -64px;
+    left: 31px;
+}
+
+.scene5 .sleepbubbles .sleepbubble2 {
+    width: 55.5px; height: 55.5px;
+    background-image: url(../img/story/sleepbubble2.png);
+    position: relative;
+    top: -163px;
+    left: 75px;
+}
+
+.scene5 .sleepbubbles .sleepbubble3 {
+    width: 98px; height: 98px;
+    background-image: url(../img/story/sleepbubble3.png);
+    position: relative;
+    top: -320px;
+    left: 123px;
+}
+
+.scene5 .clock {
+    width: 217.5px; height: 216.75px;
+    background-image: url(../img/items/clock@2x.png);
+    top: 271px;
+    left: 1030px;
+}
+
+/** Scene 6 : Maggie scared of school **/
+.scene6 {
+    height: 100%; width: 100%;
+    background-color: #29ABE2;
+}
+
+.magnetfield-academy-front {
+    background-image: url(../img/story/magnetfield-academy@0.5x.png);
+    width: 890px;
+    height: 801px;
+    left: 72px !important;
+    top: 74px !important; 
+}
+
+.maggie-back {
+    background-image: url(../img/story/maggie-back@0.5x.png);
+    width: 520px;
+    height: 901px;
+    z-index: 2;
+    top: 209px !important;
+    left: 232px !important;
+}
+
+/** Scene 7: Snow day goes wrong **/
+.scene7 { 
+    height: 100%; width: 100%;
+    background-image: url(../img/story/school-snow.png);
+    background-size: cover;
+}
+
+.scene7 .character-jessie {
+    transform: scale(.7);
+    left: 592px;
+    top: 369px;
+}
+
+.scene7 .character-jessie-arm-r {
+    background-image: url(../img/maggie/arm-r.png);
+    z-index: 1;
+    left: -79px;
+    width: 36px;
+    top: -36px;
+    height: 77px;
+    transform: rotate(53deg);
+    transform-origin: bottom;
+}
+
+.scene7 .character-jessie-arms.animating .character-jessie-arm-r {
+    animation: 1s infinite arm-r-ruffling;
+}
+
+.scene7 .character-jessie-arms.animating .character-jessie-arm-l {
+    animation: 1s infinite arm-l-ruffling;
+}
+
+@keyframes arm-l-ruffling {
+    0% { transform: rotate(0deg)}
+    50% { transform: rotate(10deg) translateX(-15px)}
+    100% { transform: rotate(0deg)}
+}
+
+@keyframes arm-r-ruffling {
+    0% { transform: rotate(53deg)}
+    50% { transform: rotate(63deg) translateX(10px)}
+    100% { transform: rotate(53deg)}
+}
+
+.scene7 .character-tomas {
+    position: absolute;
+    left: 692px;
+    top: 485px;
+    z-index: 2;
+}
+
+.scene7 .character-tomas-body {
+    background-image: url(../img/characters/tomas/tomas-body.png);
+    width: 70px;
+    height: 248px;
+    z-index: 2;
+}
+
+.scene7 .character-tomas-arm-l {
+    background-image: url(../img/maggie/arm-l.png);
+    z-index: 1;
+    left: -21px;
+    width: 30px;
+    top: 94px;
+    height: 78px;
+    transform: rotate(-5deg);
+    transform-origin: 73% 20%;
+}
+
+
+.scene7 .character-tomas-arm-r {
+    background-image: url(../img/maggie/arm-r.png);
+    z-index: 1;
+    left: 59px;
+    width: 30px;
+    top: 94px;
+    height: 78px;
+    transform: rotate(5deg);
+    transform-origin: center 90%;
+}
+
+.scene7 .snowball {
+    height: 24px;
+    width: 24px;
+    background-size: contain;
+    background-image: url(../img/story/snowball.png);
+    top: 43px;
+    left: -7px;
+    z-index: 3;
+    opacity: 0;
+}
+
+.scene7 .character-maggie {
+    transform: scale(.4) scaleX(-1);
+    top: 283px;
+    left: 182px;
+    transition: none;
+}
+
+.scene7 .character-maggie-body {
+    transform: scaleX(-1);
+}
+
+/** Scene 8 - back in the schoolyard, in the present moment. encourage maggie
+    to persevere **/
+.scene8 {
+    background-image: url(../img/story/school-sunny.png);
+    background-size: cover;
+}
+
+.scene8 .character-maggie {
+    top: 283px;
+    left: 182px;
+    transition: none;
+    z-index: 1;
+}
+
+.scene8 .character-maggie-body {
+    transform: scaleX(-1);
+}
+
+.scene8 .drag-progress {
+    width: 471px;
+    height: 32px;
+    border-radius: 900px;
+    background-color: rgba(255,255,255,.3);
+    top: 497px;
+    left: 199px;
+    position: absolute;
+    z-index: 0;
+}
+
+.scene8 .drag-prompt {
+    --amount: 350px;
+    top: 500px;
+    left: 177px;
+}
+
+.scene8 .drag-progress:after {
+    /* We store width of the :after element (which is what displays the progress inside the bar)
+    as a CSS custom property - which we adjust in JS. We do this because we cannot easily
+    modify styles of pseudo-elements. */
+
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: var(--progressScene8);
+    height: 32px;
+    border-radius: 900px;
+    background-color: rgba(255,255,255,.8);
+    z-index: 0;
+}
+
+/** scene 9 - maggie and rosie repel **/
+.scene9 {
+    background-image: url(../img/story/school-sunny-b.png);
+    background-size: cover;
+}
+
+.scene9 .character-maggie { transition: none; }
+
+.scene9 .character-rosie {
+    position: absolute;
+    left: 177px;
+    top: 384px;
+    z-index: 2;
+}
+
+.scene9 .character-rosie-body {
+    background-image: url(../img/characters/rosie/rosie-body.png);
+    width: 104px;
+    height: 242px;
+    z-index: 2;
+}
+
+.character-rosie-expression-neutral {
+    background-image: url(../img/characters/rosie/expression-rosie-neutral.png);
+    width: 44px;
+    height: 46px;
+    z-index: 3;
+    top: 25px !important;
+    left: 28px !important;
+}
+
+.character-rosie-expression-surprised {
+    background-image: url(../img/characters/rosie/expression-rosie-surprised.png);
+    width: 44px;
+    height: 46px;
+    z-index: 3;
+    top: 25px !important;
+    left: 28px !important;
+}
+
+.scene9 .character-maggie {
+    transform: scale(.4);
+    top: 282px;
+    left: 550px;
+    z-index: 1;
+}
+
+.scene9 .drag-progress {
+    width: 400px;
+    height: 32px;
+    border-radius: 900px;
+    background-color: rgba(255,255,255,.3);
+    top: 497px;
+    left: 199px;
+    position: absolute;
+    z-index: 0;
+    opacity: 0;
+    transform: scaleX(-1) !important;
+}
+
+.scene9 .drag-progress:after {
+    /* We store width of the :after element (which is what displays the progress inside the bar)
+    as a CSS custom property - which we adjust in JS. We do this because we cannot easily
+    modify styles of pseudo-elements. */
+
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: var(--progressScene9);
+    height: 32px;
+    border-radius: 900px;
+    background-color: rgba(255,255,255,.8);
+    z-index: 0;
+}
+
+
+.scene9 .drag-prompt {
+    --amount: -300px;
+    top: 500px;
+    left: 550px;
+}
+
+/****** SCENE 10 ******/
+.scene10 .city {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: scale(.5) translate(810px, 505px);
+    z-index: 99;
+    opacity: .5;
+}
+
+.scene10 .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.scene10 .sky--night {
+    position: absolute;
+    top: 149px;
+    left: 90px;
+    z-index: 99;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.scene10 .moon {
+    position: absolute;
+    z-index: 99;
+    top: 220px;
+    left: 346px;
+    width: 93px;
+    height: 97px;
+    background-image: url(../img/story/moon.png);
+    background-size: contain;
+}
+
+.scene10 .bed {
+    position: absolute;
+    background-image: url(../img/story/bed.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 364.5px;
+    height: 276px;
+    z-index: 100;
+    top: 478.4px; left: 635.2px;
+}
+
+.scene10 .blanket {
+    position: absolute;
+    background-image: url(../img/story/blanket.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 339.5px;
+    height: 107.5px;
+    z-index: 100;
+    top: 523.2px; left: 629.6px
+}
+
+.scene10 .door-closed {
+    background-image: url(../img/story/door-closed@2x.png);
+    width: 68px;
+    height: 302px;
+    top: 432.8px !important;
+    left: 96px !important;
+    z-index: 100;
+}
+
+.scene10 .door-open {
+    background-image: url(../img/story/door-open@2x.png);
+    width: 137px;
+    height: 294px;
+    top: 435.2px !important;
+    left: 98.8px !important;
+    z-index: 102;
+}
+
+.scene10 .door-light {
+    background-image: url(../img/story/door-light@2x.png);
+    width: 240px;
+    height: 465px;
+    top: 261.2px !important;
+    left: 100.8px !important;
+    z-index: 100;
+}
+
+.scene10 .character-maggie {
+    z-index: 101;
+    transition: none;
+    transform: scaleY(.4) scaleX(-0.4);
+    top: 375px;
+    left: 0;
+}
+
+.scene10 .character-maggie-body {
+    transform: scaleX(-1);
+}
+
+.scene10 .door-mask {
+    background: #380900;
+    position: absolute;
+    bottom: 38px;
+    left: 0;
+    width: 100px;
+    height: 273px;
+    z-index: 102;
+}
+
+/******** SCENE 11
+          Maggie crying in bed :( ***********/
+.scene11 {
+    background-color: #361820;
+}
+
+/* yes i know code repetition idc */
+.scene11 .bed-closeup {
+    width: 814px; height: 826px;
+    background-image: url(../img/story/bed-closeup.png);
+    top: 145.6px; left: 100.8px;
+}
+
+.scene11 .blanket-closeup {
+    width: 709.5px; height: 657.5px;
+    background-image: url(../img/story/blanket-closeup.png);
+    top: 631.6px; left: 165.6px;
+    z-index: 2;
+}
+
+.scene11 .character-maggie {
+    top: 163px !important;
+    left: 368px !important;
+    transition: none;
+}
+
+.scene11 .drag-progress {
+    width: 296px;
+    height: 32px;
+    border-radius: 900px;
+    background-color: rgba(0,0,0,.6);
+    top: 594px;
+    left: 366px;
+    position: absolute;
+    z-index: 3;
+    opacity: 0;
+    transform: rotate(90deg) !important;
+}
+
+.scene11 .drag-progress:after {
+    /* We store width of the :after element (which is what displays the progress inside the bar)
+    as a CSS custom property - which we adjust in JS. We do this because we cannot easily
+    modify styles of pseudo-elements. */
+
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 6px;
+    width: var(--progressScene11);
+    height: 22px;
+    border-radius: 900px;
+    background-color: rgba(255,255,255,.9);
+    z-index: 0;
+}
+
+@keyframes drag-prompt-vertical {
+    0% { opacity: 0; transform: scale(1.5); }
+    20% { opacity: 1; transform: scale(1); }
+    60% { opacity: 1; transform: translateY(var(--amount))}
+    100% { opacity: 0; transform: scale(1.5) translateY(calc(var(--amount) / 1.5)) }
+}
+
+.scene11 .drag-prompt {
+    --amount: -280px;
+    top: 747px;
+    left: 477px;
+}
+
+.scene11 .drag-prompt img {
+    animation: 2s infinite drag-prompt-vertical;
+}
+
+ .character-maggie-expression-sleeping {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 99.5px;
+    height: 127.5px;
+    background-image: url(../img/story/expression-sleeping.png);
+    top: -14px;
+}
+
+/******** SCENE 12 **********/
+/*** Background gradient stuff -- this guy on codepen
+     https://codepen.io/ben-eb/pen/qqygBO ***/
+
+.scene12 {
+    --x: 304;
+    --y: 721;
+
+    background: radial-gradient(
+        circle farthest-side at
+          calc(var(--x, 1) * 1px)
+          calc(var(--y, 1) * 1px),
+        hsl(var(--x, 5), 75%, 30%),
+        hsl(var(--y, 45), 75%, 30%)
+      );
+}
+
+.dream-text {
+    opacity: .8;
+    display: flex;
+    height: 100%;
+    width: 70%;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.dream-text p {
+    max-width: 70%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.dream-text.bottom {
+    align-items: flex-end;
+}
+
+.dream-text.bottom p {
+    padding-bottom: 60px;
+}
+
+.scene12 .character-harry-dream {
+    width: 236px;
+    height: 450px;
+    left: 378px;
+    top: 100px;
+    background-image: url(../img/characters/harry/character-harry-dream.png);
+    opacity: 0;
+    transition: 0.2s linear;
+}
+
+.scene12 .character-harry-dream.reveal {
+    opacity: 1;
+    filter: brightness(1.8) contrast(1.2) blur(100px);
+    animation: 7s reveal;
+}
+
+
+@keyframes reveal {
+    0% {
+        filter: brightness(1.8) contrast(1.2) blur(100px);
+    }
+
+    100% {
+        filter: brightness(1) contrast(1) blur(10px);
+    }
+}
+
+
+/******** SCENE 13 - maggie wakes up after dream ********/
+    .scene13 {
+    background-color: #361820;
+}
+
+.scene13 .bed-closeup {
+    width: 814px; height: 826px;
+    background-image: url(../img/story/bed-closeup.png);
+    top: 145.6px; left: 100.8px;
+}
+
+.scene13 .blanket-closeup {
+    width: 709.5px; height: 657.5px;
+    background-image: url(../img/story/blanket-closeup.png);
+    top: 631.6px; left: 165.6px;
+    z-index: 2;
+}
+
+.scene13 .character-maggie {
+    top: 163px !important;
+    left: 368px !important;
+    transition: none;
+    z-index: 99;
+}
+
+.scene13 .clock {
+    width: 217.5px;
+    height: 216.75px;
+    background-image: url(../img/items/clock@2x.png);
+    top: 273px;
+    left: 564px;
+    z-index: 100;
+    transform: scale(.5) rotate(
+    20deg
+    );
+}
+
+
+/********** scene 14 - schoolyard, maggie confident *********/
+.scene14 {
+    background-image: url(../img/story/school-sunny--no-trees.png);
+    background-size: cover;
+}
+
+.scene14 .tree {
+    background-image: url(../img/story/tree.png);
+    width: 588px;
+    height: 966px;
+}
+
+.scene14 .tree0 {
+    transform: scale(.32);
+    top: 105px;
+    left: -223px;
+    z-index: 12;
+}
+
+.scene14 .tree1 {
+    transform: scale(.27);
+    top: -59px;
+    left: -110px;
+    opacity: .8;
+    z-index: 8
+}
+
+.scene14 .character-maggie {
+    top: 283px;
+    left: 182px;
+    transition: none;
+    z-index: 1;
+}
+
+.scene14 .character-maggie-body {
+    transform: scaleX(-1);
+}
+
+.scene14 .character-haroon {
+    top: 495px;
+    left: 557px;
+    transform: scale(.7);
+    z-index: 9;
+}
+
+.scene14 .character-jessie {
+    top: 536px;
+    left: 519px;
+    z-index: 10;
+    transform: scale(.7);
+}
+
+.scene14 .character-haroon .character-maggie-leg-l {
+    top: 293px;
+    left: 39px;
+    height: 36px;
+    width: 26px;
+}
+
+.scene14 .character-haroon .character-maggie-leg-r {
+    top: 295px;
+    left: 75px;
+    height: 36px;
+    width: 26px;
+}
+
+.scene14 .character-jessie .character-maggie-leg-l {
+    top: 236px;
+    left: 12px;
+    height: 36px;
+    width: 26px;
+}
+
+.scene14 .character-jessie .character-maggie-leg-r {
+    top: 240px;
+    left: 48px;
+    height: 36px;
+    width: 26px;
+}
+
+.scene14 .character-lil-full {
+    top: 346px;
+    width: 100.5px;
+    height: 319.5px;
+    background-image: url(../img/characters/lil/character-lil-full.png);
+    left: 201px;
+    z-index: 1;
+    transform: scale(.7);
+    opacity: .8;
+}
+
+.item.cloud {
+    top: 0; left: 0;
+    width: 586px;
+    height: 89px;
+    background-image: url(../img/story/cloud.png);
+    transform: scale(.7);
+}
+
+.scene14 .cloud0 {
+    top: 66px;
+    left: 200px;
+    opacity: .9;
+}
+
+.scene14 .cloud1 {
+    top: 0;
+    left: 410px;
+    opacity: .6;
+    transform: scale(.65)
+}
+
+.scene14 .character-maggie {
+    transform: scale(.4) scaleX(-1);
+    transform-origin: center 70%;
+    top: 273px;
+    left: -100px;
+    transition: none;
+    z-index: 8;
+}
+
+.scene14 .character-maggie-body {
+    transform: scaleX(-1);
+}
+
+
+/******** SCENE 15 ***********/
+.scene15 {
+    background-image: url(../img/story/school-sunny-b.png);
+    background-size: cover;   
+}
+
+.scene15 .cloud0 {
+    top: 66px;
+    left: 200px;
+    opacity: .9;
+}
+
+.scene15 .cloud1 {
+    top: 0;
+    left: 410px;
+    opacity: .6;
+    transform: scale(.65)
+}
+
+.scene15 .character-maggie {
+    transform: scale(.4);
+    transform-origin: center 70%;
+    top: 250px;
+    left: 620px;
+    transition: none;
+    z-index: 8;
+}
+
+
+.scene15 .drag-progress {
+    width: 400px;
+    height: 32px;
+    border-radius: 900px;
+    background-color: rgba(255,255,255,.3);
+    top: 497px;
+    left: 250px;
+    position: absolute;
+    z-index: 0;
+    opacity: 0;
+    transform: scaleX(-1) !important;
+}
+
+.scene15 .drag-progress:after {
+    /* We store width of the :after element (which is what displays the progress inside the bar)
+    as a CSS custom property - which we adjust in JS. We do this because we cannot easily
+    modify styles of pseudo-elements. */
+
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: var(--progressScene15);
+    height: 32px;
+    border-radius: 900px;
+    background-color: rgba(255,255,255,.8);
+    z-index: 0;
+}
+
+
+.scene15 .drag-prompt {
+    --amount: -300px;
+    top: 500px;
+    left: 550px;
+}
+
+/************* HARRY STYLES (hahaha, get it?) *************/
+.scene .character-harry {
+    top: 357px;
+    left: 199px;
+    z-index: 1001;
+    transform: scale(.77);
+}
+
+.scene .character-harry .character-harry-expression-reading {
+    display: none;
+    top: 64px !important;
+    left: 15px;
+    background-image: url(../img/characters/harry/expression-harry-reading.png);
+    width: 55px;
+    height: 42px;
+    z-index: 3;
+    top: 0;
+}
+
+.scene .character-harry .character-harry-body {
+    background-image: url(../img/characters/harry/harry-body.png);
+    width: 133px;
+    height: 330px;
+    z-index: 2;
+}
+
+.scene .character-harry .character-harry-arms-reading {
+    background-image: url(../img/characters/harry/harry-arms-reading.png);
+    width: 129px;
+    height: 83px;
+    top: 117px;
+    left: -26px;
+    z-index: 4;
+}
+
+.scene .character-harry .character-harry-arm-l-reading {
+    background-image: url(../img/characters/harry/harry-arm-l-reading.png);
+    width: 129px;
+    height: 126px;
+    top: 121px;
+    left: -35px;
+    z-index: 4;
+}
+
+
+.scene .character-harry .character-harry-arm-l {
+    background-image: url(../img/maggie/arm-l.png);
+    width: 33px;
+    height: 66px;
+    top: 153px;
+    left: -23px;
+    z-index: 4;
+    transform-origin: 79% 2%;
+}
+
+.scene .character-harry .character-harry-expression-blush {
+    top: 65px !important;
+    left: 11px;
+    background-image: url(../img/characters/harry/expression-harry-blush.png);
+    width: 61px;
+    height: 42px;
+    z-index: 3;
+    display: none;
+}
+
+.scene .character-harry .character-harry-expression-blush-down {
+    top: 65px !important;
+    left: 11px;
+    background-image: url(../img/characters/harry/expression-harry-blush-down.png);
+    width: 61px;
+    height: 42px;
+    z-index: 3;
+    display: none;
+}
+
+.character-harry .character-harry-leg-l {
+    top: 313px;
+    left: 5px;
+    height: 36px;
+    width: 26px;
+    background-image: url(../img/maggie/leg-l.png);
+    z-index: 1;
+}
+
+.character-harry .character-harry-leg-r {
+    top: 315px;
+    left: 43px;
+    height: 36px;
+    width: 26px;
+    background-image: url(../img/maggie/leg-r.png);
+    z-index: 1;
+}
+
+.character-harry .character-harry-earbuds {
+    background-image: url(../img/characters/harry/earbuds.png);
+    z-index: 3;
+    top: 83px;
+    width: 77px;
+    height: 200px;
+    transform: scaleX(-1);
+    left: 3px;
+}
+
+/************ scene16 *************/
+.scene16 .city {
+    left: 0;
+    position: absolute;
+}
+
+.scene16 {
+    background-image: url(../img/story/sky--sunny.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden !important;
+}
+
+.scene16 .character-maggie {
+    z-index: 20;
+    transform: scale(.4);
+    top: 286px;
+    left: 602px;
+    transition: none;
+}
+
+.scene16 .character-harry {
+    left: 615px;
+    top: 357px;
+}
+
+/************ scene17 *************/
+.scene17 {
+    background-image: url(../img/story/sky--sunny.png);
+    background-size: contain;
+}
+
+.scene17 .sun {
+    position: absolute;
+    background-image: url(../img/story/sun.png);
+    background-size: contain;
+    width: 105.49195px;
+    height: 122.4207px;
+    top: 32px; left: 32px;
+}
+
+.scene17 .fence {
+    position: absolute;
+    background-image: url(../img/story/park/fence.png);
+    background-size: contain;
+    width: 2265px;
+    height: 191px;
+    top: 500px;
+    left: -100px;
+    z-index: 2;
+}
+
+.scene17 .ground {
+    width: 1282.5px;
+    height: 247px;
+    background-image: url(../img/story/park/park-grass.png);
+    background-size: contain;
+    top: 600px;
+    left: 0;
+}
+
+.scene17 .park {
+    top: 280px;
+    left: 0px;
+    position: absolute;
+}
+
+.scene17 .swing-set {
+    position: absolute;
+    width: 576px;
+    height: 364.5px;
+    background-image: url(../img/story/park/swing-set.png);
+    background-size: contain;
+    left: 200px;
+    top: 0;
+}
+
+.scene17 .slide {
+    position: absolute;
+    width: 548px;
+    height: 328px;
+    background-image: url(../img/story/park/slide.png);
+    background-size: contain;
+    left: 900px;
+    top: 0;
+}
+
+.scene17 .maggie-swing {
+    position: absolute;
+    top: 16px; left: 110px;
+    width: 135px;
+    height: 250.5px;
+    background-image: url(../img/story/park/maggie-swing.png);
+    background-size: contain;
+    animation: 3s infinite maggie-swinging;
+    transform-origin: top right;
+}
+
+.scene17 .harry-swing {
+    position: absolute;
+    top: 16px; left: 299px;
+    width: 141px;
+    height: 248px;
+    background-image: url(../img/story/park/harry-swing.png);
+    background-size: contain;
+    animation: 3s infinite harry-swinging;
+}
+
+.scene17 .lil-billy-slide {
+    position: absolute;
+    top: 0; left: 123px;
+    width: 122px;
+    height: 108px;
+    background-image: url(../img/story/park/lil-billy-slide.png);
+    background-size: contain;
+}
+
+@keyframes maggie-swinging {  
+    0% {
+        transform: rotate(0deg);
+    }
+    
+    50% { 
+        transform: rotate(-45deg);
+    }
+
+    100% { 
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes harry-swinging { 
+    0% {
+        transform: rotate(20deg);
+    }
+    
+    50% { 
+        transform: rotate(-45deg) translateX(100px);
+    }
+
+    100% { 
+        transform: rotate(20deg);
+    }
+}
+
+
+/*************** scene18 ****************/
+.scene18 .city {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: scale(.5) translate(810px, 505px);
+    z-index: 99;
+    opacity: .5;
+}
+
+.scene18 .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.scene18 .sky--night {
+    position: absolute;
+    top: 149px;
+    left: 90px;
+    z-index: 99;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.scene18 .moon {
+    position: absolute;
+    z-index: 99;
+    top: 220px;
+    left: 346px;
+    width: 93px;
+    height: 97px;
+    background-image: url(../img/story/moon.png);
+    background-size: contain;
+}
+
+.scene18 .bed {
+    position: absolute;
+    background-image: url(../img/story/bed.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 364.5px;
+    height: 276px;
+    z-index: 100;
+    top: 478.4px; left: 635.2px;
+}
+
+.scene18 .blanket {
+    position: absolute;
+    background-image: url(../img/story/blanket.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 339.5px;
+    height: 107.5px;
+    z-index: 100;
+    top: 523.2px; left: 629.6px
+}
+
+.scene18 .door-closed {
+    background-image: url(../img/story/door-closed@2x.png);
+    width: 68px;
+    height: 302px;
+    top: 432.8px !important;
+    left: 96px !important;
+    z-index: 100;
+}
+
+.scene18 .door-open {
+    background-image: url(../img/story/door-open@2x.png);
+    width: 137px;
+    height: 294px;
+    top: 435.2px !important;
+    left: 98.8px !important;
+    z-index: 102;
+}
+
+.scene18 .door-light {
+    background-image: url(../img/story/door-light@2x.png);
+    width: 240px;
+    height: 465px;
+    top: 261.2px !important;
+    left: 100.8px !important;
+    z-index: 100;
+}
+
+.scene18 .door-mask {
+    background: #380900;
+    position: absolute;
+    bottom: 38px;
+    left: 0;
+    width: 100px;
+    height: 273px;
+    z-index: 102;
+}
+
+.scene18 .character-maggie {
+    transform: scaleY(.4) scaleX(-.4);
+    top: 344px;
+    left: 327px;
+    transition: none;
+    z-index: 999;
+}
+
+.scene18 .character-harry {
+    left: 449px;
+    top: 414px;
+    transform: scaleY(.77) scaleX(-.77);
+}
+
+/************* scene19 *****************/
+.scene19 .night-sky {
+    top: 0;
+    left: 0;
+    width: 1024px;
+    height: 768px;
+    background-image: url(../img/story/sunset-hill/sunset-night-sky.png);
+    background-size: 110%;
+    background-position: center;
+    z-index: 0;
+}
+
+
+.scene19 .hill {
+    height: 388.5px;
+    width: 1272.5px;
+    top: 443px;
+    left: -204px;
+    background-image: url(../img/story/sunset-hill/sunset-hill.png);
+    z-index: 3;
+}
+
+.scene19 .bridge {
+    width: 806px;
+    height: 343.5px;
+    top: 258px;
+    left: 269px;
+    background-image: url(../img/story/sunset-hill/sunset-bridge.png);
+    z-index: 2;
+}
+
+.scene19 .ocean {
+    width: 1119.5px;
+    height: 459.5px;
+    top: 247px;
+    left: -72px;
+    background-image: url(../img/story/sunset-hill/sunset-ocean.png);
+    z-index: 1;
+}
+
+.scene19 .moon {
+    top: 40px;
+    left: 40px;
+    width: 128px;
+    height: 128px;
+    background-image: url(../img/story/moon.png);
+    background-size: contain;
+    z-index: 1;
+}
+
+.scene19 .maggie-harry-blanket {
+    top: -52px;
+    left: 591px;
+    width: 218.5px;
+    height: 199.5PX;
+    background-image: URL(../img/story/sunset-hill/sunset-maggie-harry.png);
+    z-index: 4;
+}
+
+.scene19 .cars {
+    width: 1640px;
+    height: 41.5px;
+    background-repeat: repeat;
+    background-image: url(../img/story/sunset-hill/sunset-cars-1.png)
+}
+
+.scene19 .cars.cars0 {
+    transform: rotate(-20deg);
+    left: -800px;
+    top: 278px;
+    animation: 60s cars0-driving infinite;
+    animation-timing-function: linear;
+}
+
+.scene19 .cars.cars1 {
+    transform: rotate(-20deg) scaleX(-1);
+    left: 0;
+    top: 11px;
+    animation: 60s cars1-driving infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes cars0-driving {
+    0% {
+        transform: rotate(-20deg) translate(0, 0);
+    }
+
+    100% {
+        transform: rotate(-20deg) translate(800px, 0);
+    }
+}
+
+@keyframes cars1-driving {
+    0% {
+        transform: rotate(-20deg) translate(0, 0) scaleX(-1);
+    }
+
+    100% {
+        transform: rotate(-20deg) translate(-800px, 0) scaleX(-1);
+    }
+}

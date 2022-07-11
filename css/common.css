@@ -12,6 +12,86 @@ html, body {
     font-family: 'Patrick Hand', cursive;
 }
 
+.active {
+    display: block !important;
+}
+
+.inactive {
+    display: none !important;
+}
+
+.modal-container {
+    display: flex;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1024px;
+    height: 768px;
+    z-index: 99999999;
+    background-color: rgba(0,0,0,.4);
+}
+
+#modal-container__bg {
+    width: 900px;
+    position: absolute;
+    top: 115px;
+    left: 59px;
+}
+
+#modal-container__title-img {
+    position: absolute;
+    height: 263px;
+    left: 132px;
+}
+
+.modal-title {
+    position: absolute;
+    top: 93px;
+    color: black;
+    text-align: center;
+    width: 1024px;
+    font-size: 64px;
+}
+
+.modal-content {
+    width: 800px;
+    height: 428px;
+    position: absolute;
+    top: 235px;
+    left: 109px;
+    font-size: 32px;
+    color: white;
+    text-align: center;
+    white-space: initial;
+}
+
+.modal-actions-container {
+    position: absolute;
+    top: 548px;
+    width: 1024px;
+    display: flex;
+    justify-content: center;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 36px;
+}
+
+.modal-action {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.modal-action-label {
+    font-size: 24px;
+    color: white;
+}
+
 .sound-effects-container {
     /* hide audio elements - we only need to trigger them via JS */
     display: none;
@@ -28,6 +108,7 @@ html, body {
 
 .gameplay-stage {
     /* Enforce 1024 x 768 dimension, and disable inadvertent scrolling */
+    position: relative;
 	max-height: 768px;
     min-height: 768px;
     max-width: 1024px;
@@ -75,6 +156,66 @@ img {
     transform: scale(0.95);
 }
 
+.btn-circle {
+    width: 67.25px;
+    height: 70px;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    background-image: url(../img/btn-circle.png);
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: 0.1s ease-in-out;
+}
+
+.btn-circle.btn-96 {
+    width:  96px;
+    height: 96px;
+}
+
+.btn-circle:active {
+    filter: brightness(0.9);
+    transform: scale(0.95);
+}
+
+/** BUTTONS **/
+.btn-circle.btn-home { background-image: url(../img/btn-home.png) }
+.btn-circle.btn-help { background-image: url(../img/btn-help.png) }
+.btn-circle.btn-sound { background-image: url(../img/btn-sound.png) }
+.btn-circle.btn-sound--off { background-image: url(../img/btn-sound--off.png) }
+.btn-circle.btn-yes { background-image: url(../img/yes@2x.png) }
+.btn-circle.btn-no { background-image: url(../img/no@2x.png) }
+
+.btn-sound-feedback {
+    color: white;
+    position: fixed;
+    top: 133px;
+    text-align: center;
+    font-size: 20px;
+    width: 100px;
+    right: 32px;
+    text-shadow: 1px 2px 0px rgb(0 0 0 / 50%);
+}
+
+.global-controls {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    top: 24px;
+    right: 24px;
+    background: red;
+    border: 6px solid #636267;
+    border-radius: 100px;
+    background : linear-gradient(103.98deg, rgba(59, 29, 0, 1) 0%, rgba(24, 0, 0, 1) 100%);
+    z-index: 999;
+    box-shadow: 0px 0px 10px rgba(0,0,0,.5);
+}
+
 /********* Keyframes (for page animations) **********/
 @keyframes fade-in {
     0%   { opacity: 0; }
@@ -104,7 +245,335 @@ img {
     animation: circle-out 1s linear;
 }
 
+.circle.in {
+    animation: fade-in 500ms;
+}
+
 /******** Common Animation Classes ******************/
 .a-fade-out-300ms {
     animation: fade-out 300ms;
+}
+
+/******** Speech Bubble (for Dialogue in story) ******************/
+.speech-bubble-container {
+    position: absolute;
+    opacity: 0;
+    left: 0;
+    width: 596px;
+    height: 218px;
+    background-image: url(../img/speechbubble@2x.png);
+    background-size: contain;
+    background-position: center center;
+    z-index: 999999;
+}
+
+.speech-bubble-container .dialogue {
+    position: relative;
+    top: 70px;
+    left: 88px;
+    font-size: 24px;
+    max-width: 447px;
+    height: 101px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.speech-bubble-container .dialogue span {
+    flex-grow: 0;
+}
+
+.speech-bubble-container .dialogue .dimmed {
+    opacity: .5;
+}
+
+/********* Characters **************/
+
+.character-expression {
+    display: none;
+}
+
+/*********** MAGGIE *********/
+
+.character-maggie {
+    height: 293px;
+    width: 134px;
+    top: -43px;
+    left: 7px;
+    position: relative; /* children using position:absolute will be anchored
+                           to Maggie */
+    transition: 1s ease-in-out;
+}
+
+.character-maggie.peeking {
+    transform: scale(0.25) rotate(-20deg) !important;
+    left: -38px;
+    top: -34px;
+}
+
+.character-maggie div {
+    position: absolute;
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    
+}
+
+.character-maggie-hair {
+    position: absolute;
+    width: 284px;
+    height: 209px;
+    background-image: url(../img/maggie/hair.png);
+    z-index: 1;
+}
+
+.character-maggie-body {
+    position: absolute;
+    top: 102px; left: 73px;
+    width: 152px;
+    height: 487px;
+    background-image: url(../img/maggie/body.png);
+    z-index: 2;
+}
+
+.character-maggie-face {
+    top: 160px; left: 101px;
+    z-index: 3;
+}
+
+.character-maggie-face .character-maggie-face-eye-l {
+    background-image: url(../img/maggie/eye.png);
+    height: 28px; width: 28px;
+    top: 20px; left: 62px;
+}
+
+.character-maggie-face .character-maggie-face-eye-r {
+    background-image: url(../img/maggie/eye.png);
+    height: 28px; width: 28px;
+    top: 20px; left: 12px;
+}
+
+.character-maggie-face .character-maggie-face-brow-l {
+    background-image: url(../img/maggie/brow-l.png);
+    height: 24px; width: 20px;
+} 
+
+.character-maggie-face .character-maggie-face-brow-r {
+    background-image: url(../img/maggie/brow-r.png);
+    height: 25px; width: 19px;
+    left: 80px;
+}
+
+.character-maggie-face-mouth.character-maggie-face-mouth-frown {
+    background-image: url(../img/maggie/mouth-frown.png);
+    height: 13px; width: 29px;
+    left: 33px; top: 80px;
+}
+
+.character-maggie-face-mouth.character-maggie-face-mouth-smile {
+    background-image: url(../img/maggie/mouth-smile.png);
+    height: 13px; width: 29px;
+    left: 33px; top: 80px;
+}
+
+.character-maggie-face-mouth.character-maggie-face-mouth-scream {
+    background-image: url(../img/maggie/mouth-scream.png);
+    background-size: contain;
+    background-position: center center;
+    height: 28px;
+    width: 33px;
+    left: 33px;
+    top: 74px;
+}
+
+.character-maggie-leg-l {
+    width: 40px;
+    height: 55px;
+    background-image: url(../img/maggie/leg-l.png);
+    top: 572px; left: 92px;
+    z-index: 1;
+}
+
+.character-maggie-leg-r {
+    width: 40px;
+    height: 55px;
+    background-image: url(../img/maggie/leg-r.png);
+    top: 574px; left: 156px;
+    z-index: 1;
+}
+
+.character-maggie-arm-l {
+    width: 58px;
+    height: 121px;
+    background-image: url(../img/maggie/arm-l.png);
+    z-index: 1;
+    left: 28px;
+    top: 274px;
+}
+
+.character-maggie-arm-l-curved {
+    width: 58px;
+    height: 121px;
+    background-image: url(../img/maggie/arm-l-curved.png);
+    z-index: 1;
+    left: 28px;
+    top: 304px;
+}
+
+.character-maggie-arm-r {
+    width: 58px;
+    height: 121px;
+    background-image: url(../img/maggie/arm-r.png);
+    z-index: 1;
+    left: 209px;
+    top: 274px;
+}
+
+.character-maggie-arm-r-holding {
+    width: 94px;
+    height: 83px;
+    background-image: url(../img/maggie/arm-r-holding.png);
+    z-index: 1;
+    left: 209px;
+    top: 232px;
+}
+
+.character-maggie-goggles {
+    width: 120px;
+    height: 53px;
+    background-image: url(../img/maggie/goggles-cropped.png);
+    z-index: 2;
+    top: 12px;
+    left: -14px;
+}
+
+.character-maggie-expression-happy {
+    background-image: url(../img/maggie/expression-happy.png);
+    width: 100px;
+    height: 76px;
+    top: 29px;
+    left: -3px;
+}
+
+.character-maggie-expression-confident {
+    background-image: url(../img/maggie/expression-confident.png);
+    width: 94px;
+    height: 88px;
+    top: 11px;
+    left: 0px;
+}
+
+.character-maggie-expression-surprised {
+    background-image: url(../img/maggie/expression-surprised.png);
+    width: 100px;
+    height: 96px;
+    top: 16px;
+    left: -3px; 
+}
+
+.character-maggie-expression-surprised-blush {
+    background-image: url(../img/maggie/expression-surprised-blush.png);
+    width: 100px;
+    height: 96px;
+    top: 16px;
+    left: -3px; 
+}
+
+.character-maggie-expression-blush {
+    background-image: url(../img/maggie/expression-blush.png);
+    width: 100px;
+    height: 96px;
+    top: 16px;
+    left: -3px; 
+}
+
+.character-maggie-expression-blush-up {
+    background-image: url(../img/maggie/expression-blush-up.png);
+    width: 100px;
+    height: 96px;
+    top: 16px;
+    left: -3px; 
+}
+
+.character-maggie-expression-pre-crying {
+    background-image: url(../img/maggie/expression-pre-crying.png);
+    width: 100px;
+    height: 77px;
+    top: 27px;
+    left: -3px;
+}
+
+.character-maggie-expression-crying {
+    background-image: url(../img/maggie/expression-crying.png);
+    width: 100px;
+    height: 76px;
+    top: 34px;
+    left: -3px;
+}
+
+.character-maggie-expression-crying .teardrop0 {
+    background-image: url(../img/story/teardrop@2x.png);
+    width: 21px;
+    height: 30px;
+    top: 14px;
+    left: 8px;
+    animation: .8s infinite teardrop0;
+}
+
+.character-maggie-expression-crying .teardrop1 {
+    background-image: url(../img/story/teardrop@2x.png);
+    width: 21px;
+    height: 30px;
+    top: 14px;
+    left: 71px;
+    animation: .8s infinite teardrop1;
+}
+
+@keyframes teardrop0 {
+    0% {opacity: 0;}
+    60% { opacity: .8; transform: translateY(64px) }
+    100% {opacity: 0; transform: translateY(80px) }
+}
+
+@keyframes teardrop1 {
+    0% {opacity: 0;}
+    60% { opacity: .8; transform: translateY(80px) }
+    100% {opacity: 0; transform: translateY(100px) }
+}
+
+/**** Drag Prompt ****/
+@keyframes drag-prompt {
+    0% { opacity: 0; transform: scale(1.5); }
+    20% { opacity: 1; transform: scale(1); }
+    60% { opacity: 1; transform: translateX(var(--amount))}
+    100% { opacity: 0; transform: scale(1.5) translateX(calc(var(--amount) / 1.5)) }
+}
+
+.drag-prompt {
+    position: absolute;
+    --amount: 300px;
+    transition: 0.2s linear;
+    z-index: 9999;
+    opacity: .7;
+    touch-action: none;
+    pointer-events: none;
+}
+
+.drag-prompt.hidden {
+    opacity: 0;
+}
+
+.drag-prompt img {
+    height: 96px;
+    width: 85px;
+    animation: 2s infinite drag-prompt;
+    z-index: 9999;
+    touch-action: none;
+    pointer-events: none;
+}
+
+
+.game-page-blank {
+    height: 768px;
+    width: 1024px;
+    background: black;
 }

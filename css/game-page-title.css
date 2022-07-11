@@ -21,6 +21,11 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
 }
 
+.game-page-start {
+    z-index: 99999999999999;
+    position: absolute;
+}
+
 .game-page-title {
     background: linear-gradient(135deg, rgba(153, 42, 255, 1) 0%, rgba(95, 61, 146, 1) 100%);
 }
@@ -85,6 +90,10 @@
     transition: 1s ease-in-out;
 }
 
+.title-logo.no-animate {
+    animation: none !important;
+}
+
 .title-logo.with-btn {
     top: 110px;
 }
@@ -94,101 +103,6 @@
     top: 0;
     width: 750px;
 }
-
-.character-maggie {
-    height: 293px;
-    width: 134px;
-    top: -43px;
-    left: 7px;
-    position: relative; /* children using position:absolute will be anchored
-                           to Maggie */
-    transform: scale(0.2); /* use a single transform style instead of 
-                                painstakingly setting the size of every child */
-    z-index: -1;
-    transition: 1s ease-in-out;
-}
-
-.character-maggie.peeking {
-    transform: scale(0.25) rotate(-20deg);
-    left: -38px;
-    top: -34px;
-}
-
-.character-maggie div {
-    position: absolute;
-    background-size: contain;
-    background-position: center center;
-    background-repeat: no-repeat;
-    
-}
-
-.character-maggie-hair {
-    position: absolute;
-    width: 284px;
-    height: 209px;
-    background-image: url(../img/maggie/hair.png);
-    z-index: 1;
-}
-
-.character-maggie-body {
-    position: absolute;
-    top: 102px; left: 73px;
-    width: 152px;
-    height: 487px;
-    background-image: url(../img/maggie/body.png);
-    z-index: 2;
-}
-
-.character-maggie-face {
-    top: 160px; left: 101px;
-    z-index: 3;
-}
-
-.character-maggie-face .character-maggie-face-eye-l {
-    background-image: url(../img/maggie/eye.png);
-    height: 28px; width: 28px;
-    top: 20px; left: 62px;
-}
-
-.character-maggie-face .character-maggie-face-eye-r {
-    background-image: url(../img/maggie/eye.png);
-    height: 28px; width: 28px;
-    top: 20px; left: 12px;
-}
-
-.character-maggie-face .character-maggie-face-brow-l {
-    background-image: url(../img/maggie/brow-l.png);
-    height: 24px; width: 20px;
-} 
-
-.character-maggie-face .character-maggie-face-brow-r {
-    background-image: url(../img/maggie/brow-r.png);
-    height: 25px; width: 19px;
-    left: 80px;
-}
-
-.character-maggie-face-mouth.character-maggie-face-mouth-frown {
-    background-image: url(../img/maggie/mouth-frown.png);
-    height: 13px; width: 29px;
-    left: 33px; top: 80px;
-}
-
-.character-maggie-leg-l {
-    width: 40px;
-    height: 55px;
-    background-image: url(../img/maggie/leg-l.png);
-    top: 572px; left: 92px;
-    z-index: 1;
-}
-
-.character-maggie-leg-r {
-    width: 40px;
-    height: 55px;
-    background-image: url(../img/maggie/leg-r.png);
-    top: 574px; left: 156px;
-    z-index: 1;
-}
-
 
 @keyframes logo-animation {
     0% {
@@ -228,19 +142,29 @@
     right: 0;
 }
 
-.menu-option {
-    background: white;
+.menu-option {    
+    background-image: url(../img/menu-cloud.png);
+    background-size: contain;
+    height: 180px;
+    text-align: center;
+    width: 270px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 270px;
-    height: 134px;
     white-space: pre-wrap;
     text-align: center;
     justify-content: center;
     padding: 0 16px;
     opacity: 0;
     transition: 0.3s ease-in-out;
+}
+
+.menu-option.animating.locked {
+    opacity: .4;
+}
+
+.menu-option:active {
+    transform: scale(0.9);
 }
 
 .menu-option.animating {
@@ -255,4 +179,10 @@
 .menu-option-subtitle {
     font-size: 22px;
     color: rgba(0,0,0,.7);
+}
+
+.game-page-title .character-maggie {
+    z-index: -1;
+    transform: scale(0.2); /* use a single transform style instead of 
+    painstakingly setting the size of every child */
 }

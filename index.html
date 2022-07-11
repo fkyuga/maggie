@@ -7,6 +7,8 @@
     <!-- Stylesheets - separated by concern just to keep things clean. -->
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/game-page-title.css">
+    <link rel="stylesheet" href="css/game-page-lab.css">
+    <link rel="stylesheet" href="css/game-page-story.css">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -15,10 +17,20 @@
     <!-- Include dependencies -->
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="js/common.js"></script>
-    
+    <script src="js/confetti.js"></script>
+
+    <!-- GSAP stuff -->
+    <script src="js/gsap.min.js"></script>
+    <script src="js/Draggable.min.js"></script>
+    <script src="js/MotionPathPlugin.min.js"></script>
+
     <!-- JS files for each page -->
     <script src="js/game-page-title.js"></script>
     <script src="js/game-page-story.js"></script>
+    <script src="js/game-page-lab.js"></script>
+
+    <!-- Speech lines -->
+    <script src="js/speech.js"></script>
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,6 +39,48 @@
 <body ontouchstart>
     <div class="gameplay-stage-container">
         <div class="gameplay-stage">
+
+            <div class="speech-bubble-container">
+                <div class="dialogue">
+                    <p>This is where dialogue is put. Say hi! This is a long one.</p>
+                </div>
+            </div>
+
+            <!-- Global controls -->
+            <div class="global-controls">
+                <button class="btn-circle btn-home"></button>
+                <button class="btn-circle btn-help"></button>
+                <button class="btn-circle btn-sound"></button>
+                <div class="btn-sound-feedback">
+                    <span class="btn-sound-feedback--on inactive">SOUND ON</span>
+                    <span class="btn-sound-feedback--off inactive">SOUND OFF</span>
+                </div>
+            </div>
+
+            <!-- Dialog boxes -->
+            <div class="modal-container">
+                <div class="modal">
+                    <img id="modal-container__bg" src="img/modal@2x.png">
+                    <img id="modal-container__title-img" src="img/speechbubble@2x.png">
+                    <div class="modal-title">Stop Playing?</div>
+                    <div class="modal-content">
+                        <p>Are you sure?</p>
+                        <p>If you stop now, you'll have to start from the beginning!</p>
+                    </div>
+                    <div class="modal-actions-container">
+                        <div class="modal-actions">
+                            <div class="modal-action">
+                                <button class="btn-circle btn-96 btn-yes"></button>
+                                <div class="modal-action-label">Yes, Go Home</div>
+                            </div>
+                            <div class="modal-action">
+                                <button class="btn-circle btn-96 btn-no"></button>
+                                <div class="modal-action-label">No, Take Me Back!</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- Start screen -->
             <!-- chrome won't let us play audio until the user has interacted with the page.
@@ -39,6 +93,8 @@
                 </div>
                 
             </div>
+
+            <div class="game-page game-page-blank"></div>
 
             <!-- Title Screen -->
             <div class="game-page game-page-title">
@@ -65,11 +121,11 @@
                         <div class="menu-option-title">When Harry Met Maggie</div>
                         <div class="menu-option-subtitle">Learn about magnets!</div>
                     </div>
-                    <div class="menu-option menu-option-playground" data-activity="playground">
-                        <div class="menu-option-title">Magnet Playground</div>
+                    <div class="menu-option menu-option-playground" data-activity="lab">
+                        <div class="menu-option-title">Magnet Lab</div>
                         <div class="menu-option-subtitle">What materials are magnetic?</div>
                     </div>
-                    <div class="menu-option menu-option-game" data-activity="game">
+                    <div class="menu-option menu-option-game locked" onclick="alert('sadly, there was not enough time. :(')">
                         <div class="menu-option-title">"The Return of the Evil Dr. Magneto!"</div>
                         <div class="menu-option-subtitle">Game!</div>
                     </div>
@@ -84,9 +140,751 @@
 
             <!-- Story Screen -->
             <div class="game-page game-page-story">
-                <h1>This is the story screen</h1>
+                <div class="scene scene-interstitial">
+                    <!-- This is used to convey plot points that are too laborious to animate via text.
+                          (is that cheating? not if it's a plot device) -->
+                    <p>Maggie, with all her courage, worked hard at school today...</p>
+                </div>
+                <div class="scene scene0">
+
+                    <div class="items">
+                        <div class="item card"></div>
+                        <div class="item compass">
+                            <div class="item compass-needle"></div>
+                        </div>
+                        <div class="item phone"></div>
+                    </div>
+
+                    <div class="text">
+                        <p>Magnets help make the things we use every day work.</p>
+                        <p>Our bank cards, compasses, and even our phones!</p>
+                    </div>
+                </div>
+                
+                <div class="scene scene1">
+                    <div class="characters">
+
+
+                        <div class="item character-jessie">
+                            <div style="display: block" class="item character-expression character-jessie-expression-happy"></div>
+                            <div class="item character-jessie-arms">
+                                <div class="item character-jessie-arm-l"></div>
+                                <div class="item character-jessie-arm-r"></div>
+                            </div>
+                            <div class="item character-jessie-body"></div>
+                        </div>
+
+
+                        <div class="item character-haroon">
+                            <div style="display: block" class="item character-expression character-haroon-expression-smile"></div>
+                            <div class="item character-haroon-arms">
+                                <div class="item character-haroon-arm-l"></div>
+                                <div class="item character-haroon-arm-r"></div>
+                            </div>
+                            <div class="item character-haroon-body"></div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="drag-progress"></div>
+
+                    <div class="drag-prompt hidden">
+                        <img src="img/finger.svg">
+                    </div>
+                    
+                    <div class="text text0 active">There are two <strong>poles</strong> of magnets -- North and South!</div>
+                    <div class="text text1 inactive">
+                        <p class="para0">Magnets that have <strong>opposite poles</strong> attract when they come close.</p>
+                        <p class="para1"><strong>Try it!</strong></p>
+                    </div>
+                </div>
+
+                <div class="scene scene2">
+
+                    <div class="item character-jessie">
+                        <div style="display: block" class="item character-expression character-jessie-expression-happy"></div>
+                        <div class="item character-jessie-arms">
+                            <div class="item character-jessie-arm-l"></div>
+                            <div class="item character-jessie-arm-r"></div>
+                        </div>
+                        <div class="item character-jessie-body"></div>
+                    </div>
+
+                    <div class="item character-lil-full"></div>
+
+                    <div class="drag-progress">
+
+                    </div>
+
+                    <div class="drag-prompt hidden">
+                        <img src="img/finger.svg">
+                    </div>
+
+                    <div class="text text0 active">
+                        <p>On the other hand, magnets that have the same pole <strong>repel</strong>. They can't stand each other!</p>
+                        <p class="para1"><strong>Go ahead and try it!</strong></p>
+                    </div>
+
+                    <div class="text text1 inactive">
+                        <p class="para0">Great work!</p>
+                        <p class="para1">Now that we've been through that, it's time for a story...</p>
+                        <p class="para2">Get comfy! We're ready when you are.</p>
+                    
+                        <div id="beginStory" class="btn-orb btn-orb-start"></div>
+                    </div>
+                </div>
+
+                <div class="scene scene3">
+                    <div class="sun"></div>
+                    <div class="city">
+                        <div class="buildings"></div>
+                        <div class="magbux"></div>
+                        <div class="bank"></div>
+                        <div class="tree tree0"></div>
+                        <div class="tree tree1"></div>
+                        <div class="pavement"></div>
+                        <div class="road"></div>
+                        <div class="car"></div>    
+                    </div>
+                </div>
+
+                <div class="scene scene4">
+                    <div class="bed"></div>
+                    <div class="maggie-sleep"></div>
+                    <div class="blanket"></div>
+                </div>
+
+                <div class="scene scene5">
+                    <div class="item bed-closeup"></div>
+                    <div class="item blanket-closeup"></div>
+                    <div class="item maggie-pajamas">
+                        <div class="item expression-sleeping"></div>
+                        <div class="item expression-shocked" style="display: none"></div>
+                        <div class="item expression-screaming" style="display: none"></div>
+                    </div>
+                    <div class="item sleepbubbles">
+                        <div class="item sleepbubble sleepbubble0"></div>
+                        <div class="item sleepbubble sleepbubble1"></div>
+                        <div class="item sleepbubble sleepbubble2"></div>
+                        <div class="item sleepbubble sleepbubble3"></div>
+                    </div>
+                    <div class="item clock"></div>
+                </div>
+                
+                <div class="scene scene6">
+                    <div class="item magnetfield-academy-front"></div>
+                    <div class="item maggie-back"></div>
+                </div>
+
+                <div class="scene scene7">
+                    <!-- Maggie -->
+                    <div class="item character-maggie">
+                        <div class="character-maggie-frame"></div>
+                        <div class="character-maggie-hair"></div>
+                        <div class="character-maggie-face">
+                            <div class="character-maggie-face-brow-l"></div>
+                            <div class="character-maggie-face-brow-r"></div>
+                            <div class="character-expression character-maggie-expression-happy"></div>
+                            <div class="character-expression character-maggie-expression-surprised"></div>
+                            <div class="character-expression character-maggie-expression-neutral active">
+                                <div class="character-maggie-face-eye-l"></div>
+                                <div class="character-maggie-face-eye-r"></div>
+                                <div class="character-maggie-face-mouth character-maggie-face-mouth-smile active"></div>
+                                <div class="character-maggie-face-mouth character-maggie-face-mouth-scream inactive"></div>
+                            </div>
+                        </div>
+                        <div class="character-maggie-body"></div>
+                        <div class="character-maggie-arm-l"></div>
+                        <div class="character-maggie-arm-r"></div>
+                        <div class="character-maggie-leg-l"></div>
+                        <div class="character-maggie-leg-r"></div>
+                    </div>
+
+                    <div class="item character-jessie">
+                        <div class="item character-expression character-jessie-expression-focussed active"></div>
+                        <div class="item character-expression character-jessie-expression-surprised inactive"></div>
+                        <div class="item character-jessie-arms animating">
+                            <div class="item character-jessie-arm-l"></div>
+                            <div class="item character-jessie-arm-r"></div>
+                        </div>
+                        <div class="item character-jessie-body"></div>
+                    </div>
+
+                    <div class="item character-tomas">
+                        <div class="item character-tomas-arms">
+                            <div class="item character-tomas-arm-l">
+                                <div class="item snowball"></div>
+                            </div>
+                            <div class="item character-tomas-arm-r"></div>
+                        </div>
+                        <div class="item character-tomas-body"></div>
+                    </div>
+                </div>
+
+                <div class="scene scene8">
+                    <!-- Maggie -->
+                    <div class="item character-maggie">
+                        <div class="character-maggie-frame"></div>
+                        <div class="character-maggie-hair"></div>
+                        <div class="character-maggie-face">
+                            <div class="character-maggie-face-brow-l"></div>
+                            <div class="character-maggie-face-brow-r"></div>
+                            <div class="character-expression character-maggie-expression-happy"></div>
+                            <div class="character-expression character-maggie-expression-surprised"></div>
+                            <div class="character-expression character-maggie-expression-frown active">
+                                <div class="character-maggie-face-eye-l"></div>
+                                <div class="character-maggie-face-eye-r"></div>
+                                <div class="character-maggie-face-mouth character-maggie-face-mouth-frown active"></div>
+                            </div>
+                        </div>
+                        <div class="character-maggie-body"></div>
+                        <div class="character-maggie-arm-l"></div>
+                        <div class="character-maggie-arm-r"></div>
+                        <div class="character-maggie-leg-l"></div>
+                        <div class="character-maggie-leg-r"></div>
+                    </div>
+
+                    <!-- Drag bar -->
+                    <div class="drag-progress">
+
+                    </div>
+                
+                    <!-- Drag prompt -->
+                    <div class="drag-prompt hidden">
+                        <img src="img/finger.svg">
+                    </div>
+                    
+                </div>
+
+                <div class="scene scene9">
+                    <!-- Maggie and Rosie repel scene -->
+                    <!-- Maggie -->
+                    <div class="item character-maggie">
+                        <div class="character-maggie-frame"></div>
+                        <div class="character-maggie-hair"></div>
+                        <div class="character-maggie-face">
+                            <div class="character-maggie-face-brow-l"></div>
+                            <div class="character-maggie-face-brow-r"></div>
+                            <div class="character-expression character-maggie-expression-happy"></div>
+                            <div class="character-expression character-maggie-expression-surprised"></div>
+
+                            <div class="character-expression character-maggie-expression-pre-crying"></div>
+
+                            <div class="character-expression character-maggie-expression-crying">
+                                <div class="teardrop teardrop0"></div>
+                                <div class="teardrop teardrop1"></div>
+                            </div>
+                            <div class="character-expression character-maggie-expression-frown active">
+                                <div class="character-maggie-face-eye-l"></div>
+                                <div class="character-maggie-face-eye-r"></div>
+                                <div class="character-maggie-face-mouth character-maggie-face-mouth-frown active"></div>
+                            </div>
+                        </div>
+                        <div class="character-maggie-body"></div>
+                        <div class="character-maggie-arm-l"></div>
+                        <div class="character-maggie-arm-r"></div>
+                        <div class="character-maggie-leg-l"></div>
+                        <div class="character-maggie-leg-r"></div>
+                    </div>
+
+                    <!-- Rosie -->
+                    <div class="item character-rosie">
+                        <div class="item character-expression character-rosie-expression-neutral active"></div>
+                        <div class="item character-expression character-rosie-expression-surprised"></div>
+                        <div class="item character-rosie-body"></div>
+                    </div>
+
+                    <!-- Drag bar -->
+                    <div class="drag-progress">
+
+                    </div>
+                
+                    <!-- Drag prompt -->
+                    <div class="drag-prompt hidden">
+                        <img src="img/finger.svg">
+                    </div>
+                </div>
+
+                <div class="scene scene10">
+                    <img class="sky--night" src="img/story/sky--night.png" />
+                    <div class="moon"></div>
+                    <div class="city">
+                        <div class="buildings"></div>
+                        <div class="magbux"></div>
+                        <div class="bank"></div>
+                        <div class="tree tree0"></div>
+                        <div class="tree tree1"></div>
+                        <div class="pavement"></div>
+                        <div class="road"></div>
+                        <div class="car"></div>    
+                    </div>
+                    
+                    <div class="item door-closed"></div>
+                    <div class="item door-open inactive"></div>
+                    <div class="item door-light inactive"></div>
+                    <div class="door-mask"></div>
+
+                    <!-- Maggie -->
+                    <div class="item character-maggie">
+                        <div class="character-maggie-frame"></div>
+                        <div class="character-maggie-hair"></div>
+                        <div class="character-maggie-face">
+                            <div class="character-maggie-face-brow-l"></div>
+                            <div class="character-maggie-face-brow-r"></div>
+                            <div class="character-expression character-maggie-expression-happy"></div>
+                            <div class="character-expression character-maggie-expression-surprised"></div>
+
+                            <div class="character-expression character-maggie-expression-pre-crying"></div>
+
+                            <div class="character-expression character-maggie-expression-crying active">
+                                <div class="teardrop teardrop0"></div>
+                                <div class="teardrop teardrop1"></div>
+                            </div>
+                            <div class="character-expression character-maggie-expression-frown">
+                                <div class="character-maggie-face-eye-l"></div>
+                                <div class="character-maggie-face-eye-r"></div>
+                                <div class="character-maggie-face-mouth character-maggie-face-mouth-frown"></div>
+                            </div>
+                        </div>
+                        <div class="character-maggie-body"></div>
+                        <div class="character-maggie-arm-l"></div>
+                        <div class="character-maggie-arm-r"></div>
+                        <div class="character-maggie-leg-l"></div>
+                        <div class="character-maggie-leg-r"></div>
+                    </div>
+
+                    <div class="bed"></div>
+                    <div class="blanket"></div>
+                    <img class="background" src="img/story/maggies-room.png" />
+                </div>
+
+                <!-- Scene 11 !-->
+                <div class="scene scene11">
+
+                    <div class="drag-progress"></div>
+
+                    <div class="drag-prompt hidden">
+                        <img src="img/finger.svg">
+                    </div>
+
+                    <div class="item character-maggie">
+                        <div class="character-maggie-frame"></div>
+                        <div class="character-maggie-hair"></div>
+                        <div class="character-maggie-face">
+                            <div class="character-maggie-face-brow-l"></div>
+                            <div class="character-maggie-face-brow-r"></div>
+                            <div class="character-expression character-maggie-expression-happy"></div>
+                            <div class="character-expression character-maggie-expression-surprised"></div>
+                            <div class="character-expression character-maggie-expression-sleeping"></div>
+                            <div class="character-expression character-maggie-expression-pre-crying"></div>
+
+                            <div class="character-expression character-maggie-expression-crying active">
+                                <div class="teardrop teardrop0"></div>
+                                <div class="teardrop teardrop1"></div>
+                            </div>
+                            <div class="character-expression character-maggie-expression-frown">
+                                <div class="character-maggie-face-eye-l"></div>
+                                <div class="character-maggie-face-eye-r"></div>
+                                <div class="character-maggie-face-mouth character-maggie-face-mouth-frown"></div>
+                            </div>
+                        </div>
+                        <div class="character-maggie-body"></div>
+                        <div class="character-maggie-arm-l"></div>
+                        <div class="character-maggie-arm-r"></div>
+                        <div class="character-maggie-leg-l"></div>
+                        <div class="character-maggie-leg-r"></div>
+                    </div>
+                    <div class="item bed-closeup"></div>
+                    <div class="item blanket-closeup"></div>
+                </div>
+
+                <!-- Scene 12 (dream sequence) -->
+                <div class="scene scene12">
+                    <div class="item character-harry-dream"></div>
+                    <div class="text dream-text">
+                        <p></p> <!-- must be speech  -->
+                    </div>
+                </div>
+
+                <!-- Scene 13 (Maggie awake in bed, alarm clock in hand.) -->
+                <div class="scene scene13">
+
+                    <div class="item character-maggie">
+                        <div class="character-maggie-frame"></div>
+                        <div class="character-maggie-hair"></div>
+                        <div class="character-maggie-face">
+                            <div class="character-expression character-maggie-expression-happy"></div>
+                            <div class="character-expression character-maggie-expression-confident active"></div>
+                            <div class="character-expression character-maggie-expression-surprised"></div>
+                            <div class="character-expression character-maggie-expression-sleeping"></div>
+                            <div class="character-expression character-maggie-expression-pre-crying"></div>
+
+                            <div class="character-expression character-maggie-expression-frown">
+                                <div class="character-maggie-face-eye-l"></div>
+                                <div class="character-maggie-face-eye-r"></div>
+                                <div class="character-maggie-face-mouth character-maggie-face-mouth-frown"></div>
+                            </div>
+                        </div>
+                        <div class="character-maggie-body"></div>
+                        <div class="character-maggie-arm-l-curved"></div>
+                        <div class="character-maggie-arm-r-holding"></div>
+                        <div class="character-maggie-leg-l"></div>
+                        <div class="character-maggie-leg-r"></div>
+                    </div>
+                    <div class="item bed-closeup"></div>
+                    <div class="item blanket-closeup"></div>
+                    <div class="item clock"></div>
+                </div>
+
+                <!-- Scene 14 (Maggie in the schoolyard) -->
+                <div class="scene scene14">
+                    <div class="item character-jessie">
+                        <div style="display: block" class="item character-expression character-jessie-expression-look-up"></div>
+                        <div class="item character-jessie-arms">
+                            <div class="item character-jessie-arm-l"></div>
+                        </div>
+                        <div class="item character-jessie-body-no-legs"></div>
+                        <div class="item character-maggie-leg-l"></div>
+                        <div class="item character-maggie-leg-r"></div>
+                    </div>
+
+
+                    <div class="item character-haroon">
+                        <div style="display: block" class="item character-expression character-haroon-expression-look-down"></div>
+                        <div class="item character-haroon-arms">
+                            <div class="item character-haroon-arm-r"></div>
+                        </div>
+                        <div class="item character-haroon-body-no-legs"></div>
+                        <div class="item character-maggie-leg-l"></div>
+                        <div class="item character-maggie-leg-r"></div>
+                    </div>
+
+                    <div class="item tree tree0"></div>
+                    <div class="item tree tree1"></div>
+
+                    <div class="item cloud cloud0"></div>
+                    <div class="item cloud cloud1"></div>
+
+                    <div class="item character-lil-full"></div>
+
+                    <!-- Maggie -->
+                    <div class="item character-maggie">
+                        <div class="character-maggie-frame"></div>
+                        <div class="character-maggie-hair"></div>
+                        <div class="character-maggie-face">
+                            <div class="character-expression character-maggie-expression-happy"></div>
+                            <div class="character-expression character-maggie-expression-surprised"></div>
+                            <div class="character-expression character-maggie-expression-confident active"></div>
+                            <div class="character-expression character-maggie-expression-neutral">
+                                <div class="character-maggie-face-eye-l"></div>
+                                <div class="character-maggie-face-eye-r"></div>
+                                <div class="character-maggie-face-mouth character-maggie-face-mouth-smile active"></div>
+                                <div class="character-maggie-face-mouth character-maggie-face-mouth-scream inactive"></div>
+                            </div>
+                        </div>
+                        <div class="character-maggie-body"></div>
+                        <div class="character-maggie-arm-l"></div>
+                        <div class="character-maggie-arm-r"></div>
+                        <div class="character-maggie-leg-l"></div>
+                        <div class="character-maggie-leg-r"></div>
+                    </div>
+                </div>
+
+                <!-- Scene 15 (Maggie, schoolyard, meets Harry) -->
+                <div class="scene scene15">
+
+                    <!-- Maggie -->
+                    <div class="item character-maggie">
+                        <div class="character-maggie-frame"></div>
+                        <div class="character-maggie-hair"></div>
+                        <div class="character-maggie-face">
+                            <div class="character-maggie-face-brow-l"></div>
+                            <div class="character-maggie-face-brow-r"></div>
+                            <div class="character-expression character-maggie-expression-happy"></div>
+                            <div class="character-expression character-maggie-expression-surprised"></div>
+                            <div class="character-expression character-maggie-expression-surprised-blush"></div>
+                            <div class="character-expression character-maggie-expression-blush"></div>
+                            <div class="character-expression character-maggie-expression-blush-up"></div>
+                            <div class="character-expression character-maggie-expression-pre-crying"></div>
+
+                            <div class="character-expression character-maggie-expression-crying">
+                                <div class="teardrop teardrop0"></div>
+                                <div class="teardrop teardrop1"></div>
+                            </div>
+                            <div class="character-expression character-maggie-expression-smile active">
+                                <div class="character-maggie-face-eye-l"></div>
+                                <div class="character-maggie-face-eye-r"></div>
+                                <div class="character-maggie-face-mouth character-maggie-face-mouth-smile active"></div>
+                            </div>
+                        </div>
+                        <div class="character-maggie-body"></div>
+                        <div class="character-maggie-arm-l"></div>
+                        <div class="character-maggie-arm-r"></div>
+                        <div class="character-maggie-leg-l"></div>
+                        <div class="character-maggie-leg-r"></div>
+                    </div>
+
+
+                    <!-- Harru -->
+                    <div class="item character-harry">
+                        <div class="item character-harry-face"></div>
+                        <div class="item character-harry-body"></div>
+                        <div class="item character-harry-expression-reading active"></div>
+                        <div class="item character-harry-expression-blush"></div>
+                        <div class="item character-harry-expression-blush-down"></div>
+                        <div class="item character-harry-arms-reading"></div>
+                        <div class="item character-harry-arm-l-reading inactive"></div>
+                        <div class="item character-harry-leg-l"></div>
+                        <div class="item character-harry-leg-r"></div>
+                        <div class="item character-harry-earbuds"></div>
+                    </div>
+
+                    <!-- Drag bar -->
+                    <div class="drag-progress">
+
+                    </div>
+                
+                    <!-- Drag prompt -->
+                    <div class="drag-prompt hidden">
+                        <img src="img/finger.svg">
+                    </div>
+                </div>
+
+                <!-- Scene 16 (maggie+harry first date, in town, grabbing a coffee) -->
+                <div class="scene scene16">
+                    <!-- Maggie -->
+                    <div class="item character-maggie">
+                        <div class="character-maggie-frame"></div>
+                        <div class="character-maggie-hair"></div>
+                        <div class="character-maggie-face">
+                            <div class="character-maggie-face-brow-l"></div>
+                            <div class="character-maggie-face-brow-r"></div>
+                            <div class="character-expression character-maggie-expression-happy"></div>
+                            <div class="character-expression character-maggie-expression-surprised"></div>
+                            <div class="character-expression character-maggie-expression-surprised-blush"></div>
+                            <div class="character-expression character-maggie-expression-blush"></div>
+                            <div class="character-expression character-maggie-expression-blush-up active"></div>
+                            <div class="character-expression character-maggie-expression-pre-crying"></div>
+
+                            <div class="character-expression character-maggie-expression-crying">
+                                <div class="teardrop teardrop0"></div>
+                                <div class="teardrop teardrop1"></div>
+                            </div>
+                            <div class="character-expression character-maggie-expression-smile">
+                                <div class="character-maggie-face-eye-l"></div>
+                                <div class="character-maggie-face-eye-r"></div>
+                                <div class="character-maggie-face-mouth character-maggie-face-mouth-smile active"></div>
+                            </div>
+                        </div>
+                        <div class="character-maggie-body"></div>
+                        <div class="character-maggie-arm-l"></div>
+                        <div class="character-maggie-arm-r"></div>
+                        <div class="character-maggie-leg-l"></div>
+                        <div class="character-maggie-leg-r"></div>
+                    </div>
+
+
+                    <!-- Harru -->
+                    <div class="item character-harry">
+                        <div class="item character-harry-face"></div>
+                        <div class="item character-harry-body"></div>
+                        <div class="item character-harry-expression-reading"></div>
+                        <div class="item character-harry-expression-blush"></div>
+                        <div class="item character-harry-expression-blush-down active"></div>
+                        <div class="item character-harry-arm-l-reading active"></div>
+                        <div class="item character-harry-leg-l"></div>
+                        <div class="item character-harry-leg-r"></div>
+                        <div class="item character-harry-earbuds"></div>
+                    </div>
+
+
+                    <div class="city">
+                        <div class="sun"></div>
+                        <div class="buildings"></div>
+                        <div class="magbux"></div>
+                        <div class="bank"></div>
+                        <div class="tree tree0"></div>
+                        <div class="tree tree1"></div>
+                        <div class="pavement"></div>
+                        <div class="road"></div>
+                        <div class="car"></div>    
+                    </div>
+                </div>
+
+                <!-- Scene 17 (maggie+harry second date, in park)-->
+                <div class="scene scene17">
+                    <div class="item sun"></div>
+                    <div class="item fence"></div>
+                    <div class="item ground"></div>
+
+                    <div class="park">
+                        
+                        <div class="swing-set">
+                            <div class="maggie-swing"></div>
+                            <div class="harry-swing"></div>
+                        </div>    
+
+                        <div class="slide">
+                            <div class="lil-billy-slide"></div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Scene 18 (maggie+harry in maggie's room )-->
+                <div class="scene scene18">
+                    <img class="sky--night" src="img/story/sky--night.png" />
+                    <div class="moon"></div>
+                    <div class="city">
+                        <div class="buildings"></div>
+                        <div class="magbux"></div>
+                        <div class="bank"></div>
+                        <div class="tree tree0"></div>
+                        <div class="tree tree1"></div>
+                        <div class="pavement"></div>
+                        <div class="road"></div>
+                        <div class="car"></div>    
+                    </div>
+                    
+                    <div class="item door-open active"></div>
+                    <div class="item door-light active"></div>
+                    <div class="door-mask"></div>
+
+                    <!-- Maggie -->
+                    <div class="item character-maggie">
+                        <div class="character-maggie-frame"></div>
+                        <div class="character-maggie-hair"></div>
+                        <div class="character-maggie-face">
+                            <div class="character-maggie-face-brow-l"></div>
+                            <div class="character-maggie-face-brow-r"></div>
+                            <div class="character-expression character-maggie-expression-happy"></div>
+                            <div class="character-expression character-maggie-expression-surprised"></div>
+                            <div class="character-expression character-maggie-expression-surprised-blush"></div>
+                            <div class="character-expression character-maggie-expression-blush"></div>
+                            <div class="character-expression character-maggie-expression-blush-up active"></div>
+                            <div class="character-expression character-maggie-expression-pre-crying"></div>
+
+                            <div class="character-expression character-maggie-expression-crying">
+                                <div class="teardrop teardrop0"></div>
+                                <div class="teardrop teardrop1"></div>
+                            </div>
+                            <div class="character-expression character-maggie-expression-smile">
+                                <div class="character-maggie-face-eye-l"></div>
+                                <div class="character-maggie-face-eye-r"></div>
+                                <div class="character-maggie-face-mouth character-maggie-face-mouth-smile active"></div>
+                            </div>
+                        </div>
+                        <div class="character-maggie-body"></div>
+                        <div class="character-maggie-arm-l"></div>
+                        <div class="character-maggie-arm-r"></div>
+                        <div class="character-maggie-leg-l"></div>
+                        <div class="character-maggie-leg-r"></div>
+                    </div>
+
+                    <!-- Harry -->
+                    <div class="item character-harry">
+                        <div class="item character-harry-face"></div>
+                        <div class="item character-harry-body"></div>
+                        <div class="item character-harry-expression-reading"></div>
+                        <div class="item character-harry-expression-blush"></div>
+                        <div class="item character-harry-expression-blush-down active"></div>
+                        <div class="item character-harry-arm-l active"></div>
+                        <div class="item character-harry-leg-l"></div>
+                        <div class="item character-harry-leg-r"></div>
+                        <div class="item character-harry-earbuds"></div>
+                    </div>
+
+                    <div class="bed"></div>
+                    <div class="blanket"></div>
+                    <img class="background" src="img/story/maggies-room.png" />
+                </div>
+
+                <!-- Scene 19 Sunset Hill (bridge scene) -->
+                <div class="scene scene19">
+                    <div class="item night-sky"></div>
+                    <div class="item bridge">
+                        <div class="item cars cars0"></div>
+                        <div class="item cars cars1"></div>
+                    </div>
+                    <div class="item ocean"></div>
+                    <div class="item moon"></div>
+                    <div class="item hill">
+                        <div class="item maggie-harry-blanket"></div>
+                    </div>
+                </div>
             </div>
             <!-- End Story Screen -->
+
+
+            <!-- Lab Screen -->
+            <div class="game-page game-page-lab">
+                
+                <div class="moves-counter-container">
+                    <div class="moves-counter-title">Moves</div>
+                    <div class="moves-counter">0</div>
+                </div>
+
+                <!-- Boxes -->
+                <div class="box box--magnetic"></div>
+                <div class="box box--not-magnetic"></div>
+
+                <!-- Scene items (non-interactive elements) -->
+                <div class="scene-items">
+                    <img id="scene-items--cabinets" src="img/lab/cabinets@2x.png" />
+                    <img id="scene-items--desk" src="img/lab/desk@2x.png" />
+                </div>
+
+                <!-- Maggie -->
+                <div class="character-maggie">
+                    <div class="character-maggie-frame"></div>
+                    <div class="character-maggie-hair"></div>
+                    <div class="character-maggie-face">
+                        <div class="character-maggie-goggles"></div>
+                        <div class="character-maggie-face-brow-l"></div>
+                        <div class="character-maggie-face-brow-r"></div>
+                        <div class="character-expression character-maggie-expression-happy"></div>
+                        <div class="character-expression character-maggie-expression-surprised"></div>
+                        <div class="character-expression character-maggie-expression-neutral active">
+                            <div class="character-maggie-face-eye-l"></div>
+                            <div class="character-maggie-face-eye-r"></div>
+                            <div class="character-maggie-face-mouth character-maggie-face-mouth-smile"></div>
+                        </div>
+                    </div>
+                    <div class="character-maggie-body"></div>
+                    <div class="character-maggie-arm-l"></div>
+                    <div class="character-maggie-arm-r"></div>
+                    <div class="character-maggie-leg-l"></div>
+                    <div class="character-maggie-leg-r"></div>
+                </div>
+
+                <!-- Maggie's drop zone.
+                     We dynamically add an img tag in here to represent the item drop hint
+                     in JS. -->
+                <div class="maggie-drop-zone">
+                    <img class="item-cola" src="img/items/cola--hint@2x.png" />
+                </div>
+
+                <!-- Item bar -->
+                <div class="item-bar">
+
+                    <!-- Item bar item (template) -->
+                    <template id="item-bar__item-template">
+                        <li class="item-bar__item">
+                            <div class="item">
+                                <img src />
+                            </div>
+                        </li>
+                    </template>
+                    
+                    <ul class="item-bar__items">
+                        <!-- this DIV is filled out dynamically using js, so we can shuffle it -->
+                    </ul>
+
+                    <!-- Item bar backdrop -->
+                    <img src="img/toolbelt@2x.png" id="item-bar__backdrop" />
+                </div>
+            </div>
 
         </div>
     </div>
